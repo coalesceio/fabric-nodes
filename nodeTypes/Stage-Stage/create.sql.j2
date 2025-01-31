@@ -1,0 +1,55 @@
+{% if node.override.create.enabled %}
+	
+	{{ node.override.create.script }}
+
+{% elif node.materializationType == 'table' %}
+  {{ stage('Drop Stage Table') }}
+  DROP TABLE IF EXISTS {{ ref_no_link(node.location.name, node.name) }}
+
+	{{ stage('Create Stage Table') }}
+
+	CREATE TABLE {{ ref_no_link(node.location.name, node.name) }}
+	(
+		{% for col in columns %}
+			[{{ col.name }}] {{ col.dataType }}
+			{%- if not col.nullable %} NOT NULL
+			{% endif %}
+			{%- if not loop.last -%}, {% endif %}
+		{% endfor %}
+	)
+
+
+{% elif node.materializationType == 'view' %}
+    {{ stage('Drop Stage View') }}
+
+    DROP VIEW IF EXISTS {{ ref_no_link(node.location.name, node.name) }}
+
+    {{ stage('Create Stage View') }}
+
+    CREATE VIEW {{ ref_no_link(node.location.name, node.name) }}
+    (
+        {% for col in columns %}
+            [{{ col.name }}]
+            {%- if not loop.last -%}, {% endif %}
+        {% endfor %}
+    )
+    AS
+    {% for source in sources %}
+        SELECT
+        {% for col in source.columns %}
+            {{ get_source_transform(col) }} AS [{{ col.name }}]
+            {%- if not loop.last -%}, {% endif %}
+        {% endfor %}
+
+        {{ source.join }}
+
+        {% if not loop.last %}
+            {% if config.insertStrategy in ['UNION', 'UNION ALL'] %}
+                {{ config.insertStrategy }}
+            {% else %}
+                UNION
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+{% endif %}
