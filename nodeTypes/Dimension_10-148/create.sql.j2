@@ -6,20 +6,18 @@
   {{ stage('Drop Dimension Table') }}
   DROP TABLE IF EXISTS {{ ref_no_link(node.location.name, node.name) }}
 
- {%set source = sources[0]%}
 	{{ stage('Create Dimension Table') }}
 
 	CREATE TABLE {{ ref_no_link(node.location.name, node.name) }}
 	(
-		{% for col in source.columns %}
+		{% for col in columns %}
              [{{ col.name }}] {{ col.dataType }}
 			{%- if not col.nullable %} NOT NULL
 			{% endif %}
 			{%- if not loop.last -%}, {% endif %}
 		{% endfor %}
 	)
-
-
+    
 {% elif node.materializationType == 'view' %}
     {{ stage('Drop Stage View') }}
 

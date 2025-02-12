@@ -1,0 +1,170 @@
+fileVersion: 1
+id: b664678b-77c9-48d4-af62-60cfa75d1514
+name: DIM_REGION
+operation:
+  config:
+    groupByAll: false
+    insertStrategy: UNION ALL
+    orderby: false
+    orderbycolumn:
+      items:
+        - {}
+    postSQL: ""
+    preSQL: ""
+    selectDistinct: false
+    testsEnabled: false
+    truncateBefore: false
+  database: ""
+  deployEnabled: true
+  description: ""
+  isMultisource: false
+  locationName: SOURCE
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: f228e5c3-c636-4ea8-ac18-63750a28ac64
+          stepCounter: b664678b-77c9-48d4-af62-60cfa75d1514
+        config: {}
+        dataType: DECIMAL
+        defaultValue: ""
+        description: ""
+        isSurrogateKey: true
+        name: DIM_REGION_KEY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 36a2b339-a812-4b02-9ca5-f9f2e89cbace
+          stepCounter: b664678b-77c9-48d4-af62-60cfa75d1514
+        config: {}
+        dataType: DECIMAL(38,6)
+        description: ""
+        isBusinessKey: true
+        name: R_REGIONKEY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5a34a96f-c4f1-425d-8018-76652e1925b7
+                stepCounter: e12dd609-574c-41a9-ba61-3961c434ba50
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 0330a754-cf3e-4e41-8c09-2ad3dccffcf5
+          stepCounter: b664678b-77c9-48d4-af62-60cfa75d1514
+        config: {}
+        dataType: VARCHAR(8000)
+        description: ""
+        name: R_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 17d6aa42-f05c-490b-a3bf-6f2e68ee359e
+                stepCounter: e12dd609-574c-41a9-ba61-3961c434ba50
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 7e2f1f03-f1cb-4def-bbd6-7a260f188b98
+          stepCounter: b664678b-77c9-48d4-af62-60cfa75d1514
+        config: {}
+        dataType: VARCHAR(8000)
+        description: ""
+        name: R_COMMENT
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: af9a9d80-4a1b-4b86-bf68-d60c704ff633
+                stepCounter: e12dd609-574c-41a9-ba61-3961c434ba50
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 50032439-9af1-4116-a97c-3c56d4cac7f0
+          stepCounter: b664678b-77c9-48d4-af62-60cfa75d1514
+        config: {}
+        dataType: VARBINARY(8000)
+        description: ""
+        name: GH
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: b3f98ae3-766a-4ef3-92c7-e08fda69f446
+                stepCounter: e12dd609-574c-41a9-ba61-3961c434ba50
+            transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 2612c349-259e-472c-a259-ac778b8e8b1d
+          stepCounter: b664678b-77c9-48d4-af62-60cfa75d1514
+        config: {}
+        dataType: DECIMAL
+        defaultValue: ""
+        description: ""
+        isSystemVersion: true
+        name: SYSTEM_VERSION
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: bf3f48fe-548f-4656-a8fa-611c4ef18a5d
+          stepCounter: b664678b-77c9-48d4-af62-60cfa75d1514
+        config: {}
+        dataType: VARCHAR(1)
+        defaultValue: ""
+        description: ""
+        isSystemCurrentFlag: true
+        name: SYSTEM_CURRENT_FLAG
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 4ba29322-fb82-4800-bb85-35c50bc40f66
+          stepCounter: b664678b-77c9-48d4-af62-60cfa75d1514
+        config: {}
+        dataType: DATETIME2(6)
+        defaultValue: ""
+        description: ""
+        isSystemStartDate: true
+        name: SYSTEM_START_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: CAST(GETDATE() AS DATETIME(6))
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases: {}
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: TARGET
+            nodeName: WRK_REGION
+        join:
+          joinCondition: FROM {{ ref('TARGET', 'WRK_REGION') }} [WRK_REGION]
+        name: DIM_REGION
+        noLinkRefs: []
+  name: DIM_REGION
+  overrideSQL: false
+  schema: ""
+  sqlType: "148"
+  type: sql
+  version: 1
+type: Node

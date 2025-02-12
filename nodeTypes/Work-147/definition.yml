@@ -6,7 +6,7 @@ metadata:
   error: null
   nodeMetadataSpec: |
     capitalized: Work
-    short: STG
+    short: WRK
     plural: Stages
     tagColor: '#2EB67D'
 

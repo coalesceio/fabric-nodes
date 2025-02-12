@@ -58,18 +58,38 @@ operation:
           - columnReferences:
               - columnCounter: eb5b962a-301e-4736-9100-edd30b197a31
                 stepCounter: 25bfccc4-099e-430b-8887-724f68cb5e2d
-            transform: ""
+            transform: substring([REGION].[R_COMMENT],1,8)
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: b3f98ae3-766a-4ef3-92c7-e08fda69f446
+          stepCounter: e12dd609-574c-41a9-ba61-3961c434ba50
+        config: {}
+        dataType: VARBINARY(8000)
+        defaultValue: ""
+        description: ""
+        hashDetails:
+          hashAlgorithm: SHA1
+        hashedColumns: []
+        name: GH
+        nullable: true
+        sourceColumnReferences: []
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
-      - aliases: {}
+      - aliases:
+          REGION: 25bfccc4-099e-430b-8887-724f68cb5e2d
         customSQL:
           customSQL: ""
         dependencies:
           - locationName: SOURCE
             nodeName: REGION
         join:
-          joinCondition: FROM {{ ref('SOURCE', 'REGION') }} [REGION]
+          joinCondition: |-
+            FROM {{ ref('SOURCE', 'REGION') }} [REGION]
+            where [REGION].[R_REGIONKEY] >2
         name: WRK_REGION
         noLinkRefs: []
   name: WRK_REGION

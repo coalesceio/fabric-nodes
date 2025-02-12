@@ -311,7 +311,7 @@ does not permit copying or modification for any other purpose.
                     {% else %}
                         {{ get_source_transform(col) }}
                     {% endif %}
-                    AS "{{ [col.name] }}"
+                    AS [{{col.name}}]
                     {%- if not loop.last %}, {% endif %}
                 {% endfor %}
                 {{ source.join }}
@@ -330,7 +330,7 @@ does not permit copying or modification for any other purpose.
                 {% if not loop.first %}
                     AND
                 {% endif %}
-                "SRC"."{{ [col.name] }}" = "TGT"."{{ [col.name] }}"
+                [SRC].[{{col.name}}]= [TGT].[{{col.name}}]
             {% endfor %}
             WHEN MATCHED
             {% for col in columns if not (   col.isBusinessKey or
@@ -346,7 +346,7 @@ does not permit copying or modification for any other purpose.
                 {% else %}
                     OR
                 {% endif %}
-                NVL( CAST("SRC"."{{ [col.name] }}" as STRING), '**NULL**') <> NVL( CAST("TGT"."{{ [col.name] }}" as STRING), '**NULL**')
+                NVL( CAST([SRC].[{{col.name}}] as STRING), '**NULL**') <> NVL( CAST([TGT].[{{col.name}}] as STRING), '**NULL**')
                 {% if loop.last %}
                     )
                 {% endif %}
@@ -359,19 +359,19 @@ does not permit copying or modification for any other purpose.
                                                     col.isSystemStartDate or
                                                     col.isSystemEndDate or
                                                     col.isSystemCreateDate) %}
-                    "TGT"."{{ [col.name] }}" = "SRC"."{{ [col.name] }}"
+                    [TGT].[{{col.name}}] = [SRC].[{{col.name}}]
                 {% if not loop.last %}, {% endif %}
             {% endfor %}
             WHEN NOT MATCHED THEN
             INSERT (
             {%- for col in columns if not col.isSurrogateKey %}
-                "{{ [col.name] }}"
+                [{{ col.name }}]
                 {% if not loop.last %}, {% endif %}
             {% endfor -%}
             )
             VALUES (
             {%- for col in columns if not col.isSurrogateKey %}
-                "SRC"."{{ [col.name] }}"
+                [SRC].[{{col.name}}]
                 {% if not loop.last %}, {% endif %}
             {% endfor -%}
             )
