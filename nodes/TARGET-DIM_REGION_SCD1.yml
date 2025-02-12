@@ -1,6 +1,6 @@
 fileVersion: 1
 id: b664678b-77c9-48d4-af62-60cfa75d1514
-name: DIM_REGION
+name: DIM_REGION_SCD1
 operation:
   config:
     groupByAll: false
@@ -13,12 +13,12 @@ operation:
     preSQL: ""
     selectDistinct: false
     testsEnabled: false
-    truncateBefore: false
+    truncateBefore: true
   database: ""
   deployEnabled: true
   description: ""
   isMultisource: false
-  locationName: SOURCE
+  locationName: TARGET
   materializationType: table
   metadata:
     appliedNodeTests: []
@@ -31,7 +31,7 @@ operation:
           columnCounter: f228e5c3-c636-4ea8-ac18-63750a28ac64
           stepCounter: b664678b-77c9-48d4-af62-60cfa75d1514
         config: {}
-        dataType: DECIMAL
+        dataType: BIGINT
         defaultValue: ""
         description: ""
         isSurrogateKey: true
@@ -39,7 +39,7 @@ operation:
         nullable: true
         sourceColumnReferences:
           - columnReferences: []
-            transform: ""
+            transform: ROW_NUMBER() OVER (ORDER BY (SELECT NULL))
       - appliedColumnTests: {}
         columnReference:
           columnCounter: 36a2b339-a812-4b02-9ca5-f9f2e89cbace
@@ -147,7 +147,7 @@ operation:
         nullable: true
         sourceColumnReferences:
           - columnReferences: []
-            transform: CAST(GETDATE() AS DATETIME(6))
+            transform: CAST(GETDATE() AS DATETIME2(6))
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
@@ -159,9 +159,9 @@ operation:
             nodeName: WRK_REGION
         join:
           joinCondition: FROM {{ ref('TARGET', 'WRK_REGION') }} [WRK_REGION]
-        name: DIM_REGION
+        name: DIM_REGION_SCD1
         noLinkRefs: []
-  name: DIM_REGION
+  name: DIM_REGION_SCD1
   overrideSQL: false
   schema: ""
   sqlType: "148"
