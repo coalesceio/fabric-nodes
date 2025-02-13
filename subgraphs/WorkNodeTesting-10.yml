@@ -2,6 +2,10 @@ fileVersion: 1
 id: "10"
 name: Work Node Testing
 steps:
+  - 3a2b728f-767e-417f-8adf-af3069d0c3a9
+  - 7e8ea4c1-164d-41a4-b001-0072cd518ae8
   - bbdd4152-3470-4066-86f1-841e513cbda5
+  - c3b145bd-1dd3-4aff-a281-b21af2e444c9
   - e5bcaf28-3a31-47b7-96c7-8d3673c2aa84
+  - f1d9aa40-ae71-48d9-8ef9-20274fb63ff8
 type: Subgraph

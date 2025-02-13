@@ -1,5 +1,4 @@
-
-    {% for test in node.tests if config.testsEnabled %}
+{% for test in node.tests if config.testsEnabled %}
         {% if test.runOrder == 'Before' %}
             {{ test_stage(test.name, test.continueOnFailure) }}
             {{ test.templateString }}
@@ -48,15 +47,16 @@
 				)
 			{% endif %}
 	
-			SELECT
+			SELECT 
+			{% if config.selectDistinct -%}	 
+			DISTINCT	
+			{%- endif -%}
 			{% for col in source.columns %}
                 {{ get_source_transform(col) }} AS [{{ col.name }}]
 				{%- if not loop.last -%}, {% endif %}
-			{% endfor %}
-	
-			{{ source.join }}
-	
-			{% if config.insertStrategy in ['UNION', 'UNION ALL'] and not loop.last %}
+			{% endfor -%}
+            {{source.join|trim}}
+			 {% if config.insertStrategy in ['UNION', 'UNION ALL'] and not loop.last %}
 				{{config.insertStrategy}}
 			{% endif %}
 	
