@@ -1,5 +1,5 @@
 fileVersion: 1
-id: b664678b-77c9-48d4-af62-60cfa75d1514
+id: 4fdd6a3f-dafd-4eae-90b5-5e05d7f536bc
 name: DIM_REGION_SCD1
 operation:
   config:
@@ -13,12 +13,12 @@ operation:
     preSQL: ""
     selectDistinct: false
     testsEnabled: false
-    truncateBefore: true
+    truncateBefore: false
   database: ""
   deployEnabled: true
   description: ""
   isMultisource: false
-  locationName: TARGET
+  locationName: SOURCE
   materializationType: table
   metadata:
     appliedNodeTests: []
@@ -28,10 +28,10 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: f228e5c3-c636-4ea8-ac18-63750a28ac64
-          stepCounter: b664678b-77c9-48d4-af62-60cfa75d1514
+          columnCounter: e7c76fb8-79a1-4a7c-a53b-7bbbbe5df055
+          stepCounter: 4fdd6a3f-dafd-4eae-90b5-5e05d7f536bc
         config: {}
-        dataType: BIGINT
+        dataType: DECIMAL
         defaultValue: ""
         description: ""
         isSurrogateKey: true
@@ -39,11 +39,11 @@ operation:
         nullable: true
         sourceColumnReferences:
           - columnReferences: []
-            transform: ROW_NUMBER() OVER (ORDER BY (SELECT NULL))
+            transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 36a2b339-a812-4b02-9ca5-f9f2e89cbace
-          stepCounter: b664678b-77c9-48d4-af62-60cfa75d1514
+          columnCounter: 6b68edcc-41be-43c4-b61b-c9662a2b1708
+          stepCounter: 4fdd6a3f-dafd-4eae-90b5-5e05d7f536bc
         config: {}
         dataType: DECIMAL(38,6)
         description: ""
@@ -57,8 +57,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 0330a754-cf3e-4e41-8c09-2ad3dccffcf5
-          stepCounter: b664678b-77c9-48d4-af62-60cfa75d1514
+          columnCounter: 4cdbcb99-bb1f-4730-9b73-41bc82bf900d
+          stepCounter: 4fdd6a3f-dafd-4eae-90b5-5e05d7f536bc
         config: {}
         dataType: VARCHAR(8000)
         description: ""
@@ -71,8 +71,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 7e2f1f03-f1cb-4def-bbd6-7a260f188b98
-          stepCounter: b664678b-77c9-48d4-af62-60cfa75d1514
+          columnCounter: 1933b30d-fa63-473b-b0bf-9ef3ba3050fa
+          stepCounter: 4fdd6a3f-dafd-4eae-90b5-5e05d7f536bc
         config: {}
         dataType: VARCHAR(8000)
         description: ""
@@ -85,8 +85,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 50032439-9af1-4116-a97c-3c56d4cac7f0
-          stepCounter: b664678b-77c9-48d4-af62-60cfa75d1514
+          columnCounter: 399e337d-d993-44fb-a3b6-b2c0c6cb5a77
+          stepCounter: 4fdd6a3f-dafd-4eae-90b5-5e05d7f536bc
         config: {}
         dataType: VARBINARY(8000)
         description: ""
@@ -97,13 +97,27 @@ operation:
               - columnCounter: b3f98ae3-766a-4ef3-92c7-e08fda69f446
                 stepCounter: e12dd609-574c-41a9-ba61-3961c434ba50
             transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 8ea8c71c-5dd8-4871-b414-2ad80403a396
+          stepCounter: 4fdd6a3f-dafd-4eae-90b5-5e05d7f536bc
+        config: {}
+        dataType: VARBINARY(8000)
+        description: ""
+        name: GH1
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: f1f4e725-f80b-4d29-ac63-bea8c193b861
+                stepCounter: e12dd609-574c-41a9-ba61-3961c434ba50
+            transform: ""
       - acceptedValues:
           strictMatch: true
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: 2612c349-259e-472c-a259-ac778b8e8b1d
-          stepCounter: b664678b-77c9-48d4-af62-60cfa75d1514
+          columnCounter: 43ded004-8200-438b-9437-c36d210259e0
+          stepCounter: 4fdd6a3f-dafd-4eae-90b5-5e05d7f536bc
         config: {}
         dataType: DECIMAL
         defaultValue: ""
@@ -119,8 +133,8 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: bf3f48fe-548f-4656-a8fa-611c4ef18a5d
-          stepCounter: b664678b-77c9-48d4-af62-60cfa75d1514
+          columnCounter: 9e436a5a-20b1-46a2-9d97-f8929374f747
+          stepCounter: 4fdd6a3f-dafd-4eae-90b5-5e05d7f536bc
         config: {}
         dataType: VARCHAR(1)
         defaultValue: ""
@@ -136,14 +150,65 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: 4ba29322-fb82-4800-bb85-35c50bc40f66
-          stepCounter: b664678b-77c9-48d4-af62-60cfa75d1514
+          columnCounter: da0c3d82-4a21-401d-9a20-e40cc2ace377
+          stepCounter: 4fdd6a3f-dafd-4eae-90b5-5e05d7f536bc
         config: {}
         dataType: DATETIME2(6)
         defaultValue: ""
         description: ""
         isSystemStartDate: true
         name: SYSTEM_START_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: CAST(GETDATE() AS DATETIME2(6))
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 95d0ac19-247e-4b19-8e1f-f6ddf109b486
+          stepCounter: 4fdd6a3f-dafd-4eae-90b5-5e05d7f536bc
+        config: {}
+        dataType: DATETIME2(6)
+        defaultValue: ""
+        description: ""
+        isSystemEndDate: true
+        name: SYSTEM_END_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: CAST('2999-12-31 00:00:00' AS DATETIME2(6))
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 64ed97b7-0ceb-4c73-843c-33df563014fe
+          stepCounter: 4fdd6a3f-dafd-4eae-90b5-5e05d7f536bc
+        config: {}
+        dataType: DATETIME2(6)
+        defaultValue: ""
+        description: ""
+        isSystemCreateDate: true
+        name: SYSTEM_CREATE_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: CAST(GETDATE() AS DATETIME2(6))
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 598dd117-d5ab-4546-9970-b3ebbc613a0b
+          stepCounter: 4fdd6a3f-dafd-4eae-90b5-5e05d7f536bc
+        config: {}
+        dataType: DATETIME2(6)
+        defaultValue: ""
+        description: ""
+        isSystemUpdateDate: true
+        name: SYSTEM_UPDATE_DATE
         nullable: true
         sourceColumnReferences:
           - columnReferences: []

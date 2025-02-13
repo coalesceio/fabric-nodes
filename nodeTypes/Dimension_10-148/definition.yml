@@ -111,13 +111,13 @@ metadata:
     systemColumns:
     - displayName: '{{NODE_NAME}}_KEY'
       transform: ''
-      dataType: NUMBER
+      dataType: DECIMAL
       placement: beginning
       attributeName: isSurrogateKey
 
     - displayName: SYSTEM_VERSION
       transform: ''
-      dataType: NUMBER
+      dataType: DECIMAL
       placement: end
       attributeName: isSystemVersion
 
@@ -128,26 +128,26 @@ metadata:
       attributeName: isSystemCurrentFlag
 
     - displayName: SYSTEM_START_DATE
-      transform: CAST(CURRENT_TIMESTAMP AS TIMESTAMP)
-      dataType: TIMESTAMP
+      transform: CAST(GETDATE() AS DATETIME2(6))
+      dataType: DATETIME2(6)
       placement: end
       attributeName: isSystemStartDate
 
     - displayName: SYSTEM_END_DATE
-      transform: CAST('2999-12-31 00:00:00' AS TIMESTAMP)
-      dataType: TIMESTAMP
+      transform: CAST('2999-12-31 00:00:00' AS DATETIME2(6))
+      dataType: DATETIME2(6)
       placement: end
       attributeName: isSystemEndDate
 
     - displayName: SYSTEM_CREATE_DATE
-      transform: CAST(CURRENT_TIMESTAMP AS TIMESTAMP)
-      dataType: TIMESTAMP
+      transform: CAST(GETDATE() AS DATETIME2(6))
+      dataType: DATETIME2(6)
       placement: end
       attributeName: isSystemCreateDate
 
     - displayName: SYSTEM_UPDATE_DATE
-      transform: CAST(CURRENT_TIMESTAMP AS TIMESTAMP)
-      dataType: TIMESTAMP
+      transform: CAST(GETDATE() AS DATETIME2(6))
+      dataType: DATETIME2(6)
       placement: end
       attributeName: isSystemUpdateDate
 name: Dimension_1.0
