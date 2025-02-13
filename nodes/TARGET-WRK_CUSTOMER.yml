@@ -1,6 +1,6 @@
 fileVersion: 1
 id: 4a223bbc-9fbe-436a-ac69-006cb9a55b73
-name: WRK_CUSTOMER1
+name: WRK_CUSTOMER
 operation:
   config:
     insertStrategy: INSERT
@@ -10,7 +10,7 @@ operation:
     testsEnabled: false
     truncateBefore: false
   database: ""
-  deployEnabled: false
+  deployEnabled: true
   description: This table is created to update information about customer
   isMultisource: false
   locationName: TARGET
@@ -159,9 +159,9 @@ operation:
             nodeName: CUSTOMER
         join:
           joinCondition: FROM {{ ref('SOURCE', 'CUSTOMER') }} [CUSTOMER]
-        name: WRK_CUSTOMER1
+        name: WRK_CUSTOMER
         noLinkRefs: []
-  name: WRK_CUSTOMER1
+  name: WRK_CUSTOMER
   overrideSQL: false
   schema: ""
   sqlType: "147"
