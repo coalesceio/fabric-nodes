@@ -38,7 +38,7 @@
 			{% if config.insertStrategy == 'INSERT' %}
 				{{ stage('Insert ' + source.name | string ) }}
 	
-				INSERT INTO {{ ref_no_link(node.location.name, node.name) }}
+			INSERT INTO {{ ref_no_link(node.location.name, node.name) }}
 				(
 					{% for col in source.columns %}
 						[{{ col.name }}]
@@ -54,8 +54,9 @@
 			{% for col in source.columns %}
                 {{ get_source_transform(col) }} AS [{{ col.name }}]
 				{%- if not loop.last -%}, {% endif %}
-			{% endfor -%}
-            {{source.join|trim}}
+			{% endfor %}
+
+            {{source.join}}
 			 {% if config.insertStrategy in ['UNION', 'UNION ALL'] and not loop.last %}
 				{{config.insertStrategy}}
 			{% endif %}
