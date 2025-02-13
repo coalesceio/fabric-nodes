@@ -1,0 +1,11 @@
+fileVersion: 1
+id: "52"
+mappingDefinitions:
+  SOURCE:
+    database: Node Development
+    schema: sample_data
+  TARGET:
+    database: Node Development
+    schema: target_qa_1
+name: QA
+type: Environment
