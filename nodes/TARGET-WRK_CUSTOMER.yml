@@ -53,7 +53,7 @@ operation:
         config: {}
         dataType: VARCHAR(8000)
         description: ""
-        name: C_ADDRESS
+        name: C_ADDRESS_NEW
         nullable: true
         sourceColumnReferences:
           - columnReferences:
