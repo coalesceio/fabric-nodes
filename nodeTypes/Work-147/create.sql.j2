@@ -10,7 +10,7 @@
 
 	CREATE TABLE {{ ref_no_link(node.location.name, node.name) }}
 	(
-		{% for col in source.columns %}
+		{% for col in columns %}
              [{{ col.name }}] {{ col.dataType }}
 			{%- if not col.nullable %} NOT NULL
 			{% endif %}

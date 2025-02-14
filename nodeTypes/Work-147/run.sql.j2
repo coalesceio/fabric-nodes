@@ -1,5 +1,4 @@
-
-    {% for test in node.tests if config.testsEnabled %}
+{% for test in node.tests if config.testsEnabled %}
         {% if test.runOrder == 'Before' %}
             {{ test_stage(test.name, test.continueOnFailure) }}
             {{ test.templateString }}
@@ -11,16 +10,13 @@
 		{{ stage('Pre-SQL') }}
 		{{ config.preSQL }}
 	{% endif %}
-	
-	
-	
-		{% if config.truncateBefore %}
+
+{% if config.truncateBefore %}
 	
 			{{ stage('Truncate Stage Table') }}
 			TRUNCATE TABLE {{ ref_no_link(node.location.name, node.name) }}
 	
-		{% endif %}
-	
+{% endif %}
 	
 		{% if config.insertStrategy in ['UNION', 'UNION ALL'] %}
 			{{ stage( config.insertStrategy + ' Sources' | string ) }}
@@ -32,8 +28,7 @@
 					{% endfor %}
 				)
 		{% endif %}
-	
-	
+
 		{% for source in sources %}
 	
 			{% if config.insertStrategy == 'INSERT' %}
@@ -51,7 +46,7 @@
 			SELECT
 			{% for col in source.columns %}
                 {{ get_source_transform(col) }} AS [{{ col.name }}]
-				{%- if not loop.last -%}, {% endif %}
+				{%- if not loop.last -%} {% endif %}
 			{% endfor %}
 	
 			{{ source.join }}
@@ -59,7 +54,6 @@
 			{% if config.insertStrategy in ['UNION', 'UNION ALL'] and not loop.last %}
 				{{config.insertStrategy}}
 			{% endif %}
-	
 		{% endfor %}
 	
 	{% if config.postSQL %}
