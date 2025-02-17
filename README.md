@@ -113,24 +113,13 @@ The following stages are executed:
 | **Swap Cloned Table** | Upon successful completion of all updates, the clone replaces the main table ensuring that no data is lost |
 | **Delete Table** | Drops the internal table |
 
-#### Recreating the Work Tables
+#### Recreating the Work View
 
-If any of the following change are detected, then the table will be recreated by DROP table first and then CREATE table.
+If any of the following change are detected, then the table will be recreated by DROP View first and then CREATE.
 
 * Join clause
 * Adding transformation
 * Changes in configuration like adding distinct.
-
-One of the following stages are executed:
-
-| **Stage** | **Description** |
-|-----------|----------------|
-| **Create Table** | Creates a new table |
-| **Replace Table** | Replaces an existing table|
-
-#### Recreating the Work Views
-
-The subsequent deployment of Work node of materialization type view with changes in view definition, adding table description or renaming view results in deleting the existing view and recreating the view.
 
 The following stages are executed:
 
@@ -138,6 +127,7 @@ The following stages are executed:
 |-----------|----------------|
 | **Delete View** | Removes existing view |
 | **Create View** | Creates new view with updated definition |
+
 
 ### Work Undeployment
 
