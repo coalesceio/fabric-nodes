@@ -1,6 +1,6 @@
 fileVersion: 1
 id: 7833b738-cfa3-4c2d-8b3e-8559a30ec444
-name: DIM_REGION12
+name: DIM_REGION12_SCD2
 operation:
   config:
     groupByAll: false
@@ -13,7 +13,7 @@ operation:
     preSQL: ""
     selectDistinct: false
     testsEnabled: false
-    truncateBefore: false
+    truncateBefore: true
   database: ""
   deployEnabled: true
   description: ""
@@ -47,6 +47,7 @@ operation:
         config: {}
         dataType: DECIMAL(38,6)
         description: ""
+        isBusinessKey: true
         name: R_REGIONKEY
         nullable: true
         sourceColumnReferences:
@@ -61,6 +62,7 @@ operation:
         config: {}
         dataType: VARCHAR(8000)
         description: ""
+        isChangeTracking: true
         name: R_NAME
         nullable: true
         sourceColumnReferences:
@@ -80,20 +82,6 @@ operation:
         sourceColumnReferences:
           - columnReferences:
               - columnCounter: 2a8e84f5-974a-4c98-ab44-648fe4bdadce
-                stepCounter: cc6d2ef2-0576-47f7-be7a-2927c0533e2d
-            transform: ""
-      - appliedColumnTests: {}
-        columnReference:
-          columnCounter: a71f83ed-a8f1-49af-a43d-23b37149c046
-          stepCounter: 7833b738-cfa3-4c2d-8b3e-8559a30ec444
-        config: {}
-        dataType: VARBINARY(8000)
-        description: ""
-        name: GH
-        nullable: true
-        sourceColumnReferences:
-          - columnReferences:
-              - columnCounter: 25dfa888-e84b-4961-a8b2-497593828d19
                 stepCounter: cc6d2ef2-0576-47f7-be7a-2927c0533e2d
             transform: ""
       - acceptedValues:
@@ -209,9 +197,9 @@ operation:
             nodeName: WRK_REGION12
         join:
           joinCondition: FROM {{ ref('TARGET', 'WRK_REGION12') }} [WRK_REGION12]
-        name: DIM_REGION12
+        name: DIM_REGION12_SCD2
         noLinkRefs: []
-  name: DIM_REGION12
+  name: DIM_REGION12_SCD2
   overrideSQL: false
   schema: ""
   sqlType: "148"

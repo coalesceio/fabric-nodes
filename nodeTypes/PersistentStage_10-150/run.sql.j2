@@ -45,7 +45,7 @@ does not permit copying or modification for any other purpose.
 	
 {% if is_type_2 %}
          
-         {# SCD-Type 2 Dimension == #}
+          {# SCD-Type 2 Dimension == #}
 
          {{ stage('Insert New Records' ) }}  
 
@@ -164,8 +164,12 @@ does not permit copying or modification for any other purpose.
              
               UPDATE [DIM]
               SET
-              {% for col in columns if (col.isSystemCurrentFlag) %}
-                  [DIM].[{{ col.name }}] = 'N'
+              {% for col in columns if (col.isSystemCurrentFlag)  %}
+                  [DIM].[{{ col.name }}] = [SRC].[{{col.name}}]
+              {%- endfor %}
+                  AND
+              {% for col in columns if (col.isSystemEndDate)  %}
+                  [DIM].[{{ col.name }}] = [SRC].[{{col.name}}]
               {%- endfor %}
               FROM {{ ref_no_link(node.location.name, node.name) }} AS [DIM]
               INNER JOIN 
@@ -178,7 +182,9 @@ does not permit copying or modification for any other purpose.
                     {%- if col.isSystemVersion %}
                     	1
                     {%- elif col.isSystemCurrentFlag %}
-                    	'Y'
+                    	'N'
+                    {%- elif col.isSystemEndDate %}
+                         DATEADD(MILLISECOND, -1, CAST(GETDATE() AS DATETIME2(6)))
                     {%- else %}
                         {{ get_source_transform(col) }}
                     {%- endif %}
@@ -423,12 +429,37 @@ does not permit copying or modification for any other purpose.
 
         {# == Executed if neither business key or change tracking is not specified  == #}
 
+         {{ stage('Insert ' + 'Sources' | string ) }}
+            INSERT INTO {{ ref_no_link(node.location.name, node.name) }}
+            (
+                {% for col in columns if not col.isSurrogateKey %}
+                    "{{ col.name }}"
+                    {%- if not loop.last -%},{% endif %}
+                {% endfor %}
+            )
+           {%- for source in sources %}
+            (SELECT
+            {%- if config.selectDistinct %}
+            DISTINCT
+            {%- endif %}
+            {%- for col in source.columns if not col.isSurrogateKey %}
 
-
-
-
-
-
+                {%- if col.isSystemVersion %}
+                    1
+                {%- elif col.isSystemCurrentFlag %}
+                    'Y'
+                {%- else %}
+                    {{ get_source_transform(col) }}
+                {%- endif %}
+                AS [{{ col.name }}]
+                {%- if not loop.last -%}, {% endif %}             
+            {%- endfor %}
+            {{ source.join }}
+            {{ sortorder_by_colv() }} ) 
+            {%- if config.insertStrategy in ['UNION', 'UNION ALL'] and not loop.last %}
+                {{config.insertStrategy}}
+            {%- endif %}
+        {%- endfor %}
   
 {% endif %}
 

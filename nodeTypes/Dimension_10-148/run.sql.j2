@@ -163,9 +163,8 @@ does not permit copying or modification for any other purpose.
               SET
               {% for col in columns if (col.isSystemCurrentFlag)  %}
                   [DIM].[{{ col.name }}] = [SRC].[{{col.name}}]
-              {%- endfor %}
-                  AND
-              {% for col in columns if (col.isSystemEndDate)  %}
+              {%- endfor %},
+              {%- for col in columns if (col.isSystemEndDate)  %}
                   [DIM].[{{ col.name }}] = [SRC].[{{col.name}}]
               {%- endfor %}
               FROM {{ ref_no_link(node.location.name, node.name) }} AS [DIM]
