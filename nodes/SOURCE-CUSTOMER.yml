@@ -1,0 +1,152 @@
+fileVersion: 1
+id: bbdd4152-3470-4066-86f1-841e513cbda5
+name: CUSTOMER
+operation:
+  database: ""
+  deployEnabled: false
+  description: ""
+  locationName: SOURCE
+  metadata:
+    columns:
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 10cef61e-38c8-4401-9851-8582aa32ed3f
+          stepCounter: bbdd4152-3470-4066-86f1-841e513cbda5
+        config: {}
+        dataType: DECIMAL(38,6)
+        defaultValue: ""
+        description: ""
+        name: C_CUSTKEY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 54c0fd0d-1825-4cb4-aa36-b281336760dd
+          stepCounter: bbdd4152-3470-4066-86f1-841e513cbda5
+        config: {}
+        dataType: VARCHAR(8000)
+        defaultValue: ""
+        description: ""
+        name: C_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: a2d94bd8-3573-4f2d-815f-04f0be6cc2ef
+          stepCounter: bbdd4152-3470-4066-86f1-841e513cbda5
+        config: {}
+        dataType: VARCHAR(8000)
+        defaultValue: ""
+        description: ""
+        name: C_ADDRESS
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 3a4ef9b5-0cab-4e70-8fc4-540dfa4d3c1c
+          stepCounter: bbdd4152-3470-4066-86f1-841e513cbda5
+        config: {}
+        dataType: DECIMAL(38,6)
+        defaultValue: ""
+        description: ""
+        name: C_NATIONKEY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 2e5c748a-990f-4e9e-b5be-192d397e8149
+          stepCounter: bbdd4152-3470-4066-86f1-841e513cbda5
+        config: {}
+        dataType: VARCHAR(8000)
+        defaultValue: ""
+        description: ""
+        name: C_PHONE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 33437e35-31b2-41db-ac1d-8f363605560f
+          stepCounter: bbdd4152-3470-4066-86f1-841e513cbda5
+        config: {}
+        dataType: DECIMAL(38,6)
+        defaultValue: ""
+        description: ""
+        name: C_ACCTBAL
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 30c186ae-1b78-4768-b14c-1fd3b156319d
+          stepCounter: bbdd4152-3470-4066-86f1-841e513cbda5
+        config: {}
+        dataType: VARCHAR(8000)
+        defaultValue: ""
+        description: ""
+        name: C_MKTSEGMENT
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 65b7bbe3-5c6f-412d-910d-d4ab0caa84f5
+          stepCounter: bbdd4152-3470-4066-86f1-841e513cbda5
+        config: {}
+        dataType: VARCHAR(8000)
+        defaultValue: ""
+        description: ""
+        name: C_COMMENT
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+  name: CUSTOMER
+  schema: ""
+  sqlType: Source
+  type: sourceInput
+  version: 1
+type: Node
