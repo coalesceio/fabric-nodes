@@ -73,10 +73,6 @@ Join conditions and other clauses can be specified in the join space next to map
 
 ![work_join](https://github.com/coalesceio/Coalesce-Base-Node-Types/assets/7216836/2dc81bb8-2285-46e1-8b93-ce7082800fc5)
 
-> 📘 **Specify Group by and Order by Clauses**
->
-> You should specify group by and order by clauses in this space if you are not opting for the group by all and order by provided in OPTIONS config.
-
 ### Work Deployment
 
 #### Work Initial Deployment
@@ -85,8 +81,10 @@ When deployed for the first time into an environment the Work node of materializ
 
 | **Stage** | **Description** |
 |-----------|----------------|
-| **Create Work Table** | This will execute a CREATE OR REPLACE statement and create a table in the target environment |
-| **Create Work View** | This will execute a CREATE OR REPLACE statement and create a view in the target environment |
+| **Drop Work Table** | This will execute a DROP statement and Drops a table in the target environment |
+| **Create Work Table** | This will execute a CREATE statement and create a table in the target environment |
+| **Drop Work View** | This will execute a DROP statement and Drops a view in the target environment |
+| **Create Work View** | This will execute a CREATE statement and create a view in the target environment |
 
 #### Work Redeployment
 
@@ -112,11 +110,11 @@ The following stages are executed:
 
 #### Recreating the Work Tables
 
-If any of the following change are detected, then the table will be recreated using a CREATE or REPLACE.
+If any of the following change are detected, then the table will be recreated using a DROP and CREATE.
 
 * Join clause
 * Adding transformation
-* Changes in configuration like adding distinct, group by, or order by
+* Changes in configuration like adding distinct.
 
 One of the following stages are executed:
 
