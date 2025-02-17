@@ -45,37 +45,31 @@ does not permit copying or modification for any other purpose.
 				{% endfor %}
 			)
 	{% endif %}
-	
-	
 	{% for source in sources %}
-		{% if nsVariables.varInsertStrategy == 'INSERT' %}
-			{{ stage('Insert ' + source.name | string ) }}
-			INSERT INTO {{ ref_no_link(node.location.name, node.name) }}
+		{%- if nsVariables.varInsertStrategy == 'INSERT' %}
+		{{ stage('Insert ' + source.name | string ) }}
+		INSERT INTO {{ ref_no_link(node.location.name, node.name) }}
 			(
 				{% for col in source.columns %}
 					[{{ col.name }}]
 					{%- if not loop.last -%},{% endif %}
 				{% endfor %}
-			)
+		    )
 		{% endif %}
-	
 		SELECT 
 		{% if config.selectDistinct -%}	 
 		DISTINCT	
 		{%- endif -%}
-
 		{% for col in source.columns %}
             {{ get_source_transform(col) }} AS [{{ col.name }}]
 			{%- if not loop.last -%}, {% endif %}
 		{% endfor %}
         {{source.join}}
-
 		{% if node.isMultisource and nsVariables.varInsertStrategy in ['UNION', 'UNION ALL'] and not loop.last %}
-			{{nsVariables.varInsertStrategy}}
-		{% else %}
-			{% set nsVariables.varInsertStrategy = 'INSERT' %}
+		{{nsVariables.varInsertStrategy}}
+		{%- else -%}
+		{%- set nsVariables.varInsertStrategy = 'INSERT' -%}
 		{% endif %}
-
 	{% endfor %}
 	
 	{% if config.postSQL %}
