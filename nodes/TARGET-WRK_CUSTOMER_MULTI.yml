@@ -7,14 +7,14 @@ operation:
     postSQL: ""
     preSQL: ""
     selectDistinct: false
-    testsEnabled: true
+    testsEnabled: false
     truncateBefore: false
   database: ""
   deployEnabled: false
   description: This table is created to update information about customer
   isMultisource: false
   locationName: TARGET
-  materializationType: table
+  materializationType: view
   metadata:
     appliedNodeTests:
       - continueOnFailure: false

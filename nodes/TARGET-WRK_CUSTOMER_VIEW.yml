@@ -7,8 +7,8 @@ operation:
     postSQL: ""
     preSQL: ""
     selectDistinct: false
-    testsEnabled: true
-    truncateBefore: true
+    testsEnabled: false
+    truncateBefore: false
   database: ""
   deployEnabled: false
   description: ""
