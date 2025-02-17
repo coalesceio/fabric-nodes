@@ -83,6 +83,11 @@ When deployed for the first time into an environment the Work node of materializ
 |-----------|----------------|
 | **Drop Work Table** | This will execute a DROP statement and Drops a table in the target environment |
 | **Create Work Table** | This will execute a CREATE statement and create a table in the target environment |
+
+When deployed for the first time into an environment the Work node of materialization type view will execute the below stage:
+
+| **Stage** | **Description** |
+|-----------|----------------|
 | **Drop Work View** | This will execute a DROP statement and Drops a view in the target environment |
 | **Create Work View** | This will execute a CREATE statement and create a view in the target environment |
 
@@ -110,7 +115,7 @@ The following stages are executed:
 
 #### Recreating the Work Tables
 
-If any of the following change are detected, then the table will be recreated using a DROP and CREATE.
+If any of the following change are detected, then the table will be recreated by DROP table first and then CREATE table.
 
 * Join clause
 * Adding transformation
