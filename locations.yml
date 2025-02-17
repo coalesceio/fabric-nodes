@@ -1,3 +1,5 @@
-defaultStorageMapping: null
+defaultStorageMapping: TGT
 fileVersion: 1
-locations: []
+locations:
+  - SRC
+  - TGT
