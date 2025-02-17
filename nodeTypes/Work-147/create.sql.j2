@@ -27,7 +27,7 @@
 
     {{ stage('Create Stage View') }}
 
-    CREATE VIEWxx {{ ref_no_link(node.location.name, node.name) }}
+    CREATE VIEW {{ ref_no_link(node.location.name, node.name) }}
     (
         {% for col in source.columns %}
             [{{ col.name }}]

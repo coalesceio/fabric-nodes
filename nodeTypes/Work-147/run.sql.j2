@@ -3,7 +3,7 @@
             {{ test_stage(test.name, test.continueOnFailure) }}
             {{ test.templateString }}
         {% endif %}
-    {% endfor %}
+{% endfor %}
 
 {% if node.materializationType == 'table' %}
 	{% if config.preSQL %}
@@ -11,62 +11,65 @@
 		{{ config.preSQL }}
 	{% endif %}
 	
-	
-	
-		{% if config.truncateBefore %}
-	
-			{{ stage('Truncate Stage Table') }}
-			TRUNCATE TABLE {{ ref_no_link(node.location.name, node.name) }}
-	
-		{% endif %}
-	
-	
-		{% if config.insertStrategy in ['UNION', 'UNION ALL'] %}
-			{{ stage( config.insertStrategy + ' Sources' | string ) }}
-			INSERT INTO {{ ref_no_link(node.location.name, node.name) }}
-				(
-					{% for col in columns %}
-						[{{ col.name }}]
-						{%- if not loop.last -%},{% endif %}
-					{% endfor %}
-				)
-		{% endif %}
-	
-	
-		{% for source in sources %}
-	
-			{% if config.insertStrategy == 'INSERT' %}
-				{{ stage('Insert ' + source.name | string ) }}
-	
-			INSERT INTO {{ ref_no_link(node.location.name, node.name) }}
-				(
-					{% for col in source.columns %}
-						[{{ col.name }}]
-						{%- if not loop.last -%},{% endif %}
-					{% endfor %}
-				)
-			{% endif %}
-	
-			SELECT 
-			{% if config.selectDistinct -%}	 
-			DISTINCT	
-			{%- endif -%}
-			{% for col in source.columns %}
-                {{ get_source_transform(col) }} AS [{{ col.name }}]
-				{%- if not loop.last -%}, {% endif %}
-			{% endfor %}
+	{% if config.truncateBefore %}
+		{{ stage('Truncate Stage Table') }}
+		TRUNCATE TABLE {{ ref_no_link(node.location.name, node.name) }}
+	{% endif %}
 
-            {{source.join}}
-			 {% if config.insertStrategy in ['UNION', 'UNION ALL'] and not loop.last %}
-				{{config.insertStrategy}}
-			{% endif %}
+	{% set nsVariables = namespace(varInsertStrategy="INSERT") %}
+	{% if node.isMultisource %}
+	{% set nsVariables.varInsertStrategy = config.insertStrategy %}
+	{% endif %}	
 	
+
+	{% if nsVariables.varInsertStrategy in ['UNION', 'UNION ALL'] %}
+		{{ stage( nsVariables.varInsertStrategy + ' Sources' | string ) }}
+		INSERT INTO {{ ref_no_link(node.location.name, node.name) }}
+			(
+				{% for col in columns %}
+					[{{ col.name }}]
+					{%- if not loop.last -%},{% endif %}
+				{% endfor %}
+			)
+	{% endif %}
+	
+	
+	{% for source in sources %}
+		{% if nsVariables.varInsertStrategy == 'INSERT' %}
+			{{ stage('Insert ' + source.name | string ) }}
+			INSERT INTO {{ ref_no_link(node.location.name, node.name) }}
+			(
+				{% for col in source.columns %}
+					[{{ col.name }}]
+					{%- if not loop.last -%},{% endif %}
+				{% endfor %}
+			)
+		{% endif %}
+	
+		SELECT 
+		{% if config.selectDistinct -%}	 
+		DISTINCT	
+		{%- endif -%}
+
+		{% for col in source.columns %}
+            {{ get_source_transform(col) }} AS [{{ col.name }}]
+			{%- if not loop.last -%}, {% endif %}
 		{% endfor %}
+        {{source.join}}
+
+		{% if node.isMultisource and nsVariables.varInsertStrategy in ['UNION', 'UNION ALL'] and not loop.last %}
+			{{nsVariables.varInsertStrategy}}
+		{% else %}
+			{% set nsVariables.varInsertStrategy = 'INSERT' %}
+		{% endif %}
+
+	{% endfor %}
 	
 	{% if config.postSQL %}
 		{{ stage('Post-SQL') }}
 		{{ config.postSQL }}
 	{% endif %}
+
 {% endif %}
 
 {% if config.testsEnabled %}
