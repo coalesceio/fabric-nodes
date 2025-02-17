@@ -161,8 +161,12 @@ does not permit copying or modification for any other purpose.
              
               UPDATE [DIM]
               SET
-              {% for col in columns if (col.isSystemCurrentFlag) %}
-                  [DIM].[{{ col.name }}] = 'N'
+              {% for col in columns if (col.isSystemCurrentFlag)  %}
+                  [DIM].[{{ col.name }}] = [SRC].[{{col.name}}]
+              {%- endfor %}
+                  AND
+              {% for col in columns if (col.isSystemEndDate)  %}
+                  [DIM].[{{ col.name }}] = [SRC].[{{col.name}}]
               {%- endfor %}
               FROM {{ ref_no_link(node.location.name, node.name) }} AS [DIM]
               INNER JOIN 
@@ -175,7 +179,9 @@ does not permit copying or modification for any other purpose.
                     {%- if col.isSystemVersion %}
                     	1
                     {%- elif col.isSystemCurrentFlag %}
-                    	'Y'
+                    	'N'
+                    {%- elif col.isSystemEndDate %}
+                         DATEADD(MILLISECOND, -1, CAST(GETDATE() AS DATETIME2(6)))
                     {%- else %}
                         {{ get_source_transform(col) }}
                     {%- endif %}
