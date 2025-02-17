@@ -14,7 +14,7 @@ operation:
   description: ""
   isMultisource: false
   locationName: TARGET
-  materializationType: table
+  materializationType: view
   metadata:
     appliedNodeTests:
       - continueOnFailure: true

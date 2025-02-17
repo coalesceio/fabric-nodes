@@ -10,7 +10,7 @@ operation:
     testsEnabled: false
     truncateBefore: false
   database: ""
-  deployEnabled: false
+  deployEnabled: true
   description: ""
   isMultisource: false
   locationName: TARGET
