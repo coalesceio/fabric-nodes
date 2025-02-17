@@ -6,7 +6,7 @@ operation:
     insertStrategy: INSERT
     postSQL: ""
     preSQL: ""
-    selectDistinct: false
+    selectDistinct: true
     testsEnabled: false
     truncateBefore: false
   database: ""
