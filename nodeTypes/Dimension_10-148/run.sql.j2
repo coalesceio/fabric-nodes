@@ -224,7 +224,7 @@ does not permit copying or modification for any other purpose.
 
              /* Rows Needing To Be Updated Due To Changes To Non-Type-2 columns
               This case merges only when there are changes in non-type-2 column updates, but no changes in type-2 columns*/
-              
+
               UPDATE [DIM]
               SET
                {%- for col in columns if not (   col.isBusinessKey or
@@ -436,7 +436,6 @@ does not permit copying or modification for any other purpose.
 
   
 {% endif %}
-
 
 {# == Queries to be excuted post data insertion  == #}
 
