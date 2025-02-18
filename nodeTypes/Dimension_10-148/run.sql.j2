@@ -417,6 +417,9 @@ does not permit copying or modification for any other purpose.
         {%- endfor -%}
 		WHERE 
 		{% for col in columns if col.isBusinessKey -%}
+                {% if not loop.first %}
+                    AND
+                {% endif %}
                 [TGT].[{{col.name}}] IS NULL
         {% endfor -%}
 
