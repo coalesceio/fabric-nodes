@@ -1,0 +1,136 @@
+fileVersion: 1
+id: 31b66cea-0440-486a-b24b-84d7e766da18
+name: FCT_REGION_VW
+operation:
+  config:
+    groupByAll: false
+    insertStrategy: UNION ALL
+    orderby: false
+    orderbycolumn:
+      items:
+        - {}
+    postSQL: ""
+    preSQL: ""
+    selectDistinct: false
+    testsEnabled: false
+    truncateBefore: false
+  database: ""
+  deployEnabled: true
+  description: ""
+  isMultisource: false
+  locationName: SOURCE
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 2047b746-66f6-4643-9a4f-249ac6d48555
+          stepCounter: 31b66cea-0440-486a-b24b-84d7e766da18
+        config: {}
+        dataType: DECIMAL
+        description: ""
+        name: PSTG_REGION_VW_KEY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 38218450-9d33-43bc-83f5-071148693073
+                stepCounter: 9cfb79c7-125b-4b55-9a54-c99f507fe72d
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: b2c6fd18-53ab-4782-8fd1-72ca1f2ea38f
+          stepCounter: 31b66cea-0440-486a-b24b-84d7e766da18
+        config: {}
+        dataType: DECIMAL(38,6)
+        description: ""
+        isBusinessKey: true
+        name: R_REGIONKEY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: e9d5a8da-9805-496b-baa1-d9edcc446f07
+                stepCounter: 9cfb79c7-125b-4b55-9a54-c99f507fe72d
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: a4c5f614-c528-4744-9de0-cdd5353fb25c
+          stepCounter: 31b66cea-0440-486a-b24b-84d7e766da18
+        config: {}
+        dataType: VARCHAR(8000)
+        description: ""
+        name: R_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 32fc8f58-1344-4edd-81f3-35c07406c1df
+                stepCounter: 9cfb79c7-125b-4b55-9a54-c99f507fe72d
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: e220a10b-b2e8-4291-945e-685ff90e6615
+          stepCounter: 31b66cea-0440-486a-b24b-84d7e766da18
+        config: {}
+        dataType: VARCHAR(8000)
+        description: ""
+        name: R_COMMENT
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 6dfd1731-a284-4c63-a177-2b49e4b5ef72
+                stepCounter: 9cfb79c7-125b-4b55-9a54-c99f507fe72d
+            transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: f0771616-dc7f-4ef3-afea-ecddfb9e62a0
+          stepCounter: 31b66cea-0440-486a-b24b-84d7e766da18
+        config: {}
+        dataType: DATETIME2(3)
+        defaultValue: ""
+        description: ""
+        isSystemCreateDate: true
+        name: SYSTEM_CREATE_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: CAST(GETDATE() AS DATETIME2(3))
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 21d09cd8-9867-4631-9d07-cbf08f852eea
+          stepCounter: 31b66cea-0440-486a-b24b-84d7e766da18
+        config: {}
+        dataType: DATETIME2(3)
+        defaultValue: ""
+        description: ""
+        isSystemUpdateDate: true
+        name: SYSTEM_UPDATE_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: CAST(GETDATE() AS DATETIME2(3))
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases: {}
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: SOURCE
+            nodeName: PSTG_REGION_VW
+        join:
+          joinCondition: FROM {{ ref('SOURCE', 'PSTG_REGION_VW') }} [PSTG_REGION_VW]
+        name: FCT_REGION_VW
+        noLinkRefs: []
+  name: FCT_REGION_VW
+  overrideSQL: false
+  schema: ""
+  sqlType: "149"
+  type: sql
+  version: 1
+type: Node
