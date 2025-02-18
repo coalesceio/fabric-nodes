@@ -14,10 +14,10 @@ does not permit copying or modification for any other purpose.
 	{{ node.override.create.script }}
 
 {% elif node.materializationType == 'table' %}
-  {{ stage('Drop Dimension Table') }}
+  {{ stage('Drop Persistent stage Table') }}
   DROP TABLE IF EXISTS {{ ref_no_link(node.location.name, node.name) }}
 
-	{{ stage('Create Dimension Table') }}
+	{{ stage('Create Persistent stage Table') }}
 
 	CREATE TABLE {{ ref_no_link(node.location.name, node.name) }}
 	(
@@ -30,12 +30,12 @@ does not permit copying or modification for any other purpose.
 	)
     
 {% elif node.materializationType == 'view' %}
-    {{ stage('Drop Stage View') }}
+    {{ stage('Drop Persistent stage View') }}
 
     DROP VIEW IF EXISTS {{ ref_no_link(node.location.name, node.name) }}
 
 
-    {{ stage('Create Stage View') }}
+    {{ stage('Create Persistent stage View') }}
 
     CREATE VIEW {{ ref_no_link(node.location.name, node.name) }}
     (

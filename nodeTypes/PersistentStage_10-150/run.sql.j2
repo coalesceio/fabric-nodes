@@ -39,7 +39,7 @@ does not permit copying or modification for any other purpose.
  {# == Truncate data before data insertion  == #}
 
     {% if config.truncateBefore %}
-        {{ stage('Truncate Dimension Table') }}
+        {{ stage('Truncate Persistent stage Table') }}
         TRUNCATE TABLE {{ ref_no_link(node.location.name, node.name) }}
     {% endif %}
 	
