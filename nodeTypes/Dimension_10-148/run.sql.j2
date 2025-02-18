@@ -44,6 +44,8 @@ does not permit copying or modification for any other purpose.
          
          {# SCD-Type 2 Dimension == #}
 
+         /* New Rows That Don't Exist and to Be Inserted Due To Type-2 Column Changes*/
+
          {{ stage('Insert New Records' ) }}  
 
         	INSERT INTO  {{ ref_no_link(node.location.name, node.name) }} 
@@ -157,6 +159,9 @@ does not permit copying or modification for any other purpose.
                 {# Skip Section #}
             {% else %}
 
+        /* Rows Needing To Be Expired Due To Type-2 Column Changes
+            In this case, only two columns are merged (version and end date) */
+
              {{stage('Update Rows-- Type-2 Column Changes')}}
              
               UPDATE [DIM]
@@ -213,7 +218,13 @@ does not permit copying or modification for any other purpose.
                 {%- endif %}
             {%- endfor %}
 
+
+
              {{stage('Update Rows-- Non Type-2 Column Changes')}}
+
+             /* Rows Needing To Be Updated Due To Changes To Non-Type-2 columns
+              This case merges only when there are changes in non-type-2 column updates, but no changes in type-2 columns*/
+              
               UPDATE [DIM]
               SET
                {%- for col in columns if not (   col.isBusinessKey or
