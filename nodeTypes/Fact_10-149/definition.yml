@@ -106,13 +106,13 @@ metadata:
     systemColumns:
     - displayName: SYSTEM_CREATE_DATE
       transform: CAST(GETDATE() AS DATETIME2(3))
-      dataType: DATETIME2(6)
+      dataType: DATETIME2(3)
       placement: end
       attributeName: isSystemCreateDate
 
     - displayName: SYSTEM_UPDATE_DATE
       transform: CAST(GETDATE() AS DATETIME2(3))
-      dataType: DATETIME2(6)
+      dataType: DATETIME2(3)
       placement: end
       attributeName: isSystemUpdateDate
 name: Fact_1.0

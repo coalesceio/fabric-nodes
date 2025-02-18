@@ -30,12 +30,12 @@ does not permit copying or modification for any other purpose.
 	)
     
 {% elif node.materializationType == 'view' %}
-    {{ stage('Drop Stage View') }}
+    {{ stage('Drop Dimension View') }}
 
     DROP VIEW IF EXISTS {{ ref_no_link(node.location.name, node.name) }}
 
 
-    {{ stage('Create Stage View') }}
+    {{ stage('Create Dimension View') }}
 
     CREATE VIEW {{ ref_no_link(node.location.name, node.name) }}
     (

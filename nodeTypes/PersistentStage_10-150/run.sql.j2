@@ -432,7 +432,7 @@ does not permit copying or modification for any other purpose.
          {{ stage('Insert ' + 'Sources' | string ) }}
             INSERT INTO {{ ref_no_link(node.location.name, node.name) }}
             (
-                {% for col in columns if not col.isSurrogateKey %}
+                {% for col in columns  %}
                     "{{ col.name }}"
                     {%- if not loop.last -%},{% endif %}
                 {% endfor %}
@@ -442,12 +442,15 @@ does not permit copying or modification for any other purpose.
             {%- if config.selectDistinct %}
             DISTINCT
             {%- endif %}
-            {%- for col in source.columns if not col.isSurrogateKey %}
+            {%- for col in source.columns %}
 
                 {%- if col.isSystemVersion %}
                     1
                 {%- elif col.isSystemCurrentFlag %}
                     'Y'
+                {%- elif col.isSurrogateKey %}
+                  ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) 
+	              + COALESCE (( SELECT MAX({%- for col in columns if col.isSurrogateKey -%}{%- if not loop.first %} , {%- endif %} [{{col.name}}] {%endfor%}) FROM {{ ref_no_link(node.location.name, node.name) }}),0)
                 {%- else %}
                     {{ get_source_transform(col) }}
                 {%- endif %}
