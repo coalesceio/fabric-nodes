@@ -124,7 +124,7 @@ operation:
           columnCounter: 73effdd2-4a91-42a5-b91f-41e17add0183
           stepCounter: 9cfb79c7-125b-4b55-9a54-c99f507fe72d
         config: {}
-        dataType: DATETIME2(6)
+        dataType: DATETIME2(3)
         defaultValue: ""
         description: ""
         isSystemStartDate: true
@@ -132,7 +132,7 @@ operation:
         nullable: true
         sourceColumnReferences:
           - columnReferences: []
-            transform: CAST(GETDATE() AS DATETIME2(6))
+            transform: CAST(GETDATE() AS DATETIME2(3))
       - acceptedValues:
           strictMatch: true
           values: []
@@ -149,7 +149,7 @@ operation:
         nullable: true
         sourceColumnReferences:
           - columnReferences: []
-            transform: CAST('2999-12-31 00:00:00' AS DATETIME2(6))
+            transform: CAST('2999-12-31 00:00:00' AS DATETIME2(3))
       - acceptedValues:
           strictMatch: true
           values: []
@@ -166,7 +166,7 @@ operation:
         nullable: true
         sourceColumnReferences:
           - columnReferences: []
-            transform: CAST(GETDATE() AS DATETIME2(6))
+            transform: CAST(GETDATE() AS DATETIME2(3))
       - acceptedValues:
           strictMatch: true
           values: []
@@ -183,7 +183,7 @@ operation:
         nullable: true
         sourceColumnReferences:
           - columnReferences: []
-            transform: CAST(GETDATE() AS DATETIME2(6))
+            transform: CAST(GETDATE() AS DATETIME2(3))
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
