@@ -217,20 +217,16 @@ does not permit copying or modification for any other purpose.
              {{stage('Update Rows-- Non Type-2 Column Changes')}}
               UPDATE [DIM]
               SET
-               {%- for col in columns if not (   col.isBusinessKey or
-                                                      col.isChangeTracking or
-                                                      col.isSurrogateKey or
-                                                      col.isSystemVersion or
-                                                      col.isSystemCurrentFlag or
-                                                      col.isSystemStartDate or
-                                                      col.isSystemEndDate or
-                                                      col.isSystemUpdateDate or              col.isSystemCreateDate) -%}
-                             
-                  {%- if not loop.first %}
-                      AND
-                  {%- endif %}
-                     [DIM].[{{ col.name }}] = [SRC].[{{col.name}}]
-              {%- endfor %}
+		        {% for col in columns if not (  col.isBusinessKey or
+                                                    col.isSurrogateKey or
+                                                    col.isSystemVersion or
+                                                    col.isSystemCurrentFlag or
+                                                    col.isSystemStartDate or
+                                                    col.isSystemEndDate or
+                                                    col.isSystemCreateDate) -%}
+                    [DIM].[{{col.name}}] = [SRC].[{{col.name}}]
+                    {% if not loop.last %}, {% endif %}
+                {%- endfor -%}
               FROM {{ ref_no_link(node.location.name, node.name) }} AS [DIM]
               INNER JOIN 
               ({%- for source in sources %}

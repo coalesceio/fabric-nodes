@@ -1,14 +1,3 @@
-{#
-    Copyright (c) 2023 Coalesce. All rights reserved.
-This script and its associated documentation are confidential and proprietary to Coalesce.
-Unauthorized reproduction, distribution, or disclosure of this material is strictly prohibited.
-Coalesce permits you to copy and modify this script for the purposes of using with Coalsce but
-does not permit copying or modification for any other purpose.  
-#}
-{# == Node Type Version        : 1  == #}
-{# == Node Type Name           : Dimension  == #}
-{# == Node Type Description    :This node loads data into dimension table and maintain history using config options distinct,groupby all,order by ,multi-source  == #}
-
 {% if node.override.create.enabled %}
 	
 	{{ node.override.create.script }}
@@ -30,16 +19,16 @@ does not permit copying or modification for any other purpose.
 	)
     
 {% elif node.materializationType == 'view' %}
-    {{ stage('Drop Dimension View') }}
+    {{ stage('Drop Stage View') }}
 
     DROP VIEW IF EXISTS {{ ref_no_link(node.location.name, node.name) }}
+{%set source = sources[0]%}
 
-
-    {{ stage('Create Dimension View') }}
+    {{ stage('Create Stage View') }}
 
     CREATE VIEW {{ ref_no_link(node.location.name, node.name) }}
     (
-        {% for col in columns %}
+        {% for col in source.columns %}
             [{{ col.name }}]
             {%- if not loop.last -%}, {% endif %}
         {% endfor %}

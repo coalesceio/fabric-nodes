@@ -59,7 +59,14 @@ metadata:
         attributeName: selectDistinct
         type: toggleButton
         enableIf: "{% if config.groupByAll or  node.override.create.enabled %} false {% else %} true {% endif %}"
-        default: false   
+        default: false
+        
+
+      - displayName: Group By All
+        attributeName: groupByAll
+        type: toggleButton
+        default: false
+        enableIf: "{% if config.selectDistinct or  node.override.create.enabled %} false {% else %} true {% endif %}"    
 
       - displayName: Order By
         attributeName: orderby
@@ -104,13 +111,13 @@ metadata:
     systemColumns:
     - displayName: '{{NODE_NAME}}_KEY'
       transform: ''
-      dataType: DECIMAL
+      dataType: NUMBER
       placement: beginning
       attributeName: isSurrogateKey
 
     - displayName: SYSTEM_VERSION
       transform: ''
-      dataType: DECIMAL
+      dataType: NUMBER
       placement: end
       attributeName: isSystemVersion
 
@@ -121,26 +128,26 @@ metadata:
       attributeName: isSystemCurrentFlag
 
     - displayName: SYSTEM_START_DATE
-      transform: CAST(GETDATE() AS DATETIME2(3))
-      dataType: DATETIME2(3)
+      transform: CAST(CURRENT_TIMESTAMP AS TIMESTAMP)
+      dataType: TIMESTAMP
       placement: end
       attributeName: isSystemStartDate
 
     - displayName: SYSTEM_END_DATE
-      transform: CAST('2999-12-31 00:00:00' AS DATETIME2(3))
-      dataType: DATETIME2(3)
+      transform: CAST('2999-12-31 00:00:00' AS TIMESTAMP)
+      dataType: TIMESTAMP
       placement: end
       attributeName: isSystemEndDate
 
     - displayName: SYSTEM_CREATE_DATE
-      transform: CAST(GETDATE() AS DATETIME2(3))
-      dataType: DATETIME2(3)
+      transform: CAST(CURRENT_TIMESTAMP AS TIMESTAMP)
+      dataType: TIMESTAMP
       placement: end
       attributeName: isSystemCreateDate
 
     - displayName: SYSTEM_UPDATE_DATE
-      transform: CAST(GETDATE() AS DATETIME2(3))
-      dataType: DATETIME2(3)
+      transform: CAST(CURRENT_TIMESTAMP AS TIMESTAMP)
+      dataType: TIMESTAMP
       placement: end
       attributeName: isSystemUpdateDate
 name: Dimension_1.0

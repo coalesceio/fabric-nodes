@@ -1,6 +1,6 @@
 fileVersion: 1
-id: 9cfb79c7-125b-4b55-9a54-c99f507fe72d
-name: PSTG_REGION_VW
+id: e3866d9b-7c96-4342-843d-55e73a61e490
+name: PSTG_Products_SCD1
 operation:
   config:
     groupByAll: false
@@ -18,7 +18,7 @@ operation:
   deployEnabled: true
   description: ""
   isMultisource: false
-  locationName: SOURCE
+  locationName: TARGET
   materializationType: table
   metadata:
     appliedNodeTests: []
@@ -28,67 +28,83 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: 38218450-9d33-43bc-83f5-071148693073
-          stepCounter: 9cfb79c7-125b-4b55-9a54-c99f507fe72d
+          columnCounter: 941c2ee3-01c4-47fc-9d83-0e17cffba54e
+          stepCounter: e3866d9b-7c96-4342-843d-55e73a61e490
         config: {}
         dataType: DECIMAL
         defaultValue: ""
         description: ""
         isSurrogateKey: true
-        name: PSTG_REGION_VW_KEY
+        name: PSTG_Products_KEY
         nullable: true
         sourceColumnReferences:
           - columnReferences: []
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: e9d5a8da-9805-496b-baa1-d9edcc446f07
-          stepCounter: 9cfb79c7-125b-4b55-9a54-c99f507fe72d
+          columnCounter: 60ed8dba-4dc4-4051-8fbf-cb3ecbaaee75
+          stepCounter: e3866d9b-7c96-4342-843d-55e73a61e490
         config: {}
-        dataType: DECIMAL(38,6)
+        dataType: INT
         description: ""
-        name: R_REGIONKEY
+        isBusinessKey: true
+        name: Product_ID
         nullable: true
         sourceColumnReferences:
           - columnReferences:
-              - columnCounter: 5c020eff-8f40-4f65-aba7-c988aa4c24ca
-                stepCounter: 273f4c78-07f8-426a-a630-f9e4967634a5
+              - columnCounter: af6b2a35-6b1a-4a8a-9592-8c6be8946c0d
+                stepCounter: 414c4f32-4857-4c58-8650-3e6881093a99
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 32fc8f58-1344-4edd-81f3-35c07406c1df
-          stepCounter: 9cfb79c7-125b-4b55-9a54-c99f507fe72d
+          columnCounter: c3bf25ea-084c-47b9-9888-a94fc7d3f8fe
+          stepCounter: e3866d9b-7c96-4342-843d-55e73a61e490
         config: {}
-        dataType: VARCHAR(8000)
+        dataType: VARCHAR(255)
         description: ""
-        name: R_NAME
-        nullable: true
+        isBusinessKey: true
+        name: Product_Name
+        nullable: false
         sourceColumnReferences:
           - columnReferences:
-              - columnCounter: 9fdf9ac0-c759-4dbe-9f62-c19e778e57ce
-                stepCounter: 273f4c78-07f8-426a-a630-f9e4967634a5
-            transform: UPPER([R_NAME])
+              - columnCounter: 65d7aab9-3ed3-477e-9e75-815b515bff44
+                stepCounter: 414c4f32-4857-4c58-8650-3e6881093a99
+            transform: UPPER(Product_Name)
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 6dfd1731-a284-4c63-a177-2b49e4b5ef72
-          stepCounter: 9cfb79c7-125b-4b55-9a54-c99f507fe72d
+          columnCounter: 28847bed-cefa-494a-a6d9-8bc318e5a56d
+          stepCounter: e3866d9b-7c96-4342-843d-55e73a61e490
         config: {}
-        dataType: VARCHAR(8000)
+        dataType: VARCHAR(255)
         description: ""
-        name: R_COMMENT
+        name: Product_Name1
+        nullable: false
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 65d7aab9-3ed3-477e-9e75-815b515bff44
+                stepCounter: 414c4f32-4857-4c58-8650-3e6881093a99
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6582a2f7-c579-45f2-a5e6-086d7bd52e4e
+          stepCounter: e3866d9b-7c96-4342-843d-55e73a61e490
+        config: {}
+        dataType: VARCHAR(255)
+        description: ""
+        name: Brand
         nullable: true
         sourceColumnReferences:
           - columnReferences:
-              - columnCounter: 08d995b9-1665-4d90-9f75-5681bf96c31c
-                stepCounter: 273f4c78-07f8-426a-a630-f9e4967634a5
+              - columnCounter: 07440b00-ed9b-4784-9d86-7dfafed99bae
+                stepCounter: 414c4f32-4857-4c58-8650-3e6881093a99
             transform: ""
       - acceptedValues:
           strictMatch: true
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: 58e41684-33fc-4ba1-ba87-400c4bf41c0c
-          stepCounter: 9cfb79c7-125b-4b55-9a54-c99f507fe72d
+          columnCounter: 4794827f-588f-4cd7-af39-117815fdf753
+          stepCounter: e3866d9b-7c96-4342-843d-55e73a61e490
         config: {}
         dataType: DECIMAL
         defaultValue: ""
@@ -104,8 +120,8 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: 4e91c1be-8fda-40ba-9b02-e6bb5b99a1d5
-          stepCounter: 9cfb79c7-125b-4b55-9a54-c99f507fe72d
+          columnCounter: ba20d2aa-68a6-4af2-8b7a-0a47ab268770
+          stepCounter: e3866d9b-7c96-4342-843d-55e73a61e490
         config: {}
         dataType: VARCHAR(1)
         defaultValue: ""
@@ -121,8 +137,8 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: 73effdd2-4a91-42a5-b91f-41e17add0183
-          stepCounter: 9cfb79c7-125b-4b55-9a54-c99f507fe72d
+          columnCounter: 6666c17d-20a1-4790-96a9-1476b1075dfd
+          stepCounter: e3866d9b-7c96-4342-843d-55e73a61e490
         config: {}
         dataType: DATETIME2(3)
         defaultValue: ""
@@ -138,10 +154,10 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: 0a584203-d02c-4d26-9476-0ea0e9e8f0b1
-          stepCounter: 9cfb79c7-125b-4b55-9a54-c99f507fe72d
+          columnCounter: fbe8de00-1859-45e0-8590-21dd56dd7791
+          stepCounter: e3866d9b-7c96-4342-843d-55e73a61e490
         config: {}
-        dataType: DATETIME2(6)
+        dataType: DATETIME2(3)
         defaultValue: ""
         description: ""
         isSystemEndDate: true
@@ -149,16 +165,16 @@ operation:
         nullable: true
         sourceColumnReferences:
           - columnReferences: []
-            transform: CAST('2999-12-31 00:00:00' AS DATETIME2(3))
+            transform: CAST('2999-12-31 00:00:00' AS DATETIME2(6))
       - acceptedValues:
           strictMatch: true
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: 3faa6784-0381-4fca-9846-671c40744e01
-          stepCounter: 9cfb79c7-125b-4b55-9a54-c99f507fe72d
+          columnCounter: 54242eb5-b6aa-4a60-87c9-c77ab405def7
+          stepCounter: e3866d9b-7c96-4342-843d-55e73a61e490
         config: {}
-        dataType: DATETIME2(6)
+        dataType: DATETIME2(3)
         defaultValue: ""
         description: ""
         isSystemCreateDate: true
@@ -172,10 +188,10 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: 95c78ff0-ec9b-42dc-a230-fc3696e6d07d
-          stepCounter: 9cfb79c7-125b-4b55-9a54-c99f507fe72d
+          columnCounter: 58831533-d66c-407a-b1ae-1ad2ef9707e0
+          stepCounter: e3866d9b-7c96-4342-843d-55e73a61e490
         config: {}
-        dataType: DATETIME2(6)
+        dataType: DATETIME2(3)
         defaultValue: ""
         description: ""
         isSystemUpdateDate: true
@@ -184,6 +200,25 @@ operation:
         sourceColumnReferences:
           - columnReferences: []
             transform: CAST(GETDATE() AS DATETIME2(3))
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 64c58ecb-6db6-4cd2-a4b7-ba3b084c79d9
+          stepCounter: e3866d9b-7c96-4342-843d-55e73a61e490
+        config: {}
+        dataType: VARBINARY(8000)
+        defaultValue: ""
+        description: ""
+        hashDetails:
+          hashAlgorithm: SHA1
+        hashedColumns:
+          - columnCounter: 60ed8dba-4dc4-4051-8fbf-cb3ecbaaee75
+            stepCounter: e3866d9b-7c96-4342-843d-55e73a61e490
+        name: Hashcolumn
+        nullable: true
+        sourceColumnReferences: []
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
@@ -191,13 +226,13 @@ operation:
         customSQL:
           customSQL: ""
         dependencies:
-          - locationName: TARGET
-            nodeName: STG_REGION_VW
+          - locationName: SOURCE
+            nodeName: Products
         join:
-          joinCondition: FROM {{ ref('TARGET', 'STG_REGION_VW') }} [STG_REGION_VW]
-        name: PSTG_REGION_VW
+          joinCondition: FROM {{ ref('SOURCE', 'Products') }} [Products]
+        name: PSTG_Products_SCD1
         noLinkRefs: []
-  name: PSTG_REGION_VW
+  name: PSTG_Products_SCD1
   overrideSQL: false
   schema: ""
   sqlType: "150"
