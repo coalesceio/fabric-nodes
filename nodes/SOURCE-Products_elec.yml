@@ -1,0 +1,84 @@
+fileVersion: 1
+id: 62a750cc-c26f-4230-8a29-dcb524e5d004
+name: Products_elec
+operation:
+  database: ""
+  deployEnabled: true
+  description: ""
+  locationName: SOURCE
+  metadata:
+    columns:
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 5b31f9b8-9039-4c81-a8de-52d844b95157
+          stepCounter: 62a750cc-c26f-4230-8a29-dcb524e5d004
+        config: {}
+        dataType: INT
+        defaultValue: ""
+        description: ""
+        name: Product_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 77f109d6-557d-45c8-babc-d7eef50d0863
+          stepCounter: 62a750cc-c26f-4230-8a29-dcb524e5d004
+        config: {}
+        dataType: VARCHAR(255)
+        defaultValue: ""
+        description: ""
+        name: Product_Name
+        nullable: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 4e8dc83e-3a29-4b62-95d9-6692782a44bb
+          stepCounter: 62a750cc-c26f-4230-8a29-dcb524e5d004
+        config: {}
+        dataType: VARCHAR(255)
+        defaultValue: ""
+        description: ""
+        name: Brand
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 12a623c2-b758-4090-83d4-8122237effed
+          stepCounter: 62a750cc-c26f-4230-8a29-dcb524e5d004
+        config: {}
+        dataType: VARCHAR(100)
+        defaultValue: ""
+        description: ""
+        name: Colour
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+  name: Products_elec
+  schema: ""
+  sqlType: Source
+  type: sourceInput
+  version: 1
+type: Node

@@ -63,11 +63,6 @@ metadata:
         enableIf: "{% if config.selectDistinct %} false {% else %} true {% endif %}"
         default: false
         
-      - displayName: Order By
-        attributeName: orderby
-        type: toggleButton
-        default: false
-
       - type: tabular
         displayName: 'Sort column'
         attributeName: orderbycolumn

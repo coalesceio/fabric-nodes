@@ -60,7 +60,7 @@ does not permit copying or modification for any other purpose.
          {%-if not col.isSurrogateKey%}
              [SRC].[{{ col.name }}] 
           {%-else%}
-            ROW_NUMBER() OVER (ORDER BY ({%- for col in columns if col.isBusinessKey -%}{%- if not loop.first %} , {%- endif %} [SRC].[{{col.name}}] {%endfor%})) 
+            ROW_NUMBER() OVER (ORDER BY {%- for col in columns if col.isBusinessKey -%}{%- if not loop.first %} , {%- endif %} [SRC].[{{col.name}}] {%endfor%}) 
 	        + COALESCE (( SELECT MAX({%- for col in columns if col.isSurrogateKey -%}{%- if not loop.first %} , {%- endif %} [{{col.name}}] {%endfor%}) FROM {{ ref_no_link(node.location.name, node.name) }}),0) AS [{{ col.name }}] 
           {%-endif%}
 			{%- if not loop.last -%}, {% endif %}
@@ -235,11 +235,10 @@ does not permit copying or modification for any other purpose.
                                                       col.isSystemStartDate or
                                                       col.isSystemEndDate or
                                                       col.isSystemUpdateDate or              col.isSystemCreateDate) -%}
-                             
-                  {%- if not loop.first %}
-                      AND
-                  {%- endif %}
                      [DIM].[{{ col.name }}] = [SRC].[{{col.name}}]
+                    {%- if not loop.last %}
+                     ,
+                  {%- endif %}
               {%- endfor %}
               FROM {{ ref_no_link(node.location.name, node.name) }} AS [DIM]
               INNER JOIN 
@@ -391,7 +390,7 @@ does not permit copying or modification for any other purpose.
          {%-if not col.isSurrogateKey%}
              [SRC].[{{ col.name }}] 
           {%-else%}
-              ROW_NUMBER() OVER (ORDER BY ({%- for col in columns if col.isBusinessKey -%}{%- if not loop.first %} , {%- endif %} [SRC].[{{col.name}}] {%endfor%})) 
+              ROW_NUMBER() OVER (ORDER BY {%- for col in columns if col.isBusinessKey -%}{%- if not loop.first %} , {%- endif %} [SRC].[{{col.name}}] {%endfor%})
 	          + COALESCE (( SELECT MAX({%- for col in columns if col.isSurrogateKey -%}{%- if not loop.first %} , {%- endif %} [{{col.name}}] {%endfor%}) FROM {{ ref_no_link(node.location.name, node.name) }}),0) AS [{{ col.name }}] 
           {%-endif%}
 			{%- if not loop.last -%}, {% endif %}

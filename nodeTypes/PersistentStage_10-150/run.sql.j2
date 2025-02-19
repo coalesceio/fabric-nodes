@@ -61,7 +61,7 @@ does not permit copying or modification for any other purpose.
          {%-if not col.isSurrogateKey%}
              [SRC].[{{ col.name }}] 
           {%-else%}
-            ROW_NUMBER() OVER (ORDER BY ({%- for col in columns if col.isBusinessKey -%}{%- if not loop.first %} , {%- endif %} [SRC].[{{col.name}}] {%endfor%})) 
+            ROW_NUMBER() OVER (ORDER BY {%- for col in columns if col.isBusinessKey -%}{%- if not loop.first %} , {%- endif %} [SRC].[{{col.name}}] {%endfor%})
 	        + COALESCE (( SELECT MAX({%- for col in columns if col.isSurrogateKey -%}{%- if not loop.first %} , {%- endif %} [{{col.name}}] {%endfor%}) FROM {{ ref_no_link(node.location.name, node.name) }}),0) AS [{{ col.name }}] 
           {%-endif%}
 			{%- if not loop.last -%}, {% endif %}
@@ -98,8 +98,7 @@ does not permit copying or modification for any other purpose.
                 {%- endif %}
                 [DIM].[{{ col.name }}] IS NULL
             {%- endfor -%}
-            {{ get_clause(joinclause)|trim }}
-            {{ sortorder_by_colv()|trim }}		
+            {{ get_clause(joinclause)|trim }}	
 			UNION ALL
 			SELECT
             {%- if config.selectDistinct %}
@@ -137,7 +136,6 @@ does not permit copying or modification for any other purpose.
                 {%- endif %}
             {%- endfor -%}
             {{  get_clause(joinclause) |trim }}
-            {{ sortorder_by_colv()|trim }}
 			)			
 			   {%- if config.insertStrategy in ['UNION', 'UNION ALL'] and not loop.last %}
                 {{config.insertStrategy}}
@@ -167,7 +165,7 @@ does not permit copying or modification for any other purpose.
               {% for col in columns if (col.isSystemCurrentFlag)  %}
                   [DIM].[{{ col.name }}] = [SRC].[{{col.name}}]
               {%- endfor %}
-                  AND
+                  ,
               {% for col in columns if (col.isSystemEndDate)  %}
                   [DIM].[{{ col.name }}] = [SRC].[{{col.name}}]
               {%- endfor %}
@@ -192,7 +190,6 @@ does not permit copying or modification for any other purpose.
                     {%- if not loop.last %}, {% endif %}
                 {%- endfor %}
                   {{ source.join }}
-                  {{ sortorder_by_colv() }}   
                   {%- if config.insertStrategy in ['UNION', 'UNION ALL'] and not loop.last %}
                      {{config.insertStrategy}}
                   {%- endif %}
@@ -252,8 +249,7 @@ does not permit copying or modification for any other purpose.
                     AS [{{col.name}}]
                     {%- if not loop.last %}, {% endif %}
                 {%- endfor %}
-                  {{ source.join }}
-                  {{ sortorder_by_colv() }}   
+                  {{ source.join }} 
                   {%- if config.insertStrategy in ['UNION', 'UNION ALL'] and not loop.last %}
                      {{config.insertStrategy}}
                   {%- endif %}
@@ -335,11 +331,7 @@ does not permit copying or modification for any other purpose.
                     AS [{{col.name}}]
                     {%- if not loop.last %}, {% endif %}
                 {%- endfor %}
-                {{ source.join }}
-                 {%- if config.groupByAll %}
-                 GROUP BY ALL
-                 {%- endif %}
-                 {{ sortorder_by_colv() }} )     
+                {{ source.join }})     
                  {%- if config.insertStrategy in ['UNION', 'UNION ALL'] and not loop.last %}
                      {{config.insertStrategy}}
                  {%- endif %}
@@ -385,7 +377,7 @@ does not permit copying or modification for any other purpose.
          {%-if not col.isSurrogateKey%}
              [SRC].[{{ col.name }}] 
           {%-else%}
-              ROW_NUMBER() OVER (ORDER BY ({%- for col in columns if col.isBusinessKey -%}{%- if not loop.first %} , {%- endif %} [SRC].[{{col.name}}] {%endfor%})) 
+              ROW_NUMBER() OVER (ORDER BY {%- for col in columns if col.isBusinessKey -%}{%- if not loop.first %} , {%- endif %} [SRC].[{{col.name}}] {%endfor%})
 	          + COALESCE (( SELECT MAX({%- for col in columns if col.isSurrogateKey -%}{%- if not loop.first %} , {%- endif %} [{{col.name}}] {%endfor%}) FROM {{ ref_no_link(node.location.name, node.name) }}),0) AS [{{ col.name }}] 
           {%-endif%}
 			{%- if not loop.last -%}, {% endif %}
@@ -406,8 +398,7 @@ does not permit copying or modification for any other purpose.
                     AS [{{col.name}}]
                     {%- if not loop.last %}, {% endif %}
                 {%- endfor %}
-                {{ source.join }}
-                 {{ sortorder_by_colv() }}     
+                {{ source.join }}    
                  {%- if config.insertStrategy in ['UNION', 'UNION ALL'] and not loop.last %}
                      {{config.insertStrategy}}
                  {%- endif %}
@@ -461,7 +452,7 @@ does not permit copying or modification for any other purpose.
                 {%- if not loop.last -%}, {% endif %}             
             {%- endfor %}
             {{ source.join }}
-            {{ sortorder_by_colv() }} ) 
+             ) 
             {%- if config.insertStrategy in ['UNION', 'UNION ALL'] and not loop.last %}
                 {{config.insertStrategy}}
             {%- endif %}
