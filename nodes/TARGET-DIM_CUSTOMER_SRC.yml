@@ -131,6 +131,20 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
+          columnCounter: 091336d5-799a-479f-a137-6424dc5f9e8d
+          stepCounter: e1e4b94a-f408-4e74-8207-306223b67ba5
+        config: {}
+        dataType: DECIMAL(38,6)
+        description: ""
+        name: C_ACCTBAL1
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: df523d3b-68d7-4b4e-90ad-389d9a63886d
+                stepCounter: 072561b0-46c2-41a8-8475-59942a6ea05b
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
           columnCounter: 865480b2-340d-4b1c-8151-f68ebb3c0191
           stepCounter: e1e4b94a-f408-4e74-8207-306223b67ba5
         config: {}
@@ -261,31 +275,6 @@ operation:
         sourceColumnReferences:
           - columnReferences: []
             transform: CAST(GETDATE() AS DATETIME2(6))
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
-        columnReference:
-          columnCounter: 14a03113-5b61-4b26-a8d9-44e9e1bccaa5
-          stepCounter: e1e4b94a-f408-4e74-8207-306223b67ba5
-        config: {}
-        dataType: VARBINARY(8000)
-        defaultValue: ""
-        description: ""
-        hashDetails:
-          hashAlgorithm: SHA1
-        hashedColumns:
-          - columnCounter: 59dcfe92-225c-4739-a118-967d4e468e7c
-            stepCounter: e1e4b94a-f408-4e74-8207-306223b67ba5
-          - columnCounter: 5e2f6478-3b1a-4f9a-88f2-df689cac68dd
-            stepCounter: e1e4b94a-f408-4e74-8207-306223b67ba5
-          - columnCounter: e7d7bf88-4d2e-4e99-88ef-92141e349600
-            stepCounter: e1e4b94a-f408-4e74-8207-306223b67ba5
-          - columnCounter: abd45d92-5038-4cf2-83bf-581fa2997abb
-            stepCounter: e1e4b94a-f408-4e74-8207-306223b67ba5
-        name: GH
-        nullable: true
-        sourceColumnReferences: []
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
