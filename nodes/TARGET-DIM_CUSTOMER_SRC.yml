@@ -20,7 +20,7 @@ operation:
   deployEnabled: true
   description: This is Dimnsion table for Customer
   isMultisource: false
-  locationName: SOURCE
+  locationName: TARGET
   materializationType: table
   metadata:
     appliedNodeTests: []
