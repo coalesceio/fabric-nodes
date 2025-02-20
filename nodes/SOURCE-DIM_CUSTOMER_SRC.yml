@@ -107,6 +107,7 @@ operation:
         config: {}
         dataType: VARCHAR(8000)
         description: ""
+        isChangeTracking: true
         name: C_PHONE
         nullable: true
         sourceColumnReferences:
@@ -135,6 +136,7 @@ operation:
         config: {}
         dataType: VARCHAR(8000)
         description: ""
+        isChangeTracking: true
         name: C_MKTSEGMENT
         nullable: true
         sourceColumnReferences:
@@ -149,6 +151,7 @@ operation:
         config: {}
         dataType: VARCHAR(8000)
         description: This column explains details about customer
+        isChangeTracking: true
         name: C_COMMENT
         nullable: true
         sourceColumnReferences:

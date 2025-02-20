@@ -375,7 +375,7 @@ does not permit copying or modification for any other purpose.
          {%-if not col.isSurrogateKey%}
              [SRC].[{{ col.name }}] 
           {%-else%}
-              ROW_NUMBER() OVER (ORDER BY ({%- for col in columns if col.isBusinessKey -%}{%- if not loop.first %} , {%- endif %} [SRC].[{{col.name}}] {%endfor%})) 
+              ROW_NUMBER() OVER (ORDER BY {%- for col in columns if col.isBusinessKey -%}{%- if not loop.first %} , {%- endif %} [SRC].[{{col.name}}] {%endfor%}) 
 	          + COALESCE (( SELECT MAX({%- for col in columns if col.isSurrogateKey -%}{%- if not loop.first %} , {%- endif %} [{{col.name}}] {%endfor%}) FROM {{ ref_no_link(node.location.name, node.name) }}),0) AS [{{ col.name }}] 
           {%-endif%}
 			{%- if not loop.last -%}, {% endif %}
