@@ -17,7 +17,7 @@ operation:
     testsEnabled: false
     truncateBefore: false
   database: ""
-  deployEnabled: true
+  deployEnabled: false
   description: This is Dimnsion table for Customer
   isMultisource: false
   locationName: TARGET
