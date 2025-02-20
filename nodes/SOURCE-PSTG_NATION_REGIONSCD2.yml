@@ -85,21 +85,6 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: c5664c68-a6a3-4211-aeb5-10a57cb9ed9b
-          stepCounter: 52f7dfdd-ed46-4db9-ad8b-a86858c02d38
-        config: {}
-        dataType: VARCHAR(8000)
-        description: ""
-        isChangeTracking: true
-        name: N_COMMENT
-        nullable: true
-        sourceColumnReferences:
-          - columnReferences:
-              - columnCounter: 5327b17a-ef19-403b-a29d-3f7533e77b2e
-                stepCounter: 1fd7cac4-feb7-445a-9f14-47677b6afc1b
-            transform: ""
-      - appliedColumnTests: {}
-        columnReference:
           columnCounter: 44690956-2274-4159-b70c-03ceb34d9eaf
           stepCounter: 52f7dfdd-ed46-4db9-ad8b-a86858c02d38
         config: {}

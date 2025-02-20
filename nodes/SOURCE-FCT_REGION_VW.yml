@@ -117,14 +117,15 @@ operation:
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
-      - aliases: {}
+      - aliases:
+          PSTG_REGION_VW1: 9cfb79c7-125b-4b55-9a54-c99f507fe72d
         customSQL:
           customSQL: ""
         dependencies:
-          - locationName: SOURCE
-            nodeName: PSTG_REGION_VW
+          - locationName: TARGET
+            nodeName: PSTG_REGION_VW1
         join:
-          joinCondition: FROM {{ ref('SOURCE', 'PSTG_REGION_VW') }} [PSTG_REGION_VW]
+          joinCondition: FROM {{ ref('TARGET', 'PSTG_REGION_VW1') }} [PSTG_REGION_VW1]
         name: FCT_REGION_VW
         noLinkRefs: []
   name: FCT_REGION_VW

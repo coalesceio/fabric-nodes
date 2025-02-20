@@ -1,6 +1,6 @@
 fileVersion: 1
 id: 9cfb79c7-125b-4b55-9a54-c99f507fe72d
-name: PSTG_REGION_VW
+name: PSTG_REGION_VW1
 operation:
   config:
     groupByAll: false
@@ -18,7 +18,7 @@ operation:
   deployEnabled: true
   description: ""
   isMultisource: false
-  locationName: SOURCE
+  locationName: TARGET
   materializationType: table
   metadata:
     appliedNodeTests: []
@@ -195,9 +195,9 @@ operation:
             nodeName: STG_REGION_VW
         join:
           joinCondition: FROM {{ ref('TARGET', 'STG_REGION_VW') }} [STG_REGION_VW]
-        name: PSTG_REGION_VW
+        name: PSTG_REGION_VW1
         noLinkRefs: []
-  name: PSTG_REGION_VW
+  name: PSTG_REGION_VW1
   overrideSQL: false
   schema: ""
   sqlType: "150"
