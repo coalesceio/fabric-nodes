@@ -9,7 +9,7 @@ operation:
     orderbycolumn:
       items:
         - {}
-    postSQL: ""
+    postSQL: Select count(*) from [sample_data].[PSTG_Products_muti]
     preSQL: ""
     selectDistinct: false
     testsEnabled: false
@@ -68,6 +68,7 @@ operation:
         config: {}
         dataType: VARCHAR(255)
         description: ""
+        isChangeTracking: true
         name: Product_Name
         nullable: false
         sourceColumnReferences:
@@ -86,6 +87,7 @@ operation:
         config: {}
         dataType: VARCHAR(255)
         description: ""
+        isChangeTracking: true
         name: Brand
         nullable: true
         sourceColumnReferences:

@@ -222,14 +222,17 @@ operation:
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
-      - aliases: {}
+      - aliases:
+          Products: 414c4f32-4857-4c58-8650-3e6881093a99
         customSQL:
           customSQL: ""
         dependencies:
           - locationName: SOURCE
             nodeName: Products
         join:
-          joinCondition: FROM {{ ref('SOURCE', 'Products') }} [Products]
+          joinCondition: |-
+            FROM {{ ref('SOURCE', 'Products') }} [Products]
+            where [Product_ID]>1
         name: PSTG_Products_SCD1
         noLinkRefs: []
   name: PSTG_Products_SCD1

@@ -89,7 +89,7 @@ does not permit copying or modification for any other purpose.
                 {%- if not loop.first %}
                     AND
                 {%- endif %}
-                    {{ get_source_transform(col) }} = [DIM].[{{ col.name }}]
+                    {{col.sourceColumns[0].node.name }}.[{{col.name}}] = [DIM].[{{ col.name }}]
             {%- endfor %}
             WHERE
             {%- for col in source.columns if col.isBusinessKey -%}
@@ -97,7 +97,7 @@ does not permit copying or modification for any other purpose.
                     AND
                 {%- endif %}
                 [DIM].[{{ col.name }}] IS NULL
-            {%- endfor -%}
+            {%- endfor %}
             {{ get_clause(joinclause)|trim }}	
 			UNION ALL
 			SELECT
@@ -117,11 +117,11 @@ does not permit copying or modification for any other purpose.
                 'INSERT_NEW_VERSION_ROWS' AS "DML_OPERATION"
             {{  get_clause(joinclause,'from') |trim }}
             INNER JOIN {{ ref_no_link(node.location.name, node.name) }} [DIM] ON
-            {%- for col in source.columns if col.isBusinessKey -%}
+            {%- for col in source.columns if col.isBusinessKey %}
                 {%- if not loop.first %}
                     AND
                 {%- endif %}
-                {{ get_source_transform(col) }} = [DIM].[{{ col.name }}]
+                {{col.sourceColumns[0].node.name }}.[{{col.name}}] = [DIM].[{{ col.name }}]
             {%- endfor %}
             WHERE [DIM].[{{ get_value_by_column_attribute("isSystemCurrentFlag") }}] = 'Y'
             {%- for col in source.columns if (col.isChangeTracking == true) %}
@@ -130,7 +130,7 @@ does not permit copying or modification for any other purpose.
                 {%- else %}
                     OR
                 {%- endif %}
-                ( ISNULL( CAST({{ get_source_transform(col) }} as NVARCHAR(MAX)), '**NULL**') <> ISNULL( CAST([DIM].[{{ col.name }}] as NVARCHAR(MAX)), '**NULL**') )
+                ( ISNULL( CAST([{{col.sourceColumns[0].node.name }}].[{{ col.name }}] as NVARCHAR(MAX)), '**NULL**') <> ISNULL( CAST([DIM].[{{ col.name }}] as NVARCHAR(MAX)), '**NULL**') )
                 {%- if loop.last %}
                     )
                 {%- endif %}
@@ -141,25 +141,12 @@ does not permit copying or modification for any other purpose.
                 {{config.insertStrategy}}
                {%- endif -%}
           {%-endfor-%}) AS [SRC]
-
-            {# The if-block below avoids unnecessary updates when no type 2 column changes are present #}
-        {% if columns 
-                | rejectattr('isSurrogateKey')
-                | rejectattr('isBusinessKey')
-                | rejectattr('isChangeTracking')
-                | rejectattr('isSystemVersion')
-                | rejectattr('isSystemCurrentFlag')
-                | rejectattr('isSystemStartDate')
-                | rejectattr('isSystemEndDate')
-                | rejectattr('isSystemCreateDate')
-                | rejectattr('isSystemUpdateDate') 
-                | list | length == 0 
-            %}
-                {# Skip Section #}
-            {% else %}
-
-             {{stage('Update Rows-- Type-2 Column Changes')}}
+        
+          {{stage('Update Rows-- Type-2 Column Changes')}}
              
+        /* Rows Needing To Be Expired Due To Type-2 Column Changes
+            In this case, only two columns are merged (version and end date) */
+            
               UPDATE [DIM]
               SET
               {% for col in columns if (col.isSystemCurrentFlag)  %}
@@ -213,6 +200,25 @@ does not permit copying or modification for any other purpose.
                     )
                 {%- endif %}
             {%- endfor %}
+
+            {# The if-block below avoids unnecessary updates when no type 2 column changes are present #}
+        {% if columns 
+                | rejectattr('isSurrogateKey')
+                | rejectattr('isBusinessKey')
+                | rejectattr('isChangeTracking')
+                | rejectattr('isSystemVersion')
+                | rejectattr('isSystemCurrentFlag')
+                | rejectattr('isSystemStartDate')
+                | rejectattr('isSystemEndDate')
+                | rejectattr('isSystemCreateDate')
+                | rejectattr('isSystemUpdateDate') 
+                | list | length == 0 
+            %}
+                {# Skip Section #}
+            {% else %}
+
+        /* Rows Needing To Be Updated Due To Changes To Non-Type-2 columns
+           This case merges only when there are changes in non-type-2 column updates, but no changes in type-2 columns*/
 
              {{stage('Update Rows-- Non Type-2 Column Changes')}}
               UPDATE [DIM]
