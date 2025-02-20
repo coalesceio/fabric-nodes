@@ -10,7 +10,7 @@ operation:
     testsEnabled: false
     truncateBefore: false
   database: ""
-  deployEnabled: true
+  deployEnabled: false
   description: This table is created to update information about customer
   isMultisource: false
   locationName: TARGET
