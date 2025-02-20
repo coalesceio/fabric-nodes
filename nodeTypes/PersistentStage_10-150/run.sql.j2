@@ -427,20 +427,26 @@ does not permit copying or modification for any other purpose.
                     {%- if not loop.last -%},{% endif %}
                 {% endfor %}
             )
+        SELECT
+        {%- for col in columns  -%}
+         {%-if not col.isSurrogateKey%}
+             [SRC].[{{ col.name }}] 
+          {%-else%}
+            ROW_NUMBER() OVER (ORDER BY (SELECT NULL))
+	        + COALESCE (( SELECT MAX({%- for col in columns if col.isSurrogateKey -%}{%- if not loop.first %} , {%- endif %} [{{col.name}}] {%endfor%}) FROM {{ ref_no_link(node.location.name, node.name) }}),0) AS [{{ col.name }}] 
+          {%-endif%}
+			{%- if not loop.last -%}, {% endif %}
+		{%- endfor %} FROM
            {%- for source in sources %}
             (SELECT
             {%- if config.selectDistinct %}
             DISTINCT
             {%- endif %}
-            {%- for col in source.columns %}
-
+            {%- for col in source.columns if not col.isSurrogateKey%}
                 {%- if col.isSystemVersion %}
                     1
                 {%- elif col.isSystemCurrentFlag %}
                     'Y'
-                {%- elif col.isSurrogateKey %}
-                  ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) 
-	              + COALESCE (( SELECT MAX({%- for col in columns if col.isSurrogateKey -%}{%- if not loop.first %} , {%- endif %} [{{col.name}}] {%endfor%}) FROM {{ ref_no_link(node.location.name, node.name) }}),0)
                 {%- else %}
                     {{ get_source_transform(col) }}
                 {%- endif %}
@@ -448,7 +454,7 @@ does not permit copying or modification for any other purpose.
                 {%- if not loop.last -%}, {% endif %}             
             {%- endfor %}
             {{ source.join }}
-             ) 
+             ) AS [SRC]
             {%- if config.insertStrategy in ['UNION', 'UNION ALL'] and not loop.last %}
                 {{config.insertStrategy}}
             {%- endif %}
