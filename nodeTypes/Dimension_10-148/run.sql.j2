@@ -86,7 +86,7 @@ does not permit copying or modification for any other purpose.
                 {%- if not loop.first %}
                     AND
                 {%- endif %}
-                    {{ get_source_transform(col) }} = [DIM].[{{ col.name }}]
+                    [{{col.sourceColumns[0].node.name}}].[{{ col.name }}] = [DIM].[{{ col.name }}]
             {%- endfor %}
             WHERE
             {%- for col in source.columns if col.isBusinessKey -%}
@@ -118,7 +118,7 @@ does not permit copying or modification for any other purpose.
                 {%- if not loop.first %}
                     AND
                 {%- endif %}
-                {{ get_source_transform(col) }} = [DIM].[{{ col.name }}]
+                [{{col.sourceColumns[0].node.name}}].[{{ col.name }}]  = [DIM].[{{ col.name }}]
             {%- endfor %}
             WHERE [DIM].[{{ get_value_by_column_attribute("isSystemCurrentFlag") }}] = 'Y'
             {%- for col in source.columns if (col.isChangeTracking == true) %}
@@ -127,7 +127,7 @@ does not permit copying or modification for any other purpose.
                 {%- else %}
                     OR
                 {%- endif %}
-                ( ISNULL( CAST([SRC].[{{ col.name }}] as NVARCHAR(MAX)), '**NULL**') <> ISNULL( CAST([DIM].[{{ col.name }}] as NVARCHAR(MAX)), '**NULL**') )
+                ( ISNULL( CAST([{{col.sourceColumns[0].node.name}}].[{{ col.name }}] as NVARCHAR(MAX)), '**NULL**') <> ISNULL( CAST([DIM].[{{ col.name }}] as NVARCHAR(MAX)), '**NULL**') )
                 {%- if loop.last %}
                     )
                 {%- endif %}

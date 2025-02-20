@@ -79,6 +79,7 @@ operation:
         config: {}
         dataType: VARCHAR(8000)
         description: ""
+        isChangeTracking: true
         name: C_ADDRESS
         nullable: true
         sourceColumnReferences:
@@ -93,6 +94,7 @@ operation:
         config: {}
         dataType: DECIMAL(38,6)
         description: ""
+        isChangeTracking: true
         name: C_NATIONKEY
         nullable: false
         sourceColumnReferences:
@@ -122,6 +124,7 @@ operation:
         config: {}
         dataType: DECIMAL(38,6)
         description: ""
+        isChangeTracking: true
         name: C_ACCTBAL
         nullable: true
         sourceColumnReferences:
@@ -139,10 +142,8 @@ operation:
         name: C_ACCTBAL1
         nullable: true
         sourceColumnReferences:
-          - columnReferences:
-              - columnCounter: df523d3b-68d7-4b4e-90ad-389d9a63886d
-                stepCounter: 072561b0-46c2-41a8-8475-59942a6ea05b
-            transform: ""
+          - columnReferences: []
+            transform: "100"
       - appliedColumnTests: {}
         columnReference:
           columnCounter: 865480b2-340d-4b1c-8151-f68ebb3c0191

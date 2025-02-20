@@ -104,6 +104,20 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
+          columnCounter: f28175ef-25dc-4a42-8d3f-930cd6bb8d25
+          stepCounter: 072561b0-46c2-41a8-8475-59942a6ea05b
+        config: {}
+        dataType: DECIMAL(38,6)
+        description: ""
+        name: C_ACCTBAL1
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 33437e35-31b2-41db-ac1d-8f363605560f
+                stepCounter: bbdd4152-3470-4066-86f1-841e513cbda5
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
           columnCounter: 979d1393-b4e7-40ab-a276-d6f815ec3265
           stepCounter: 072561b0-46c2-41a8-8475-59942a6ea05b
         config: {}
