@@ -175,6 +175,8 @@ The Persistent node type has two configuration groups:
 
 #### Persistent Stage Options
 
+![image](https://github.com/user-attachments/assets/21c63618-a311-4102-a3c0-ef783282b1ba)
+
 | **Option** | **Description** |
 |---------|-------------|
 | **Create As** | Table is the only option at this time |
