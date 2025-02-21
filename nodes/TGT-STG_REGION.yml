@@ -9,10 +9,10 @@ operation:
     testsEnabled: true
     truncateBefore: true
   database: ""
-  deployEnabled: false
+  deployEnabled: true
   description: ""
   isMultisource: false
-  locationName: TARGET
+  locationName: TGT
   materializationType: table
   metadata:
     appliedNodeTests: []
@@ -62,14 +62,15 @@ operation:
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
-      - aliases: {}
+      - aliases:
+          REGION: 25bfccc4-099e-430b-8887-724f68cb5e2d
         customSQL:
           customSQL: ""
         dependencies:
-          - locationName: SOURCE
+          - locationName: SRC
             nodeName: REGION
         join:
-          joinCondition: FROM {{ ref('SOURCE', 'REGION') }} [REGION]
+          joinCondition: FROM {{ ref('SRC', 'REGION') }} [REGION]
         name: STG_REGION
         noLinkRefs: []
   name: STG_REGION

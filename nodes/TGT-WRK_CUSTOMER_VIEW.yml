@@ -13,7 +13,7 @@ operation:
   deployEnabled: true
   description: ""
   isMultisource: false
-  locationName: TARGET
+  locationName: TGT
   materializationType: view
   metadata:
     appliedNodeTests: []
@@ -134,7 +134,8 @@ operation:
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
-      - aliases: {}
+      - aliases:
+          CUSTOMER: bbdd4152-3470-4066-86f1-841e513cbda5
         customSQL:
           customSQL: |-
             {{ stage('Override Create SQL') }}
@@ -151,10 +152,10 @@ operation:
              FROM {{ ref('SOURCE', 'CUSTOMER') }}
             	)
         dependencies:
-          - locationName: SOURCE
+          - locationName: SRC
             nodeName: CUSTOMER
         join:
-          joinCondition: FROM {{ ref('SOURCE', 'CUSTOMER') }} [CUSTOMER]
+          joinCondition: FROM {{ ref('SRC', 'CUSTOMER') }} [CUSTOMER]
         name: WRK_CUSTOMER_VIEW
         noLinkRefs: []
   name: WRK_CUSTOMER_VIEW

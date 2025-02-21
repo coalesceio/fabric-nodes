@@ -9,10 +9,10 @@ operation:
     testsEnabled: true
     truncateBefore: true
   database: ""
-  deployEnabled: false
+  deployEnabled: true
   description: ""
   isMultisource: false
-  locationName: SOURCE
+  locationName: TGT
   materializationType: view
   metadata:
     appliedNodeTests: []
@@ -138,14 +138,14 @@ operation:
             ON {{ ref('SOURCE', 'REGION') }}.[R_REGIONKEY] = [NATION].[N_REGIONKEY]
             	)
         dependencies:
-          - locationName: SOURCE
+          - locationName: SRC
             nodeName: NATION
-          - locationName: SOURCE
+          - locationName: SRC
             nodeName: REGION
         join:
           joinCondition: |-
-            FROM {{ ref('SOURCE', 'REGION') }} [REGION]
-            INNER JOIN {{ ref('SOURCE', 'NATION') }} [NATION]
+            FROM {{ ref('SRC', 'REGION') }} [REGION]
+            INNER JOIN {{ ref('SRC', 'NATION') }} [NATION]
             ON [REGION].[R_REGIONKEY] = [NATION].[N_REGIONKEY]
         name: WRK_REGION_NATION
         noLinkRefs: []

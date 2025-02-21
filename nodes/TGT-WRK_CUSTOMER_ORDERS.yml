@@ -10,10 +10,10 @@ operation:
     testsEnabled: false
     truncateBefore: false
   database: ""
-  deployEnabled: false
+  deployEnabled: true
   description: ""
   isMultisource: false
-  locationName: TARGET
+  locationName: TGT
   materializationType: view
   metadata:
     appliedNodeTests:
@@ -288,14 +288,14 @@ operation:
         customSQL:
           customSQL: ""
         dependencies:
-          - locationName: SOURCE
+          - locationName: SRC
             nodeName: CUSTOMER
-          - locationName: SOURCE
+          - locationName: SRC
             nodeName: ORDERS
         join:
           joinCondition: |-
-            FROM {{ ref('SOURCE', 'CUSTOMER') }} [CUSTOMER]
-            INNER JOIN {{ ref('SOURCE', 'ORDERS') }} [ORDERS]
+            FROM {{ ref('SRC', 'CUSTOMER') }} [CUSTOMER]
+            INNER JOIN {{ ref('SRC', 'ORDERS') }} [ORDERS]
             ON [CUSTOMER].C_CUSTKEY = [ORDERS].[O_CUSTKEY]
             WHERE [C_NATIONKEY] = 4
         name: WRK_CUSTOMER_ORDERS

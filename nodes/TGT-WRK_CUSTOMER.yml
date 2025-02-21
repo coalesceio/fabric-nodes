@@ -13,7 +13,7 @@ operation:
   deployEnabled: true
   description: This table is created to update information about customer
   isMultisource: false
-  locationName: TARGET
+  locationName: TGT
   materializationType: table
   metadata:
     appliedNodeTests: []
@@ -151,14 +151,15 @@ operation:
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
-      - aliases: {}
+      - aliases:
+          CUSTOMER: bbdd4152-3470-4066-86f1-841e513cbda5
         customSQL:
           customSQL: ""
         dependencies:
-          - locationName: SOURCE
+          - locationName: SRC
             nodeName: CUSTOMER
         join:
-          joinCondition: FROM {{ ref('SOURCE', 'CUSTOMER') }} [CUSTOMER]
+          joinCondition: FROM {{ ref('SRC', 'CUSTOMER') }} [CUSTOMER]
         name: WRK_CUSTOMER
         noLinkRefs: []
   name: WRK_CUSTOMER

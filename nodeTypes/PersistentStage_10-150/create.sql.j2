@@ -1,0 +1,31 @@
+{#
+    Copyright (c) 2023 Coalesce. All rights reserved.
+This script and its associated documentation are confidential and proprietary to Coalesce.
+Unauthorized reproduction, distribution, or disclosure of this material is strictly prohibited.
+Coalesce permits you to copy and modify this script for the purposes of using with Coalsce but
+does not permit copying or modification for any other purpose.  
+#}
+{# == Node Type Version        : 1  == #}
+{# == Node Type Name           : Persistent stage  == #}
+{# == Node Type Description    :This node loads data into dimension table and maintain history using config options distinct,groupby all,order by ,multi-source  == #}
+
+
+{% if node.materializationType == 'table' %}
+
+    {{ stage('Drop Persistent stage Table') }}
+       DROP TABLE IF EXISTS {{ ref_no_link(node.location.name, node.name) }}
+
+	{# CreateSQL for table #}
+    {{ stage('Create Persistent stage Table') }}
+
+	CREATE TABLE {{ ref_no_link(node.location.name, node.name) }}
+	(
+		{% for col in columns %}
+             [{{ col.name }}] {{ col.dataType }}
+			{%- if not col.nullable %} NOT NULL
+			{% endif %}
+			{%- if not loop.last -%}, {% endif %}
+		{% endfor %}
+	)
+    
+{% endif %}

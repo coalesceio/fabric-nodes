@@ -1,6 +1,6 @@
 fileVersion: 1
-id: e12dd609-574c-41a9-ba61-3961c434ba50
-name: WRK_REGION
+id: 273f4c78-07f8-426a-a630-f9e4967634a5
+name: STG_REGION_VW
 operation:
   config:
     insertStrategy: INSERT
@@ -12,15 +12,15 @@ operation:
   deployEnabled: false
   description: ""
   isMultisource: false
-  locationName: TARGET
-  materializationType: table
+  locationName: TGT
+  materializationType: view
   metadata:
     appliedNodeTests: []
     columns:
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 5a34a96f-c4f1-425d-8018-76652e1925b7
-          stepCounter: e12dd609-574c-41a9-ba61-3961c434ba50
+          columnCounter: 5c020eff-8f40-4f65-aba7-c988aa4c24ca
+          stepCounter: 273f4c78-07f8-426a-a630-f9e4967634a5
         config: {}
         dataType: DECIMAL(38,6)
         description: ""
@@ -33,8 +33,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 17d6aa42-f05c-490b-a3bf-6f2e68ee359e
-          stepCounter: e12dd609-574c-41a9-ba61-3961c434ba50
+          columnCounter: 9fdf9ac0-c759-4dbe-9f62-c19e778e57ce
+          stepCounter: 273f4c78-07f8-426a-a630-f9e4967634a5
         config: {}
         dataType: VARCHAR(8000)
         description: ""
@@ -44,11 +44,11 @@ operation:
           - columnReferences:
               - columnCounter: 5b27f5ff-8117-4c78-b55d-0d2a9239a48b
                 stepCounter: 25bfccc4-099e-430b-8887-724f68cb5e2d
-            transform: substring(R_NAME,1,4)
+            transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: af9a9d80-4a1b-4b86-bf68-d60c704ff633
-          stepCounter: e12dd609-574c-41a9-ba61-3961c434ba50
+          columnCounter: 08d995b9-1665-4d90-9f75-5681bf96c31c
+          stepCounter: 273f4c78-07f8-426a-a630-f9e4967634a5
         config: {}
         dataType: VARCHAR(8000)
         description: ""
@@ -58,24 +58,7 @@ operation:
           - columnReferences:
               - columnCounter: eb5b962a-301e-4736-9100-edd30b197a31
                 stepCounter: 25bfccc4-099e-430b-8887-724f68cb5e2d
-            transform: substring([REGION].[R_COMMENT],1,8)
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
-        columnReference:
-          columnCounter: b3f98ae3-766a-4ef3-92c7-e08fda69f446
-          stepCounter: e12dd609-574c-41a9-ba61-3961c434ba50
-        config: {}
-        dataType: VARBINARY(8000)
-        defaultValue: ""
-        description: ""
-        hashDetails:
-          hashAlgorithm: SHA1
-        hashedColumns: []
-        name: GH
-        nullable: true
-        sourceColumnReferences: []
+            transform: ""
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
@@ -84,18 +67,16 @@ operation:
         customSQL:
           customSQL: ""
         dependencies:
-          - locationName: SOURCE
+          - locationName: SRC
             nodeName: REGION
         join:
-          joinCondition: |-
-            FROM {{ ref('SOURCE', 'REGION') }} [REGION]
-            where [REGION].[R_REGIONKEY] >2
-        name: WRK_REGION
+          joinCondition: FROM {{ ref('SRC', 'REGION') }} [REGION]
+        name: STG_REGION_VW
         noLinkRefs: []
-  name: WRK_REGION
+  name: STG_REGION_VW
   overrideSQL: false
   schema: ""
-  sqlType: "147"
+  sqlType: Stage
   type: sql
   version: 1
 type: Node
