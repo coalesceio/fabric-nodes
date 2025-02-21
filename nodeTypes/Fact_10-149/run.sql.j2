@@ -74,11 +74,7 @@ does not permit copying or modification for any other purpose.
                     AS [{{col.name}}]
                     {%- if not loop.last %}, {% endif %}
                 {%- endfor %}
-                {{ source.join }}
-                 {%- if config.groupByAll %}
-                 GROUP BY ALL
-                 {%- endif %}
-                 {{ sortorder_by_colv() }} )     
+                {{ source.join }})     
                  {%- if config.insertStrategy in ['UNION', 'UNION ALL'] and not loop.last %}
                      {{config.insertStrategy}}
                  {%- endif %}
@@ -145,8 +141,7 @@ does not permit copying or modification for any other purpose.
                     AS [{{col.name}}]
                     {%- if not loop.last %}, {% endif %}
                 {%- endfor %}
-                {{ source.join }}
-                 {{ sortorder_by_colv() }}     
+                {{ source.join }} 
                  {%- if config.insertStrategy in ['UNION', 'UNION ALL'] and not loop.last %}
                      {{config.insertStrategy}}
                  {%- endif %}
@@ -196,8 +191,7 @@ does not permit copying or modification for any other purpose.
                 AS [{{ col.name }}]
                 {%- if not loop.last -%}, {% endif %}             
             {%- endfor %}
-            {{ source.join }}
-            {{ sortorder_by_colv() }} ) 
+            {{ source.join }} ) 
             {%- if config.insertStrategy in ['UNION', 'UNION ALL'] and not loop.last %}
                 {{config.insertStrategy}}
             {%- endif %}

@@ -14,10 +14,11 @@ does not permit copying or modification for any other purpose.
 	{{ node.override.create.script }}
 
 {% elif node.materializationType == 'table' %}
+
   {{ stage('Drop Fact Table') }}
   DROP TABLE IF EXISTS {{ ref_no_link(node.location.name, node.name) }}
 
-	{{ stage('Create Fact Table') }}
+  {{ stage('Create Fact Table') }}
 
 	CREATE TABLE {{ ref_no_link(node.location.name, node.name) }}
 	(

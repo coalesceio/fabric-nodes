@@ -1,0 +1,260 @@
+fileVersion: 1
+id: c2fd0724-ac32-4af4-a529-8d9e53d6f714
+name: PSTG_Products_multi
+operation:
+  config:
+    groupByAll: false
+    insertStrategy: UNION ALL
+    orderbycolumn:
+      items:
+        - {}
+    postSQL: ""
+    preSQL: ""
+    selectDistinct: false
+    testsEnabled: false
+    truncateBefore: false
+  database: ""
+  deployEnabled: true
+  description: ""
+  isMultisource: true
+  locationName: SOURCE
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1ea45fc0-83d7-44e0-990f-e5a5c022ba71
+          stepCounter: c2fd0724-ac32-4af4-a529-8d9e53d6f714
+        config: {}
+        dataType: DECIMAL
+        defaultValue: ""
+        description: ""
+        isSurrogateKey: true
+        name: PSTG_Products_elec_KEY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+          - columnReferences: []
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: f69609e2-4680-4e67-8365-480d4f833f9e
+          stepCounter: c2fd0724-ac32-4af4-a529-8d9e53d6f714
+        config: {}
+        dataType: INT
+        description: ""
+        name: Product_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5b31f9b8-9039-4c81-a8de-52d844b95157
+                stepCounter: 62a750cc-c26f-4230-8a29-dcb524e5d004
+            transform: ""
+          - columnReferences:
+              - columnCounter: af6b2a35-6b1a-4a8a-9592-8c6be8946c0d
+                stepCounter: 414c4f32-4857-4c58-8650-3e6881093a99
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 7b6522d3-2acf-400c-a331-add725fd6ed4
+          stepCounter: c2fd0724-ac32-4af4-a529-8d9e53d6f714
+        config: {}
+        dataType: VARCHAR(255)
+        description: ""
+        name: Product_Name
+        nullable: false
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 77f109d6-557d-45c8-babc-d7eef50d0863
+                stepCounter: 62a750cc-c26f-4230-8a29-dcb524e5d004
+            transform: ""
+          - columnReferences:
+              - columnCounter: 65d7aab9-3ed3-477e-9e75-815b515bff44
+                stepCounter: 414c4f32-4857-4c58-8650-3e6881093a99
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: a39135fe-b28f-42ad-a738-7c2668c0b421
+          stepCounter: c2fd0724-ac32-4af4-a529-8d9e53d6f714
+        config: {}
+        dataType: VARCHAR(255)
+        description: ""
+        name: Brand
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 4e8dc83e-3a29-4b62-95d9-6692782a44bb
+                stepCounter: 62a750cc-c26f-4230-8a29-dcb524e5d004
+            transform: ""
+          - columnReferences:
+              - columnCounter: 07440b00-ed9b-4784-9d86-7dfafed99bae
+                stepCounter: 414c4f32-4857-4c58-8650-3e6881093a99
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 45fdf34c-8df9-4b6a-9dfe-9b5e50859922
+          stepCounter: c2fd0724-ac32-4af4-a529-8d9e53d6f714
+        config: {}
+        dataType: VARCHAR(100)
+        description: ""
+        name: Colour
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 12a623c2-b758-4090-83d4-8122237effed
+                stepCounter: 62a750cc-c26f-4230-8a29-dcb524e5d004
+            transform: ""
+          - columnReferences:
+              - columnCounter: 24636e76-212c-4b62-bbe4-385d2b318ee3
+                stepCounter: 414c4f32-4857-4c58-8650-3e6881093a99
+            transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 84e99539-f669-4590-8997-8532251319a4
+          stepCounter: c2fd0724-ac32-4af4-a529-8d9e53d6f714
+        config: {}
+        dataType: DECIMAL
+        defaultValue: ""
+        description: ""
+        isSystemVersion: true
+        name: SYSTEM_VERSION
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+          - columnReferences: []
+            transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: d97aa06f-1d41-4cf3-b23f-d88df2706192
+          stepCounter: c2fd0724-ac32-4af4-a529-8d9e53d6f714
+        config: {}
+        dataType: VARCHAR(1)
+        defaultValue: ""
+        description: ""
+        isSystemCurrentFlag: true
+        name: SYSTEM_CURRENT_FLAG
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+          - columnReferences: []
+            transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 067676a0-e962-42ad-9deb-b1f5080c4794
+          stepCounter: c2fd0724-ac32-4af4-a529-8d9e53d6f714
+        config: {}
+        dataType: DATETIME2(3)
+        defaultValue: ""
+        description: ""
+        isSystemStartDate: true
+        name: SYSTEM_START_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: CAST(GETDATE() AS DATETIME2(3))
+          - columnReferences: []
+            transform: CAST(GETDATE() AS DATETIME2(3))
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: a91a00b8-8946-43ac-a068-90f3e68f5a6c
+          stepCounter: c2fd0724-ac32-4af4-a529-8d9e53d6f714
+        config: {}
+        dataType: DATETIME2(3)
+        defaultValue: ""
+        description: ""
+        isSystemEndDate: true
+        name: SYSTEM_END_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: CAST('2999-12-31 00:00:00' AS DATETIME2(6))
+          - columnReferences: []
+            transform: CAST('2999-12-31 00:00:00' AS DATETIME2(6))
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 66c5ff91-8ae6-4a15-9cff-222f2176f6b5
+          stepCounter: c2fd0724-ac32-4af4-a529-8d9e53d6f714
+        config: {}
+        dataType: DATETIME2(3)
+        defaultValue: ""
+        description: ""
+        isSystemCreateDate: true
+        name: SYSTEM_CREATE_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: CAST(GETDATE() AS DATETIME2(3))
+          - columnReferences: []
+            transform: CAST(GETDATE() AS DATETIME2(3))
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: d1650a46-9b11-4dd8-b45d-cc821628a5d0
+          stepCounter: c2fd0724-ac32-4af4-a529-8d9e53d6f714
+        config: {}
+        dataType: DATETIME2(3)
+        defaultValue: ""
+        description: ""
+        isSystemUpdateDate: true
+        name: SYSTEM_UPDATE_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: CAST(GETDATE() AS DATETIME2(3))
+          - columnReferences: []
+            transform: CAST(GETDATE() AS DATETIME2(3))
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases: {}
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: SOURCE
+            nodeName: Products_elec
+        join:
+          joinCondition: FROM {{ ref('SOURCE', 'Products_elec') }} [Products_elec]
+        name: PSTG_Products_multi
+        noLinkRefs: []
+      - aliases:
+          Products: 414c4f32-4857-4c58-8650-3e6881093a99
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: SOURCE
+            nodeName: Products
+        join:
+          joinCondition: FROM {{ ref('SOURCE', 'Products') }} [Products]
+        name: PSTG_products
+        noLinkRefs: []
+  name: PSTG_Products_multi
+  overrideSQL: false
+  schema: ""
+  sqlType: "150"
+  type: sql
+  version: 1
+type: Node

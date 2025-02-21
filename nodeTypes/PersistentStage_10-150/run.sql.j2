@@ -447,8 +447,8 @@ does not permit copying or modification for any other purpose.
           {%-endif%}
 			{%- if not loop.last -%}, {% endif %}
 		{%- endfor %} FROM
-           {%- for source in sources %}
-            (SELECT
+           ({%- for source in sources %}
+            SELECT
             {%- if config.selectDistinct %}
             DISTINCT
             {%- endif %}
@@ -464,11 +464,10 @@ does not permit copying or modification for any other purpose.
                 {%- if not loop.last -%}, {% endif %}             
             {%- endfor %}
             {{ source.join }}
-             ) AS [SRC]
             {%- if config.insertStrategy in ['UNION', 'UNION ALL'] and not loop.last %}
                 {{config.insertStrategy}}
             {%- endif %}
-        {%- endfor %}
+        {%- endfor %}) AS [SRC]
   
 {% endif %}
 
