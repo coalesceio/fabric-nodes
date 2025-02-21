@@ -372,9 +372,9 @@ If a Dimension Node of materialization type view is deleted from a Workspace, th
 
 ### Persistent Stage Code
 
-* [Node definition](https://github.com/coalesceio/Coalesce-Base-Node-Types/blob/main/nodeTypes/PersistentStage_10-150/definition.yml)
-* [Create Template](https://github.com/coalesceio/Coalesce-Base-Node-Types/blob/main/nodeTypes/PersistentStage_10-150/create.sql.j2)
-* [Run Template](https://github.com/coalesceio/Coalesce-Base-Node-Types/blob/main/nodeTypes/PersistentStage_10-150/run.sql.j2)
+* [Node definition](https://github.com/coalesceio/fabric-nodes/blob/main/nodeTypes/PersistentStage_10-150/definition.yml)
+* [Create Template](https://github.com/coalesceio/fabric-nodes/blob/main/nodeTypes/PersistentStage_10-150/create.sql.j2)
+* [Run Template](https://github.com/coalesceio/fabric-nodes/blob/main/nodeTypes/PersistentStage_10-150/run.sql.j2)
 
 ### Dimension Code
 
