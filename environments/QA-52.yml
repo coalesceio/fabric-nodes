@@ -1,5 +1,11 @@
 fileVersion: 1
 id: "52"
-mappingDefinitions: {}
+mappingDefinitions:
+  SRC:
+    database: Node Development
+    schema: sample_data
+  TGT:
+    database: Node Development
+    schema: target_dev
 name: QA
 type: Environment
