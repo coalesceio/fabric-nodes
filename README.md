@@ -239,8 +239,8 @@ This is executed in two stages:
 
 | **Stage** | **Description** |
 |-----------|----------------|
-| **Delete Table** | Drops table |
-| **Drop Table or View** | Removes the table |
+| **Delete Table** | Coalesce Internal table is dropped |
+| **Delete Table** | Target table in Microsoft Fabric is dropped |
 
 ---
 ## Dimension
