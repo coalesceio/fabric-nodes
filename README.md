@@ -362,6 +362,8 @@ If a Dimension Node of materialization type view is deleted from a Workspace, th
 | **Delete View** | Drops the existing Dimension view from target environment. |
 ---
 
+#### Code
+
 ### Work Code
 
 * [Node definition](https://github.com/coalesceio/fabric-nodes/blob/main/nodeTypes/Work-147/definition.yml)
