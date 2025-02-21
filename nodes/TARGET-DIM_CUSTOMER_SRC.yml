@@ -21,7 +21,7 @@ operation:
   description: This is Dimnsion table for Customer
   isMultisource: false
   locationName: TARGET
-  materializationType: table
+  materializationType: view
   metadata:
     appliedNodeTests: []
     columns:
@@ -49,7 +49,6 @@ operation:
         config: {}
         dataType: DECIMAL(38,6)
         description: ""
-        isBusinessKey: true
         name: C_CUSTKEY
         nullable: false
         sourceColumnReferences:
@@ -64,7 +63,6 @@ operation:
         config: {}
         dataType: VARCHAR(8000)
         description: ""
-        isBusinessKey: true
         name: C_NAME
         nullable: true
         sourceColumnReferences:
@@ -79,7 +77,6 @@ operation:
         config: {}
         dataType: VARCHAR(8000)
         description: ""
-        isChangeTracking: true
         name: C_ADDRESS
         nullable: true
         sourceColumnReferences:
@@ -94,7 +91,6 @@ operation:
         config: {}
         dataType: DECIMAL(38,6)
         description: ""
-        isChangeTracking: true
         name: C_NATIONKEY
         nullable: false
         sourceColumnReferences:
@@ -109,7 +105,6 @@ operation:
         config: {}
         dataType: VARCHAR(8000)
         description: ""
-        isChangeTracking: true
         name: C_PHONE
         nullable: true
         sourceColumnReferences:
@@ -124,7 +119,6 @@ operation:
         config: {}
         dataType: DECIMAL(38,6)
         description: ""
-        isChangeTracking: true
         name: C_ACCTBAL
         nullable: true
         sourceColumnReferences:
@@ -151,7 +145,6 @@ operation:
         config: {}
         dataType: VARCHAR(8000)
         description: ""
-        isChangeTracking: true
         name: C_MKTSEGMENT
         nullable: true
         sourceColumnReferences:
@@ -166,7 +159,6 @@ operation:
         config: {}
         dataType: VARCHAR(8000)
         description: This column explains details about customer
-        isChangeTracking: true
         name: C_COMMENT
         nullable: true
         sourceColumnReferences:
