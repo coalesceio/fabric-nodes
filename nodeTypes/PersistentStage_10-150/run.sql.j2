@@ -225,10 +225,12 @@ does not permit copying or modification for any other purpose.
               SET
 		        {% for col in columns if not (  col.isBusinessKey or
                                                     col.isSurrogateKey or
+                                                    col.isChangeTracking or
                                                     col.isSystemVersion or
                                                     col.isSystemCurrentFlag or
                                                     col.isSystemStartDate or
                                                     col.isSystemEndDate or
+                                                    col.isSystemUpdateDate or 
                                                     col.isSystemCreateDate) -%}
                     [DIM].[{{col.name}}] = [SRC].[{{col.name}}]
                     {% if not loop.last %}, {% endif %}
