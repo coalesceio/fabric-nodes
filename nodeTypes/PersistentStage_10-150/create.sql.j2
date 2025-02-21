@@ -9,15 +9,14 @@ does not permit copying or modification for any other purpose.
 {# == Node Type Name           : Persistent stage  == #}
 {# == Node Type Description    :This node loads data into dimension table and maintain history using config options distinct,groupby all,order by ,multi-source  == #}
 
-{% if node.override.create.enabled %}
-	
-	{{ node.override.create.script }}
 
-{% elif node.materializationType == 'table' %}
-  {{ stage('Drop Persistent stage Table') }}
-  DROP TABLE IF EXISTS {{ ref_no_link(node.location.name, node.name) }}
+{% if node.materializationType == 'table' %}
 
-	{{ stage('Create Persistent stage Table') }}
+    {{ stage('Drop Persistent stage Table') }}
+       DROP TABLE IF EXISTS {{ ref_no_link(node.location.name, node.name) }}
+
+	{# CreateSQL for table #}
+    {{ stage('Create Persistent stage Table') }}
 
 	CREATE TABLE {{ ref_no_link(node.location.name, node.name) }}
 	(
@@ -29,38 +28,4 @@ does not permit copying or modification for any other purpose.
 		{% endfor %}
 	)
     
-{% elif node.materializationType == 'view' %}
-    {{ stage('Drop Persistent stage View') }}
-
-    DROP VIEW IF EXISTS {{ ref_no_link(node.location.name, node.name) }}
-
-
-    {{ stage('Create Persistent stage View') }}
-
-    CREATE VIEW {{ ref_no_link(node.location.name, node.name) }}
-    (
-        {% for col in columns %}
-            [{{ col.name }}]
-            {%- if not loop.last -%}, {% endif %}
-        {% endfor %}
-    )
-    AS
-    {% for source in sources %}
-        SELECT
-        {% for col in source.columns %}
-            {{ get_source_transform(col) }} AS [{{ col.name }}]
-            {%- if not loop.last -%}, {% endif %}
-        {% endfor %}
-
-        {{ source.join }}
-
-        {% if not loop.last %}
-            {% if config.insertStrategy in ['UNION', 'UNION ALL'] %}
-                {{ config.insertStrategy }}
-            {% else %}
-                UNION
-            {% endif %}
-        {% endif %}
-    {% endfor %}
-
 {% endif %}
