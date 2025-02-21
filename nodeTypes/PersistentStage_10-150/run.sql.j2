@@ -48,6 +48,8 @@ does not permit copying or modification for any other purpose.
           {# SCD-Type 2 Dimension == #}
 
          {{ stage('Insert New Records' ) }}  
+         
+         /* New Rows That Don't Exist and to Be Inserted Due To Type-2 Column Changes*/
 
         	INSERT INTO  {{ ref_no_link(node.location.name, node.name) }} 
     (
