@@ -124,7 +124,7 @@ operation:
         customSQL:
           customSQL: |-
             {{ stage('Override Create SQL') }}
-            	CREATE VIEW {{ ref('SOURCE', 'WRK_REGION_NATION')}} AS (
+            	CREATE VIEW {{ ref('TGT', 'WRK_REGION_NATION')}} AS (
             		SELECT 
              [R_REGIONKEY] AS [R_REGIONKEY],
              [R_NAME] AS [R_NAME],
@@ -133,9 +133,9 @@ operation:
              [N_NAME] AS [N_NAME],
              [N_REGIONKEY] AS [N_REGIONKEY],
              [N_COMMENT] AS [N_COMMENT]
-             FROM {{ ref('SOURCE', 'REGION') }}
-            INNER JOIN {{ ref('SOURCE', 'NATION') }} [NATION]
-            ON {{ ref('SOURCE', 'REGION') }}.[R_REGIONKEY] = [NATION].[N_REGIONKEY]
+             FROM {{ ref('SRC', 'REGION') }}
+            INNER JOIN {{ ref('SRC', 'NATION') }} [NATION]
+            ON {{ ref('SRC', 'REGION') }}.[R_REGIONKEY] = [NATION].[N_REGIONKEY]
             	)
         dependencies:
           - locationName: SRC
