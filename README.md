@@ -60,14 +60,11 @@ You can create the node as:
 
 ![image](https://github.com/user-attachments/assets/6c18d488-03df-4073-8932-75c6ae1e7d11)
 
-
-
 | **Setting** | **Description** |
 |---------|-------------|
 | **Override Create SQL** | Toggle: True/False<br/>**True**: Customized Create SQL specified in the Create SQL space is executed. All other options are invisible<br/>**False**: Create view SQL based on options chosen are framed and executed |
 | **Multi Source** | Toggle: True/False<br/>Implementation of SQL UNIONs<br/>**True**: Combine multiple sources in a single node<br/>True Options:<br/>- **UNION**: Combines with duplicate elimination<br/>- **UNION ALL**: Combines without duplicate elimination<br/>**False**: Single source node or multiple sources combined using a join |
 | **Distinct** | Toggle: True/False<br/>**True**: Group by All is invisible. DISTINCT data is chosen for processing<br/>**False**: Group by All is visible |
-
 
 ### Work Joins
 
@@ -150,8 +147,100 @@ The stage executed:
 |-----------|----------------|
 | **Delete View** | Drops the existing Work view from target environment |
 
-##  Persistent Stage 
+## Persistent Stage 
 
+The Coalesce Persistent Stage Nodes element, serving as an intermediary object, is frequently utilized to maintain data persistence across multiple execution cycles.
+
+It plays a crucial role in tracking the historical changes of columns linked to business keys.
+
+This functionality is particularly beneficial when the objective is to retain raw data for prolonged durations.
+
+### Persistent Stage Node Configuration
+
+The Persistent node type has two configuration groups:
+
+* [Node Properties](#persistent-stage-node-properties)
+* [Options](#persistent-stage-options)
+
+![Fact_config](https://github.com/coalesceio/Coalesce-Base-Node-Types/assets/7216836/6f863c3b-3abd-4318-bd7e-ed50a829f911)
+
+#### Persistent Stage Node Properties
+
+| **Property** | **Description** |
+|----------|-------------|
+| **Storage Location** | Storage Location where the WORK will be created |
+| **Node Type** | Name of template used to create node objects |
+| **Description** | A description of the node's purpose |
+| **Deploy Enabled** | If TRUE the node will be deployed / redeployed when changes are detected<br/> If FALSE the node will not be deployed or will be dropped during redeployment |
+
+#### Persistent Stage Options
+
+| **Option** | **Description** |
+|---------|-------------|
+| **Create As** | Table is the only option at this time |
+| **Multi Source** | Toggle: True/False<br/>Implementation of SQL UNIONs<br/>**True**: Combine multiple sources in a single node<br/>True Options:<br/>- **UNION**: Combines with duplicate elimination<br/>- **UNION ALL**: Combines without duplicate elimination<br/>**False**: Single source node or multiple sources combined using a join |
+| **Business key** | Required column for both Type 1 and Type 2 |
+| **Change tracking** | Required column for Type 2 |
+| **Truncate Before** | Toggle: True/False<br/>This determines whether a table will be overwritten each time a task executes.<br/> **True**: Uses INSERT OVERWRITE<br/>**False**: Uses INSERT to append data |
+| **Enable tests** | Toggle: True/False<br/>Determines if tests are enabled |
+| **Distinct** | Toggle: True/False<br/>**True**: Group by All is invisible. DISTINCT data is chosen for processing<br/>**False**: Group by All is visible |
+| **Pre-SQL** | SQL to execute before data insert operation |
+| **Post-SQL** | SQL to execute after data insert operation |
+
+### Persistent Stage Joins
+
+Join conditions and other clauses can be specified in the join space next to mapping of columns in the UI.
+
+![pstage_join](https://github.com/coalesceio/Coalesce-Base-Node-Types/assets/7216836/84ce06c9-103c-4700-ad3d-2e8222995b31)
+
+> 📘 **Specify Group by and Order by Clauses**
+>
+> You should specify group by and order by clauses in this space if you are not opting for the group by all and order by provided in OPTIONS config.
+
+### Persistent Stage Deployment
+
+#### Persistent Stage Initial Deployment
+
+When deployed for the first time into an environment the Persistent node will execute the below stage:
+
+| **Stage** | **Description** |
+|-----------|----------------|
+| **Create Persistent Table** | This will execute a CREATE OR REPLACE statement and create a table in the target environment |
+
+#### Persistent Stage Redeployment
+
+After the Persistent node has been deployed for the first time into a target environment, subsequent deployments may result in either altering the Persistent Table or recreating the Persistent table.
+
+#### Altering the Persistent Tables
+
+A few types of column or table changes will result in an ALTER statement to modify the Persistent Table in the target environment, whether these changes are made individually or all together:
+
+* Changing table names
+* Dropping existing columns
+* Altering column data types
+* Adding new columns
+
+The following stages are executed:
+
+| **Stage** | **Description** |
+|-----------|----------------|
+| **Clone Table** | Creates an internal table |
+| **Rename Table\| Alter Column \| Delete Column \| Add Column \| Rename Column** | Alter table statement is executed to perform the alter operation |
+| **Rename Clone Table** | Upon successful completion of all updates, the clone replaces the main table ensuring that no data is lost |
+| **Delete Table** | Drops the internal table |
+
+### Persistent Stage Undeployment
+
+If a Persistent Node is deleted from a Workspace, that Workspace is committed to Git and that commit deployed to a higher level environment then the Persistent Table in the target environment will be dropped.
+
+This is executed in two stages:
+
+| **Stage** | **Description** |
+|-----------|----------------|
+| **Delete Table** | Drops table |
+| **Drop Table or View** | Removes the table |
+
+---
 ## Dimension
 
 The Coalesce Dimension UDN is a versatile node that allows you to develop and deploy a Dimension table in Microsoft Fabric.
