@@ -271,7 +271,7 @@ The Dimension node type has two configuration groups:
 
 ##### Dimension Table Options
 
-![Dimension](https://github.com/user-attachments/assets/8f65ee5c-ce09-457e-b4de-9e6c94038795)
+<img width="275" alt="image" src="https://github.com/user-attachments/assets/612683fd-3916-44d7-a4f6-99a799a983ea" />
 
 | **Options** | **Description** |
 |---------|-------------|
@@ -287,7 +287,7 @@ The Dimension node type has two configuration groups:
 
 ##### Dimension View Options
 
-![Work_options_view1](https://github.com/coalesceio/Coalesce-Base-Node-Types/assets/7216836/7881c46e-0424-46ca-9a89-d111b5dbc379)
+<img width="293" alt="image" src="https://github.com/user-attachments/assets/192780fd-70a7-45da-b2c4-3e86dc20335e" />
 
 | **Options** | **Description** |
 |---------|-------------|
