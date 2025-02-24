@@ -393,7 +393,9 @@ The View node type has two configuration groups:
 |---------|-------------|
 | **Override Create SQL** | Toggle: True/False<br/>**True**: Customized Create SQL specified in the Create SQL space is executed. All other options are invisible<br/>**False**: Create view SQL based on options chosen are framed and executed |
 | **Multi Source** | Toggle: True/False<br/>Implementation of SQL UNIONs<br/>**True**: Combine multiple sources in a single node<br/>True Options:<br/>- **UNION**: Combines with duplicate elimination<br/>- **UNION ALL**: Combines without duplicate elimination<br/>**False**: Single source node or multiple sources combined using a join |
-| **Distinct** | Toggle: True/False<br/>**True**: DISTINCT data is chosen for processing<br/>**False**: DISTINCT is not added in select query
+| **Distinct** | Toggle: True/False<br/>**True**: DISTINCT data is chosen for creating view<br/>**False**: DISTINCT is not added in select query for view creation
+| **Pre-SQL** | SQL to execute before view creation|
+| **Post-SQL** | SQL to execute after view creation |
 
 ### View Joins
 
