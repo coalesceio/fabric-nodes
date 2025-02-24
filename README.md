@@ -5,6 +5,7 @@ The Coalesce Base Node Types Package includes:
 * [Work](#work)
 * [Persistent Stage](#persistent-stage)
 * [Dimension](#dimension)
+* [View](#view)
 * [Code](#code)
 
 ---
@@ -362,6 +363,76 @@ If a Dimension Node of materialization type view is deleted from a Workspace, th
 | **Delete View** | Drops the existing Dimension view from target environment. |
 ---
 
+## View 
+
+The Coalesce View UDN is a versatile node that allows you to develop and deploy a View in Microsoft Fabric.
+
+A view allows the result of a query to be accessed as if it were a table. Views serve a variety of purposes, including combining, segregating, and protecting data.
+
+### View Node Configuration
+
+The View node type has two configuration groups:
+
+* [Node Properties](#view-node-properties)
+* [Options](#view-options)
+
+![Fact_config](https://github.com/coalesceio/Coalesce-Base-Node-Types/assets/7216836/6f863c3b-3abd-4318-bd7e-ed50a829f911)
+
+#### View Node Properties
+
+| **Properties** | **Description** |
+|----------|-------------|
+| **Storage Location** | Storage Location where the WORK will be created |
+| **Node Type** | Name of template used to create node objects |
+| **Description** | A description of the node's purpose |
+| **Deploy Enabled** | If TRUE the node will be deployed / redeployed when changes are detected<br/> If FALSE the node will not be deployed or will be dropped during redeployment |
+
+#### View Options
+
+| **Options** | **Description** |
+|---------|-------------|
+| **Override Create SQL** | Toggle: True/False<br/>**True**: Customized Create SQL specified in the Create SQL space is executed. All other options are invisible<br/>**False**: Create view SQL based on options chosen are framed and executed |
+| **Multi Source** | Toggle: True/False<br/>Implementation of SQL UNIONs<br/>**True**: Combine multiple sources in a single node<br/>True Options:<br/>- **UNION**: Combines with duplicate elimination<br/>- **UNION ALL**: Combines without duplicate elimination<br/>**False**: Single source node or multiple sources combined using a join |
+| **Distinct** | Toggle: True/False<br/>**True**: DISTINCT data is chosen for processing<br/>**False**: DISTINCT is not added in select query
+
+### View Joins
+
+Join conditions and other clauses like where, qualify can be specified in the join space next to mapping of columns in the Coalesce app.
+
+
+### View Deployment
+
+#### View Initial Deployment
+
+When deployed for the first time into an environment the View node will execute the Create View stage.
+
+| **Stage** | **Description** |
+|-----------|----------------|
+| **Drop View** | This will execute a DROP statement and drop a View in the target environment |
+| **Create View** | This will execute a CREATE statement and create a View in the target environment |
+
+#### View Redeployment
+
+The subsequent deployment of View node with changes in view definition, adding table description, adding secure option or renaming view results in deleting the existing view and recreating the view.
+
+The following stages are executed:
+
+| **Stage** | **Description** |
+|-----------|----------------|
+| **Delete View** | Drops existing view |
+| **Create View** | Creates new view with updated definition |
+
+#### View Undeployment
+
+If a View Node is deleted from a Workspace, that Workspace is committed to Git and that commit deployed to a higher level environment then the View in the target environment will be dropped.
+
+This is executed in the below stage:
+
+| **Stage** | **Description** |
+|-----------|----------------|
+| **Delete View** | Drops the view from the environment |
+---
+
 #### Code
 
 ### Work Code
@@ -381,6 +452,12 @@ If a Dimension Node of materialization type view is deleted from a Workspace, th
 * [Node definition](https://github.com/coalesceio/fabric-nodes/blob/main/nodeTypes/Dimension_10-148/definition.yml)
 * [Create Template](https://github.com/coalesceio/fabric-nodes/blob/main/nodeTypes/Dimension_10-148/create.sql.j2)
 * [Run Template](https://github.com/coalesceio/fabric-nodes/blob/main/nodeTypes/Dimension_10-148/run.sql.j2)
+
+### View Code
+
+* [Node definition](https://github.com/coalesceio/fabric-nodes/blob/main/nodeTypes/View_10-153/definition.yml)
+* [Create Template](https://github.com/coalesceio/fabric-nodes/blob/main/nodeTypes/View_10-153/create.sql.j2)
+* [Run Template](https://github.com/coalesceio/fabric-nodes/blob/main/nodeTypes/View_10-153/run.sql.j2)
 
 
 [Macros](https://github.com/coalesceio/fabric-nodes/blob/main/macros/macro-1.yml).
