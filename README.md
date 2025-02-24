@@ -408,7 +408,6 @@ When deployed for the first time into an environment the View node will execute 
 
 | **Stage** | **Description** |
 |-----------|----------------|
-| **Drop View** | This will execute a DROP statement and drop a View in the target environment |
 | **Create View** | This will execute a CREATE statement and create a View in the target environment |
 
 #### View Redeployment
