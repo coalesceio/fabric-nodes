@@ -1,11 +1,13 @@
 fileVersion: 1
 id: 6a4ea2a7-2eb2-4eb3-a851-0f9fef19f2e2
-name: V_CUSTOMER_SRC1
+name: V_CUSTOMER_SRC
 operation:
   config:
     OverrideSQLCreate: false
     groupByAll: false
     insertStrategy: UNION
+    postSQL: null
+    preSQL: null
     selectDistinct: true
   database: ""
   deployEnabled: true
@@ -170,9 +172,9 @@ operation:
           joinCondition: |-
             FROM {{ ref('TARGET', 'WRK_CUSTOMER_SRC') }} [WRK_CUSTOMER_SRC]
             WHERE [C_CUSTKEY] >11
-        name: V_CUSTOMER_SRC1
+        name: V_CUSTOMER_SRC
         noLinkRefs: []
-  name: V_CUSTOMER_SRC1
+  name: V_CUSTOMER_SRC
   overrideSQL: false
   schema: ""
   sqlType: "153"

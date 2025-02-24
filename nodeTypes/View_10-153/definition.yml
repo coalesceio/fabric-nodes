@@ -39,6 +39,17 @@ metadata:
           type: toggleButton
           default: false
 
+        - displayName: Pre-SQL
+          attributeName: preSQL
+          type: textBox
+          syntax: sql
+          isRequired: false
+
+        - displayName: Post-SQL
+          attributeName: postSQL
+          type: textBox
+          syntax: sql
+          isRequired: false
 
       - groupName: Hidden Config
         enableIf: "false"

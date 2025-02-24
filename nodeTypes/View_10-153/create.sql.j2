@@ -9,13 +9,16 @@ does not permit copying or modification for any other purpose.
 {# == Node Type Name           : View == #}
 {# == Node Type Description    : This node creates view. It override create sql and distinct for view == #}
 
+{% if config.preSQL %}
+		{{ stage('Pre-SQL') }}
+		{{ config.preSQL }}
+{% endif %}
+
 {% if node.override.create.enabled %}
 	
 	{{ node.override.create.script }}
-{% else %}
-{{ stage('Drop Stage View') }}
 
-    DROP VIEW IF EXISTS {{ ref_no_link(node.location.name, node.name) }}
+{% else %}
     {% set source = sources[0] %}
     {{ stage('Create Stage View') }}
     CREATE VIEW {{ ref_no_link(node.location.name, node.name) }}
@@ -47,3 +50,7 @@ does not permit copying or modification for any other purpose.
         {% endif %}
     {% endfor %}
   {% endif %}
+{% if config.postSQL %}
+		{{ stage('Post-SQL') }}
+		{{ config.postSQL }}
+{% endif %}
