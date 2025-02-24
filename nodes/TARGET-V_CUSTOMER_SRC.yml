@@ -11,7 +11,7 @@ operation:
   deployEnabled: true
   description: ""
   isMultisource: false
-  locationName: SOURCE
+  locationName: TARGET
   materializationType: view
   metadata:
     appliedNodeTests: []
@@ -173,7 +173,7 @@ operation:
         name: V_CUSTOMER_SRC
         noLinkRefs: []
   name: V_CUSTOMER_SRC
-  overrideSQL: true
+  overrideSQL: false
   schema: ""
   sqlType: "153"
   type: sql

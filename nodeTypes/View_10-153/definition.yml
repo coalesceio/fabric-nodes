@@ -2,7 +2,7 @@ fileVersion: 1
 id: "153"
 isDisabled: false
 metadata:
-  defaultStorageLocation: null
+  defaultStorageLocation: TARGET
   error: null
   nodeMetadataSpec: |
     capitalized: View

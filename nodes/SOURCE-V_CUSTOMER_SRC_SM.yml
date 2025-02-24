@@ -8,7 +8,7 @@ operation:
     insertStrategy: UNION
     selectDistinct: false
   database: ""
-  deployEnabled: true
+  deployEnabled: false
   description: ""
   isMultisource: true
   locationName: SOURCE

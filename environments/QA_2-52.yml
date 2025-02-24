@@ -6,6 +6,6 @@ mappingDefinitions:
     schema: sample_data
   TARGET:
     database: Node Development
-    schema: target_qa_1
-name: QA
+    schema: target_qa_2
+name: QA_2
 type: Environment
