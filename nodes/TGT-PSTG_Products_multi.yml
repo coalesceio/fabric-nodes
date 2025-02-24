@@ -17,7 +17,7 @@ operation:
   deployEnabled: true
   description: ""
   isMultisource: true
-  locationName: SOURCE
+  locationName: TGT
   materializationType: table
   metadata:
     appliedNodeTests: []
@@ -230,14 +230,15 @@ operation:
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
-      - aliases: {}
+      - aliases:
+          Products_elec: 62a750cc-c26f-4230-8a29-dcb524e5d004
         customSQL:
           customSQL: ""
         dependencies:
-          - locationName: SOURCE
+          - locationName: SRC
             nodeName: Products_elec
         join:
-          joinCondition: FROM {{ ref('SOURCE', 'Products_elec') }} [Products_elec]
+          joinCondition: FROM {{ ref('SRC', 'Products_elec') }} [Products_elec]
         name: PSTG_Products_multi
         noLinkRefs: []
       - aliases:
@@ -245,10 +246,10 @@ operation:
         customSQL:
           customSQL: ""
         dependencies:
-          - locationName: SOURCE
+          - locationName: SRC
             nodeName: Products
         join:
-          joinCondition: FROM {{ ref('SOURCE', 'Products') }} [Products]
+          joinCondition: FROM {{ ref('SRC', 'Products') }} [Products]
         name: PSTG_products
         noLinkRefs: []
   name: PSTG_Products_multi
