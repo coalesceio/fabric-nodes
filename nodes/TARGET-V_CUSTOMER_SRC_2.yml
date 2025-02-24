@@ -171,7 +171,7 @@ operation:
         join:
           joinCondition: |-
             FROM {{ ref('TARGET', 'WRK_CUSTOMER_SRC') }} [WRK_CUSTOMER_SRC]
-            WHERE [C_CUSTKEY] >11
+            WHERE [C_CUSTKEY] >10
         name: V_CUSTOMER_SRC_2
         noLinkRefs: []
   name: V_CUSTOMER_SRC_2
