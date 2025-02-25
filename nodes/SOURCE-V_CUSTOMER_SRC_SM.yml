@@ -6,6 +6,8 @@ operation:
     OverrideSQLCreate: false
     groupByAll: false
     insertStrategy: UNION
+    postSQL: null
+    preSQL: null
     selectDistinct: false
   database: ""
   deployEnabled: false

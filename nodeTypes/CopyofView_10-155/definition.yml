@@ -1,0 +1,64 @@
+fileVersion: 1
+id: "155"
+isDisabled: false
+metadata:
+  defaultStorageLocation: TARGET
+  error: null
+  nodeMetadataSpec: |
+    capitalized: Copy of View
+    short: V
+    tagColor: '#C4C4C4'
+    isDisabled: true
+    plural: Views
+
+    config:
+      - groupName: Options
+        items:
+
+        - displayName: OverrideCreateSQL
+          attributeName: OverrideSQLCreate
+          type: overrideSQLToggle
+          default: false
+
+        - type: multisourceToggle
+          enableIf: "{% if  node.override.create.enabled %} false {% else %} true {% endif %}"
+          default: false
+
+        - displayName: Multi Source Strategy
+          attributeName: insertStrategy
+          type: dropdownSelector
+          default: UNION
+          options:
+          - "UNION"
+          - "UNION ALL"
+          isRequired: false
+          enableIf: "{% if node.isMultisource %} true {% else %} false {% endif %}"
+
+        - displayName: Distinct
+          attributeName: selectDistinct
+          type: toggleButton
+          default: false
+
+        - displayName: Pre-SQL
+          attributeName: preSQL
+          type: textBox
+          syntax: sql
+          isRequired: false
+
+        - displayName: Post-SQL
+          attributeName: postSQL
+          type: textBox
+          syntax: sql
+          isRequired: false
+
+      - groupName: Hidden Config
+        enableIf: "false"
+        items:
+        - displayName: Type
+          type: materializationSelector
+          default:  view
+          options:
+          - view
+          isRequired: false
+name: Copy of View_1.0
+type: NodeType

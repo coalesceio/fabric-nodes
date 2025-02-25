@@ -21,7 +21,7 @@ operation:
   description: This is Dimnsion table for Customer
   isMultisource: false
   locationName: TARGET
-  materializationType: view
+  materializationType: table
   metadata:
     appliedNodeTests: []
     columns:
