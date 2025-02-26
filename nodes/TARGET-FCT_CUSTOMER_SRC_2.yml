@@ -1,5 +1,5 @@
 fileVersion: 1
-id: 43d56bd9-029a-4946-aec6-bb9d56d44177
+id: 6f487b20-351f-49ae-ad9d-468bca61ca40
 name: FCT_CUSTOMER_SRC_2
 operation:
   config:
@@ -10,7 +10,7 @@ operation:
     testsEnabled: false
     truncateBefore: false
   database: ""
-  deployEnabled: true
+  deployEnabled: false
   description: This is Fact Table
   isMultisource: false
   locationName: TARGET
@@ -28,8 +28,8 @@ operation:
       - appliedColumnTests:
           hasNull: false
         columnReference:
-          columnCounter: 50222eeb-bdb0-44a7-8d9e-54c26acdf469
-          stepCounter: 43d56bd9-029a-4946-aec6-bb9d56d44177
+          columnCounter: bd4b91f4-82a9-4274-8d6e-06743d7701de
+          stepCounter: 6f487b20-351f-49ae-ad9d-468bca61ca40
         config: {}
         dataType: DECIMAL(38,6)
         description: ""
@@ -44,8 +44,8 @@ operation:
       - appliedColumnTests:
           hasNull: true
         columnReference:
-          columnCounter: b329550c-11fe-4d2d-9cb0-4a39ec6bba95
-          stepCounter: 43d56bd9-029a-4946-aec6-bb9d56d44177
+          columnCounter: e4a9f806-ca9c-4f90-9e2f-2e442612f319
+          stepCounter: 6f487b20-351f-49ae-ad9d-468bca61ca40
         config: {}
         dataType: VARCHAR(8000)
         description: This column contains customer name
@@ -60,8 +60,8 @@ operation:
       - appliedColumnTests:
           hasNull: false
         columnReference:
-          columnCounter: df143c11-79aa-440c-8f05-05d5f1855c16
-          stepCounter: 43d56bd9-029a-4946-aec6-bb9d56d44177
+          columnCounter: 0128ad1b-f737-413a-bb7d-06226103e85f
+          stepCounter: 6f487b20-351f-49ae-ad9d-468bca61ca40
         config: {}
         dataType: VARCHAR(8000)
         description: ""
@@ -74,8 +74,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: bff4d9ba-653b-426c-927b-e0d30159bf8d
-          stepCounter: 43d56bd9-029a-4946-aec6-bb9d56d44177
+          columnCounter: eda94e27-cd32-4ce1-afe9-83b33b911c27
+          stepCounter: 6f487b20-351f-49ae-ad9d-468bca61ca40
         config: {}
         dataType: VARCHAR(8000)
         description: ""
@@ -89,8 +89,8 @@ operation:
       - appliedColumnTests:
           hasNull: false
         columnReference:
-          columnCounter: aa9a381a-db9d-4d7d-8d58-802363d862f8
-          stepCounter: 43d56bd9-029a-4946-aec6-bb9d56d44177
+          columnCounter: c53a2c05-74b7-473a-8793-6b59abf463d5
+          stepCounter: 6f487b20-351f-49ae-ad9d-468bca61ca40
         config: {}
         dataType: DECIMAL(38,6)
         description: ""
@@ -104,8 +104,8 @@ operation:
       - appliedColumnTests:
           hasNull: false
         columnReference:
-          columnCounter: 24c25d5f-fc45-4c72-ae79-379169f79cdf
-          stepCounter: 43d56bd9-029a-4946-aec6-bb9d56d44177
+          columnCounter: b6b28bbc-8ca8-4c0a-babe-0619bb30ff65
+          stepCounter: 6f487b20-351f-49ae-ad9d-468bca61ca40
         config: {}
         dataType: VARCHAR(8000)
         description: ""
@@ -119,8 +119,8 @@ operation:
       - appliedColumnTests:
           hasNull: false
         columnReference:
-          columnCounter: d2878918-84ce-4a3c-b146-57f14b74c40f
-          stepCounter: 43d56bd9-029a-4946-aec6-bb9d56d44177
+          columnCounter: a8b31827-b499-48fc-9e20-5f8b9fb4bb7c
+          stepCounter: 6f487b20-351f-49ae-ad9d-468bca61ca40
         config: {}
         dataType: DECIMAL(38,6)
         description: ""
@@ -134,8 +134,8 @@ operation:
       - appliedColumnTests:
           hasNull: false
         columnReference:
-          columnCounter: 161b943b-10ea-4a35-bc33-067f441fcf0e
-          stepCounter: 43d56bd9-029a-4946-aec6-bb9d56d44177
+          columnCounter: 6366ee4a-65d4-4fa2-9ace-73d202688a00
+          stepCounter: 6f487b20-351f-49ae-ad9d-468bca61ca40
         config: {}
         dataType: VARCHAR(8000)
         description: ""
@@ -152,8 +152,8 @@ operation:
         appliedColumnTests:
           hasNull: false
         columnReference:
-          columnCounter: 69bb13e4-c637-401f-81ce-69bdc25cf0e1
-          stepCounter: 43d56bd9-029a-4946-aec6-bb9d56d44177
+          columnCounter: fa065c8e-eaa1-46b2-83d4-822f895f0029
+          stepCounter: 6f487b20-351f-49ae-ad9d-468bca61ca40
         config: {}
         dataType: DATETIME2(3)
         defaultValue: ""
@@ -170,8 +170,8 @@ operation:
         appliedColumnTests:
           hasNull: false
         columnReference:
-          columnCounter: b1170e64-7b63-499c-ac44-41308e2226a3
-          stepCounter: 43d56bd9-029a-4946-aec6-bb9d56d44177
+          columnCounter: e52a0e6b-a43c-4eeb-bf44-8f47794ce2bb
+          stepCounter: 6f487b20-351f-49ae-ad9d-468bca61ca40
         config: {}
         dataType: DATETIME2(3)
         defaultValue: ""
