@@ -72,6 +72,20 @@ operation:
               - columnCounter: fc654eb3-efcc-420c-97f1-325253890e8d
                 stepCounter: a6b5f748-91aa-417b-93a3-6c981ff6277d
             transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: bff4d9ba-653b-426c-927b-e0d30159bf8d
+          stepCounter: 43d56bd9-029a-4946-aec6-bb9d56d44177
+        config: {}
+        dataType: VARCHAR(8000)
+        description: ""
+        name: C_ADDRESS1
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: fc654eb3-efcc-420c-97f1-325253890e8d
+                stepCounter: a6b5f748-91aa-417b-93a3-6c981ff6277d
+            transform: ""
       - appliedColumnTests:
           hasNull: false
         columnReference:
@@ -130,21 +144,6 @@ operation:
         sourceColumnReferences:
           - columnReferences:
               - columnCounter: 4dd72c88-bf61-4f43-bcad-925c0bf774b8
-                stepCounter: a6b5f748-91aa-417b-93a3-6c981ff6277d
-            transform: ""
-      - appliedColumnTests:
-          hasNull: false
-        columnReference:
-          columnCounter: c645f7ab-8162-46c3-a830-f685feb327b4
-          stepCounter: 43d56bd9-029a-4946-aec6-bb9d56d44177
-        config: {}
-        dataType: VARCHAR(8000)
-        description: ""
-        name: C_COMMENT
-        nullable: true
-        sourceColumnReferences:
-          - columnReferences:
-              - columnCounter: 39c77cc4-7b57-4977-893e-a6f3a0b9d86b
                 stepCounter: a6b5f748-91aa-417b-93a3-6c981ff6277d
             transform: ""
       - acceptedValues:
