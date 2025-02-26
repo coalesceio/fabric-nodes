@@ -1,0 +1,67 @@
+{#
+    Copyright (c) 2023 Coalesce. All rights reserved.
+This script and its associated documentation are confidential and proprietary to Coalesce.
+Unauthorized reproduction, distribution, or disclosure of this material is strictly prohibited.
+Coalesce permits you to copy and modify this script for the purposes of using with Coalsce but
+does not permit copying or modification for any other purpose.  
+#}
+{# == Node Type Version        : 1  == #}
+{# == Node Type Name           : Fact  == #}
+{# == Node Type Description    :This node loads data into fact table using config options distinct,multi-source  == #}
+
+{% if node.override.create.enabled %}
+	
+	{{ node.override.create.script }}
+
+{% elif node.materializationType == 'table' %}
+
+  {{ stage('Drop Fact Table') }}
+  DROP TABLE IF EXISTS {{ ref_no_link(node.location.name, node.name) }}
+
+  {{ stage('Create Fact Table') }}
+
+	CREATE TABLE {{ ref_no_link(node.location.name, node.name) }}
+	(
+		{% for col in columns %}
+             [{{ col.name }}] {{ col.dataType }}
+			{%- if not col.nullable %} NOT NULL
+			{% endif %}
+			{%- if not loop.last -%}, {% endif %}
+		{% endfor %}
+	)
+    
+{% elif node.materializationType == 'view' %}
+    {{ stage('Drop Fact View') }}
+
+    DROP VIEW IF EXISTS {{ ref_no_link(node.location.name, node.name) }}
+
+
+    {{ stage('Create Fact View') }}
+
+    CREATE VIEW {{ ref_no_link(node.location.name, node.name) }}
+    (
+        {% for col in columns %}
+            [{{ col.name }}]
+            {%- if not loop.last -%}, {% endif %}
+        {% endfor %}
+    )
+    AS
+    {% for source in sources %}
+        SELECT
+        {% for col in source.columns %}
+            {{ get_source_transform(col) }} AS [{{ col.name }}]
+            {%- if not loop.last -%}, {% endif %}
+        {% endfor %}
+
+        {{ source.join }}
+
+        {% if not loop.last %}
+            {% if config.insertStrategy in ['UNION', 'UNION ALL'] %}
+                {{ config.insertStrategy }}
+            {% else %}
+                UNION
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+{% endif %}
