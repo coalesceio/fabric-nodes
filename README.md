@@ -5,6 +5,7 @@ The Coalesce Base Node Types Package includes:
 * [Work](#work)
 * [Persistent Stage](#persistent-stage)
 * [Dimension](#dimension)
+* [Fact](#fact)
 * [View](#view)
 * [Code](#code)
 
@@ -263,7 +264,7 @@ The Dimension node type has two configuration groups:
 
 | **Property** | **Description** |
 |----------|-------------|
-| **Storage Location** | Storage Location where the WORK will be created |
+| **Storage Location** | Storage Location where the DIMENSION will be created |
 | **Node Type** | Name of template used to create node objects |
 | **Description** | A description of the node's purpose |
 | **Deploy Enabled** | If TRUE the node will be deployed / redeployed when changes are detected<br/> If FALSE the node will not be deployed or will be dropped during redeployment |
@@ -362,7 +363,124 @@ If a Dimension Node of materialization type view is deleted from a Workspace, th
 |-----------|----------------|
 | **Delete View** | Drops the existing Dimension view from target environment. |
 ---
+## Fact
 
+The Coalesce Fact UDN is a versatile node that allows you to develop and deploy a Fact table in Microsoft Fabric.
+
+A fact table or a fact entity is a table or entity in a star or snowflake schema that stores measures that measure the business, such as sales, cost of goods, or profit. Fact tables and entities aggregate measures, or the numerical data of a business.
+
+### Fact Node Configuration
+
+The Fact node has two configuration groups:
+
+* [Node Properties](#fact-node-properties)
+* [Options](#fact-options)
+
+![Fact_config](https://github.com/coalesceio/Coalesce-Base-Node-Types/assets/7216836/6f863c3b-3abd-4318-bd7e-ed50a829f911)
+
+
+#### Fact Node Properties
+
+| **Properties** | **Description** |
+|----------|-------------|
+| **Storage Location** | Storage Location where the FACT will be created |
+| **Node Type** | Name of template used to create node objects |
+| **Description** | A description of the node's purpose |
+| **Deploy Enabled** | If TRUE the node will be deployed / redeployed when changes are detected<br/> If FALSE the node will not be deployed or will be dropped during redeployment |
+
+#### Fact Options
+
+
+<img width="268" alt="image" src="https://github.com/user-attachments/assets/2b13dcf0-bc63-4818-ad5c-6c9d22584669" /><br/>
+
+
+| **Options** | **Description** |
+|---------|-------------|
+| **Multi Source** | Toggle: True/False<br/>Implementation of SQL UNIONs<br/>**True**: Combine multiple sources in a single node<br/>True Options:<br/>- **UNION**: Combines with duplicate elimination<br/>- **UNION ALL**: Combines without duplicate elimination<br/>**False**: Single source node or multiple sources combined using a join |
+| **Business key** | Required column for Fact table creation |
+| **Truncate Before** | Toggle: True/False<br/>This determines whether a table will be overwritten each time a task executes. **True**: Uses INSERT OVERWRITE<br/>**False**: Uses INSERT to append data |
+| **Enable tests** | Toggle: True/False<br/>Determines if tests are enabled |
+| **Distinct** | Toggle: True/False<br/>**True**: DISTINCT data is chosen for processing<br/>**False**: DISTINCT is not added in select query|
+| **Pre-SQL** | SQL to execute before data insert operation |
+| **Post-SQL** | SQL to execute after data insert operation |
+
+#### Fact View
+
+<img width="236" alt="image" src="https://github.com/user-attachments/assets/ec0fe649-28e9-463a-b6e9-ab671451b973" />
+<br/>
+
+| **Setting** | **Description** |
+|---------|-------------|
+| **Override Create SQL** | Toggle: True/False<br/>**True**: Customized Create SQL specified in the Create SQL space is executed. All other options are invisible<br/>**False**: Create view SQL based on options chosen are framed and executed |
+| **Multi Source** | Toggle: True/False<br/>Implementation of SQL UNIONs<br/>**True**: Combine multiple sources in a single node<br/>True Options:<br/>- **UNION**: Combines with duplicate elimination<br/>- **UNION ALL**: Combines without duplicate elimination<br/>**False**: Single source node or multiple sources combined using a join |
+| **Distinct** | Toggle: True/False<br/>**True**: DISTINCT data is chosen for processing<br/>**False**: DISTINCT is not added in select query|
+
+### Fact Joins
+
+Join conditions and other clauses like where, qualify can be specified in the join space next to mapping of columns in the UI.
+
+![fact_join](https://github.com/coalesceio/Coalesce-Base-Node-Types/assets/7216836/e540d2d0-2623-4b99-a435-a26df5fe3306)
+
+
+### Fact Deployment
+
+#### Fact Initial Deployment
+
+When deployed for the first time into an environment the Fact node of materialization type table will execute the Create Fact Table stage.
+
+| **Stage** | **Description** |
+|-----------|----------------|
+| **Drop Fact Table** | This will execute a DROP statement and Drops a table in the target environment |
+| **Create Fact Table** | This will execute a CREATE statement and create a table in the target environment |
+| **Drop Fact View** | This will execute a DROP statement and Drops a view in the target environmentt |
+| **Create Fact View** | This will execute a CREATE statement and create a view in the target environment |
+
+#### Fact Redeployment
+
+After the Fact node has been deployed for the first time into a target environment, subsequent deployments may result in either altering the Fact Table or recreating the Fact table.
+
+#### Altering the Fact Tables
+
+A few types of column or table changes will result in an ALTER statement to modify the Fact Table in the target environment, whether these changes are made individually or all together:
+
+* Changing table names
+* Dropping existing columns
+* Altering column data types
+* Adding new columns
+
+The following stages are executed:
+
+| **Stage** | **Description** |
+|-----------|----------------|
+| **Clone Table** | Creates an internal table |
+| **Rename Table\| Alter Column \| Delete Column \| Add Column \|** | Alter table statement is executed to perform the alter operation |
+| **Rename Clone Table** | Upon successful completion of all updates, the clone replaces the main table ensuring that no data is lost |
+| **Delete Table** | Drops the internal table |
+
+
+#### Recreating the Fact Views
+
+The subsequent deployment of Work node of materialization type view with changes in view definition, adding table description or renaming view results in deleting the existing view and recreating the view.
+
+The following stages are executed:
+
+| **Stage** | **Description** |
+|-----------|----------------|
+| **Delete View** | Removes existing view |
+| **Create View** | Creates new view with updated definition |
+
+### Fact Undeployment
+
+If a Fact Node is deleted from a Workspace, that Workspace is committed to Git and that commit deployed to a higher level environment then the Fact Table in the target environment will be dropped.
+
+This is executed in two stages:
+
+| **Stage** | **Description** |
+|-----------|----------------|
+| **Delete Table** | Coalesce Internal table is dropped |
+| **Delete Table** | Target table in Microsoft Fabric is dropped |
+
+---
 ## View 
 
 The Coalesce View UDN is a versatile node that allows you to develop and deploy a View in Microsoft Fabric.
@@ -453,6 +571,12 @@ This is executed in the below stage:
 * [Node definition](https://github.com/coalesceio/fabric-nodes/blob/main/nodeTypes/Dimension_10-148/definition.yml)
 * [Create Template](https://github.com/coalesceio/fabric-nodes/blob/main/nodeTypes/Dimension_10-148/create.sql.j2)
 * [Run Template](https://github.com/coalesceio/fabric-nodes/blob/main/nodeTypes/Dimension_10-148/run.sql.j2)
+
+### Fact Code
+
+* [Node definition](https://github.com/coalesceio/fabric-nodes/blob/main/nodeTypes/Fact_10-149/definition.yml)
+* [Create Template](https://github.com/coalesceio/fabric-nodes/blob/main/nodeTypes/Fact_10-149/create.sql.j2)
+* [Run Template](https://github.com/coalesceio/fabric-nodes/blob/main/nodeTypes/Fact_10-149/run.sql.j2)
 
 ### View Code
 
