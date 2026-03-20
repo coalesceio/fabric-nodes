@@ -456,31 +456,38 @@ does not permit copying or modification for any other purpose.
         SELECT 
          {%- for col in sources[0].columns  -%}
          {%-if col.isSurrogateKey%}
-            ROW_NUMBER() OVER (ORDER BY {%- for col in columns if col.isBusinessKey -%}{%- if not loop.first %} , {%- endif %} [SRC].[{{col.name}}] {%endfor%})
-	        + COALESCE (( SELECT MAX({%- for col in columns if col.isSurrogateKey -%}{%- if not loop.first %} , {%- endif %} [{{col.name}}] {%endfor%}) FROM {{ ref_no_link(node.location.name, node.name) }}),0) AS [{{ col.name }}] ,*
-        FROM
-        (
-        {% for source in sources %}
+           CASE 
+          WHEN DML_OPERATION LIKE 'INSERT%' 
+          THEN ROW_NUMBER() OVER (ORDER BY {%- for col in sources[0].columns if col.isBusinessKey -%}{%- if not loop.first %} , {%- endif %} {{col.name}} {%endfor%})
+	        + COALESCE (( SELECT MAX({%- for col in columns if col.isSurrogateKey -%}{%- if not loop.first %} , {%- endif %} [{{col.name}}] {%endfor%}) FROM {{ ref_no_link(node.location.name, node.name) }}),0) ELSE EXISTING_KEY
+            END AS [{{ col.name }}] , *
+         FROM
+         (
+         {%endif -%}
+         {%endfor -%}
+        {%- for source in sources %}
 
-           {% set joinclause = source.join %}
+           {%- set joinclause = source.join %}
            
             /* New Rows That Don't Exist */
             (SELECT
-            {% if config.selectDistinct %}
+            {%- if config.selectDistinct %}
             DISTINCT
             {% endif %}
-            {% for col in source.columns if not col.isSurrogateKey %}
+            {%- for col in source.columns %}
                 {% if col.isSystemVersion %}
                     1
-                {% elif col.isSystemCurrentFlag %}
+                {%- elif col.isSurrogateKey %}
+                      NULL AS EXISTING_KEY , -- No key exists for brand new rows    
+                {%- elif col.isSystemCurrentFlag %}
                     'Y'
-                {% else %}
-                   {{ get_source_transform(col) }}
-                {% endif %}
-                AS [{{ col.name }}],
+                {%- else %}
+                   {{- get_source_transform(col) }}
+                {%-  endif %}
+                {%- if not col.isSurrogateKey%} AS [{{ col.name }}], {%endif -%}
             {% endfor %}
                 'INSERT_INITAL_VERSION_ROWS' AS "DML_OPERATION"
-            {{  get_clause(joinclause,'from')  }}
+            {{-  get_clause(joinclause,'from')  -}}
             LEFT JOIN {{ ref_no_link(node.location.name, node.name) }} [DIM] ON
             {% for col in source.columns if col.isBusinessKey -%}
                 {% if not loop.first %}
@@ -506,25 +513,27 @@ does not permit copying or modification for any other purpose.
                   /* Insert new records with incremented version/latest timestamp based on last modified column */
             {%else%}
                  /* New Row Needing To Be Inserted Due To Type-2 Column Changes */
-            {%endif%}
+            {%-endif-%}
             (SELECT
-            {% if config.selectDistinct %}
+            {%- if config.selectDistinct %}
             DISTINCT
-            {% endif %}
-            {% for col in source.columns if not col.isSurrogateKey %}
-                {% if col.isSystemVersion %}
+            {%- endif %}
+            {%- for col in source.columns %}
+                {%- if col.isSystemVersion %}
                     [DIM].[{{ col.name }}] + 1
-                {% elif col.isSystemCurrentFlag %}
+                {%- elif col.isSurrogateKey %}
+                      NULL AS EXISTING_KEY ,-- This is a new record, needs a new key    
+                {%- elif col.isSystemCurrentFlag %}
                     'Y'
-                {% elif col.name == last_modified_col and useCurrentTimeStamp %}
+                {%- elif col.name == last_modified_col and useCurrentTimeStamp %}
 					     COALESCE({{ get_source_transform(col) }},CURRENT_TIMESTAMP())
-                {% else %}
+                {%- else %}
                    {{ get_source_transform(col) }}
-                {% endif %}
-                AS [{{ col.name }}],
-            {% endfor %}
+                {%- endif %}
+                {% if not col.isSurrogateKey%} AS [{{ col.name }}], {%endif%}
+            {%- endfor %}
                 'INSERT_NEW_VERSION_ROWS' AS "DML_OPERATION"
-            {{  get_clause(joinclause,'from')  }}
+            {{-  get_clause(joinclause,'from')  }}
             INNER JOIN {{ ref_no_link(node.location.name, node.name) }} [DIM] ON
             {% for col in source.columns if col.isBusinessKey -%}
                 {% if not loop.first %}
@@ -574,9 +583,11 @@ does not permit copying or modification for any other purpose.
             {% if config.selectDistinct %}
             DISTINCT
             {% endif %}
-            {%- for col in source.columns if not col.isSurrogateKey %}
+            {%- for col in source.columns %}
                 {% if col.isSystemEndDate %}
                     DATEADD(MILLISECOND, -1, CAST(GETDATE() AS DATETIME2(6)))
+                {% elif col.isSurrogateKey %}
+                      [DIM].[DIM_Products_elec_KEY] AS EXISTING_KEY, -- Pass existing key to update specific row
                 {% elif col.isSystemCurrentFlag %}
                     'N'
                 {% elif col.name == last_modified_col and useCurrentTimeStamp %}
@@ -584,7 +595,7 @@ does not permit copying or modification for any other purpose.
                 {% else %}
                     [DIM].[{{ col.name }}]
                 {% endif %}
-                AS [{{ col.name }}],
+                {%- if not col.isSurrogateKey %}AS [{{ col.name }}],{%endif%}
             {% endfor -%}
                 'update_expired_version_rows' AS "DML_OPERATION"
             {{  get_clause(joinclause,'from')  }}
@@ -649,15 +660,17 @@ does not permit copying or modification for any other purpose.
               {% if config.selectDistinct %}
               DISTINCT
               {% endif %}
-              {%- for col in source.columns if not col.isSurrogateKey %}
+              {%- for col in source.columns %}
                   {% if col.isSystemVersion or col.isSystemCreateDate or col.isSystemStartDate or col.isSystemEndDate %}
                       [DIM].[{{ col.name }}]
+                  {% elif col.isSurrogateKey %}
+                      [DIM].[DIM_Products_elec_KEY] AS EXISTING_KEY , -- Pass existing key to update specific row
                   {% elif col.isSystemCurrentFlag %}
                       'Y'
                   {% else %}
                       {{ get_source_transform(col) }}
                   {% endif %}
-                  AS [{{ col.name }}],
+                  {% if not col.isSurrogateKey%} AS [{{ col.name }}], {%endif%}
               {% endfor -%}
                   'UPDATE_NON_TYPE2_ROWS' AS "DML_OPERATION"
               {{  get_clause(joinclause,'from')  }}
@@ -742,13 +755,13 @@ does not permit copying or modification for any other purpose.
          {% endfor -%}
         {%endif%}
         WHEN NOT MATCHED THEN INSERT (
-        {%- for col in columns if not col.isSurrogateKey %}
+        {%- for col in columns %}
             [{{ col.name }}]
             {% if not loop.last %}, {% endif %}
         {% endfor -%}
         )
         VALUES (
-        {%- for col in columns if not col.isSurrogateKey %}
+        {%- for col in columns %}
             [SRC].[{{ col.name }}]
             {% if not loop.last %}, {% endif %}
         {% endfor -%}
