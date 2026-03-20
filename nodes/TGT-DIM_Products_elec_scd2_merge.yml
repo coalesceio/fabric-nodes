@@ -1,17 +1,21 @@
 fileVersion: 1
-id: 65b9c9fa-2bea-4d55-89ff-19f316611ddf
-name: DIM_Products_elec_scd1
+id: 4302c09f-79b4-40fa-8a62-284cd972bace
+name: DIM_Products_elec_scd2_merge
 operation:
   config:
+    deleteStrategy: NO DELETE
     insertStrategy: UNION ALL
-    lastModifiedComparison: false
+    insertZeroKey: true
+    insertZeroKeyBol: "TRUE"
+    insertZeroKeyDate: 01-01-1900
+    insertZeroKeyStr: UNKNOWN
+    insertZeroKeySurrogateKey: "0"
+    insertZeroKeyTimestamp: "1900-01-01 00:00:00.000"
     postSQL: ""
     preSQL: ""
     selectDistinct: false
     testsEnabled: false
-    treatNullAsCurrentTimestamp: false
-    truncateBefore: true
-    type2Dimension: false
+    truncateBefore: false
     updateStrategy: MERGE
   database: ""
   deployEnabled: true
@@ -27,22 +31,22 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: 0a71e6e4-3311-4e4c-ab39-e51b84eaf89b
-          stepCounter: 65b9c9fa-2bea-4d55-89ff-19f316611ddf
+          columnCounter: 65150b59-7dda-4449-881b-1320b7a42c5d
+          stepCounter: 4302c09f-79b4-40fa-8a62-284cd972bace
         config: {}
         dataType: DECIMAL
         defaultValue: ""
         description: ""
         isSurrogateKey: true
-        name: DIM_Products_elec1_KEY
+        name: DIM_Products_elec_KEY
         nullable: true
         sourceColumnReferences:
           - columnReferences: []
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: e592fd29-7175-4290-bebd-6e63c6cdb0ff
-          stepCounter: 65b9c9fa-2bea-4d55-89ff-19f316611ddf
+          columnCounter: c40c0d99-ef78-430c-a367-f71e221fdc73
+          stepCounter: 4302c09f-79b4-40fa-8a62-284cd972bace
         config: {}
         dataType: INT
         description: ""
@@ -56,11 +60,12 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 51f110b7-52a6-4c02-a37b-3b7250db421f
-          stepCounter: 65b9c9fa-2bea-4d55-89ff-19f316611ddf
+          columnCounter: aa572a21-3472-4cbd-b5ea-8622e71b1e8e
+          stepCounter: 4302c09f-79b4-40fa-8a62-284cd972bace
         config: {}
         dataType: VARCHAR(255)
         description: ""
+        isChangeTracking: true
         name: Product_Name
         nullable: false
         sourceColumnReferences:
@@ -70,8 +75,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 9f0d105b-306a-4a47-88a7-ee46a50c7e57
-          stepCounter: 65b9c9fa-2bea-4d55-89ff-19f316611ddf
+          columnCounter: ef15807d-0e34-498f-9390-3073c3f1e172
+          stepCounter: 4302c09f-79b4-40fa-8a62-284cd972bace
         config: {}
         dataType: VARCHAR(255)
         description: ""
@@ -84,8 +89,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: f66d256b-d31c-4e2f-b399-555a41acfb7d
-          stepCounter: 65b9c9fa-2bea-4d55-89ff-19f316611ddf
+          columnCounter: 3b823981-65a2-4acd-801d-c64a02ea0527
+          stepCounter: 4302c09f-79b4-40fa-8a62-284cd972bace
         config: {}
         dataType: VARCHAR(100)
         description: ""
@@ -101,8 +106,8 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: 07888048-e752-4078-a8e4-1bcc7a8c5269
-          stepCounter: 65b9c9fa-2bea-4d55-89ff-19f316611ddf
+          columnCounter: 7e85aa7c-81ec-47e2-815c-cf4c75029552
+          stepCounter: 4302c09f-79b4-40fa-8a62-284cd972bace
         config: {}
         dataType: DECIMAL
         defaultValue: ""
@@ -118,8 +123,8 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: 07c7a9da-4c75-44bb-8e10-d18352cff638
-          stepCounter: 65b9c9fa-2bea-4d55-89ff-19f316611ddf
+          columnCounter: c06bcaaa-ac3e-402a-a31d-f5f6007f4d8f
+          stepCounter: 4302c09f-79b4-40fa-8a62-284cd972bace
         config: {}
         dataType: VARCHAR(1)
         defaultValue: ""
@@ -135,8 +140,8 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: e9d7372c-6904-426f-844c-f566e290bfef
-          stepCounter: 65b9c9fa-2bea-4d55-89ff-19f316611ddf
+          columnCounter: 1cac4119-cd8a-463f-8d17-f4a847261772
+          stepCounter: 4302c09f-79b4-40fa-8a62-284cd972bace
         config: {}
         dataType: DATETIME2(3)
         defaultValue: ""
@@ -152,8 +157,8 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: e4e6b744-a5eb-4beb-a790-f634a154c19d
-          stepCounter: 65b9c9fa-2bea-4d55-89ff-19f316611ddf
+          columnCounter: ce5b521b-93e3-48a1-ab88-76de4dc2322b
+          stepCounter: 4302c09f-79b4-40fa-8a62-284cd972bace
         config: {}
         dataType: DATETIME2(3)
         defaultValue: ""
@@ -169,8 +174,8 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: c081f4c2-ac38-45db-bb8b-e1d71c76315b
-          stepCounter: 65b9c9fa-2bea-4d55-89ff-19f316611ddf
+          columnCounter: 87fd4e77-7e59-4b7b-80a3-6c26046a9bf0
+          stepCounter: 4302c09f-79b4-40fa-8a62-284cd972bace
         config: {}
         dataType: DATETIME2(3)
         defaultValue: ""
@@ -186,8 +191,8 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: 40dd13bf-202a-4f62-b89f-9cb076df73a5
-          stepCounter: 65b9c9fa-2bea-4d55-89ff-19f316611ddf
+          columnCounter: 6f798086-a1ac-4d53-81c5-4b1a12a72ac5
+          stepCounter: 4302c09f-79b4-40fa-8a62-284cd972bace
         config: {}
         dataType: DATETIME2(3)
         defaultValue: ""
@@ -210,9 +215,9 @@ operation:
             nodeName: Products_elec
         join:
           joinCondition: FROM {{ ref('SRC', 'Products_elec') }} [Products_elec]
-        name: DIM_Products_elec_scd1
+        name: DIM_Products_elec_scd2_merge
         noLinkRefs: []
-  name: DIM_Products_elec_scd1
+  name: DIM_Products_elec_scd2_merge
   overrideSQL: false
   schema: ""
   sqlType: "148"
