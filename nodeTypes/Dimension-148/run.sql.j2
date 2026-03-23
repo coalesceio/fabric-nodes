@@ -1057,12 +1057,16 @@ does not permit copying or modification for any other purpose.
           WHEN NOT MATCHED BY SOURCE THEN
           DELETE
         {%elif config.deleteStrategy == 'SOFT DELETE'%}
-          WHEN NOT MATCHED BY SOURCE AND TGT.[SYSTEM_CURRENT_FLAG] = 'Y' THEN
-          UPDATE SET
-          [TGT].[SYSTEM_CURRENT_FLAG] = 'N',
-          [TGT].[SYSTEM_END_DATE] = CAST(GETDATE() AS DATETIME2(3)),
-          [TGT].[SYSTEM_UPDATE_DATE] = CAST(GETDATE() AS DATETIME2(3)),
-          [TGT].[SYSTEM_VERSION] = '0'
+          {% for col in columns if (col.isSystemCurrentFlag or col.isSystemEndDate or col.isSystemUpdateDate or isSystemVersion) %}                     
+                 {%- if col.isSystemCurrentFlag == true %}						
+                        [TGT].[{{ col.name }}] = 'N'
+				 {%- elif col.isSystemEndDate or col.isSystemUpdateDate %}
+				         [TGT].[{{ col.name }}] = CAST(GETDATE() AS DATETIME2(3))
+				 {%- elif col.isSystemVersion %}
+				         [TGT].[{{ col.name }}] = 0
+                 {%- endif%}        
+						{%- if not loop.last %} , {% endif %}
+            {%- endfor %}
         {%endif%}
             WHEN NOT MATCHED THEN
             INSERT (
