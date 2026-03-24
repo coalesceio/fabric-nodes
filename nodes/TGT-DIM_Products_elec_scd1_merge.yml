@@ -3,8 +3,13 @@ id: 65b9c9fa-2bea-4d55-89ff-19f316611ddf
 name: DIM_Products_elec_scd1_merge
 operation:
   config:
+    customZeroKeyValues:
+      items:
+        - {}
+    deleteStrategy: NO DELETE
     insertStrategy: UNION ALL
     insertZeroKey: true
+    insertZeroKeyAdvanced: false
     insertZeroKeyBol: "TRUE"
     insertZeroKeyDate: 01-01-1900
     insertZeroKeyStr: UNKNOWN
@@ -221,7 +226,7 @@ operation:
   name: DIM_Products_elec_scd1_merge
   overrideSQL: false
   schema: ""
-  sqlType: "148"
+  sqlType: "633"
   type: sql
   version: 1
 type: Node

@@ -9,29 +9,24 @@ does not permit copying or modification for any other purpose.
 {# == Node Type Name           : Dimension  == #}
 {# == Node Type Description    :This node loads data into dimension table and maintain history using config options distinct ,multi-source  == #}
 
-{%- if config.updateStrategy == 'INSERT/UPDATE' -%}
-    {%- set varUpdateStrategy = 'INSERT/UPDATE' -%}
-{%- else -%}
-    {%- set varUpdateStrategy = 'MERGE' -%}
-{%- endif -%}
+{# == Variable check to identify type of dimension == #}
+
+--{% set is_type_2 = columns | selectattr("isChangeTracking") | list | length > 0 %}
 
 {# == Check if last modified comparison toggle is enabled  #}
 
 {% set has_business_key = columns | selectattr("isBusinessKey") | list | length > 0 %}
-{% set use_last_modified = config.lastModifiedComparison and varUpdateStrategy == 'MERGE' | default(false) %}
-
-{# == Variable check to identify type of dimension == #}
-
+{% set use_last_modified = config.lastModifiedComparison | default(false) %}
 {% set is_type_2 = config.type2Dimension | default(false) if use_last_modified else (columns | selectattr("isChangeTracking") | list | length > 0) %}
 {%if config.lastModifiedComparison%}
  {% set last_modified_col = config.lastModifiedColumn.name | default('') %}
 {%endif%}
 
-{%if config.treatNullAsCurrentTimestamp  and 'TIMESTAMP' in (config.lastModifiedColumn.dataType | upper)  %}
+   {%if config.treatNullAsCurrentTimestamp  and 'TIMESTAMP' in (config.lastModifiedColumn.dataType | upper)  %}
      {%set useCurrentTimeStamp = true %}
    {%else%}
      {%set useCurrentTimeStamp = false %}
-{%endif%}
+   {%endif%}
 
 {# == To run data quality tests before data insertion == #}
 

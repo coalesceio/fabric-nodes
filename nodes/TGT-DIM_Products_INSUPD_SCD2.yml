@@ -6,6 +6,7 @@ operation:
     customZeroKeyValues:
       items:
         - {}
+    deleteStrategy: NO DELETE
     insertStrategy: UNION ALL
     insertZeroKey: true
     insertZeroKeyAdvanced: false
@@ -226,7 +227,7 @@ operation:
   name: DIM_Products_INSUPD_SCD2
   overrideSQL: false
   schema: ""
-  sqlType: "148"
+  sqlType: "633"
   type: sql
   version: 1
 type: Node

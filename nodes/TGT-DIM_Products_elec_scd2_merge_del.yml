@@ -3,19 +3,26 @@ id: c1c774af-a600-45dd-a0ef-7e7b87f6174b
 name: DIM_Products_elec_scd2_merge_del
 operation:
   config:
+    customZeroKeyValues:
+      items:
+        - {}
     deleteStrategy: SOFT DELETE
     insertStrategy: UNION ALL
     insertZeroKey: true
+    insertZeroKeyAdvanced: false
     insertZeroKeyBol: "TRUE"
     insertZeroKeyDate: 01-01-1900
     insertZeroKeyStr: UNKNOWN
     insertZeroKeySurrogateKey: "0"
     insertZeroKeyTimestamp: "1900-01-01 00:00:00.000"
+    lastModifiedComparison: false
     postSQL: ""
     preSQL: ""
     selectDistinct: false
     testsEnabled: false
+    treatNullAsCurrentTimestamp: false
     truncateBefore: false
+    type2Dimension: false
     updateStrategy: MERGE
   database: ""
   deployEnabled: true
@@ -220,7 +227,7 @@ operation:
   name: DIM_Products_elec_scd2_merge_del
   overrideSQL: false
   schema: ""
-  sqlType: "148"
+  sqlType: "633"
   type: sql
   version: 1
 type: Node
