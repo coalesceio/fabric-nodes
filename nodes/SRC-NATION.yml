@@ -3,7 +3,7 @@ id: 1fd7cac4-feb7-445a-9f14-47677b6afc1b
 name: NATION
 operation:
   database: ""
-  deployEnabled: false
+  deployEnabled: true
   description: ""
   locationName: SRC
   metadata:

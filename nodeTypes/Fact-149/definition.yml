@@ -1,28 +1,27 @@
 fileVersion: 1
-id: "148"
+id: "149"
 isDisabled: false
 metadata:
   defaultStorageLocation: null
   error: null
   nodeMetadataSpec: |
-    capitalized: Dimension 
-    short: DIM
-    tagColor: '#1E339A'
-    plural: Dimensions
+    capitalized: Fact
+    plural: Facts
+    short: FCT
+    tagColor: '#D9A438'
 
     config:
     - groupName: Options
       items:
       - type: materializationSelector
         isRequired: true
-        default: table
         options:
         - table
         - view
 
       - type: overrideSQLToggle
         enableIf: "{% if node.materializationType == 'view' %} true {% else %} false {% endif %}"
-        
+
       - type: multisourceToggle
         enableIf: "{% if node.override.create.enabled %} false {% else %} true {% endif %}"
 
@@ -37,9 +36,6 @@ metadata:
         enableIf: "{% if node.isMultisource %} true {% else %} false {% endif %}"
 
       - type: businessKeyColumns
-        isRequired: true
-
-      - type: changeTrackingColumns
         isRequired: false
         enableIf: "{% if node.materializationType == 'view' %} false {% else %} true {% endif %}"
 
@@ -52,14 +48,14 @@ metadata:
       - displayName: Enable Tests
         attributeName: testsEnabled
         type: toggleButton
-        enableIf: "{% if node.materializationType == 'view' %} false {% else %} true {% endif %}"
         default: false
+        enableIf: "{% if node.materializationType == 'view' %} false {% else %} true {% endif %}"
         
       - displayName: Distinct
         attributeName: selectDistinct
         type: toggleButton
-        enableIf: "{% if config.groupByAll or  node.override.create.enabled %} false {% else %} true {% endif %}"
-        default: false   
+        default: false
+        enableIf: "{% if config.groupByAll or  node.override.create.enabled %} %} false {% else %} true {% endif %}"
 
       - displayName: Pre-SQL
         attributeName: preSQL
@@ -76,36 +72,6 @@ metadata:
         enableIf: "{% if node.materializationType == 'view' %} false {% else %} true {% endif %}"
 
     systemColumns:
-    - displayName: '{{NODE_NAME}}_KEY'
-      transform: ''
-      dataType: DECIMAL
-      placement: beginning
-      attributeName: isSurrogateKey
-
-    - displayName: SYSTEM_VERSION
-      transform: ''
-      dataType: DECIMAL
-      placement: end
-      attributeName: isSystemVersion
-
-    - displayName: SYSTEM_CURRENT_FLAG
-      transform: ''
-      dataType: VARCHAR(1)
-      placement: end
-      attributeName: isSystemCurrentFlag
-
-    - displayName: SYSTEM_START_DATE
-      transform: CAST(GETDATE() AS DATETIME2(3))
-      dataType: DATETIME2(3)
-      placement: end
-      attributeName: isSystemStartDate
-
-    - displayName: SYSTEM_END_DATE
-      transform: CAST('2999-12-31 00:00:00' AS DATETIME2(3))
-      dataType: DATETIME2(3)
-      placement: end
-      attributeName: isSystemEndDate
-
     - displayName: SYSTEM_CREATE_DATE
       transform: CAST(GETDATE() AS DATETIME2(3))
       dataType: DATETIME2(3)
@@ -117,5 +83,5 @@ metadata:
       dataType: DATETIME2(3)
       placement: end
       attributeName: isSystemUpdateDate
-name: Dimension_1.0
+name: Fact
 type: NodeType

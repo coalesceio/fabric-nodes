@@ -47,7 +47,12 @@ metadata:
         attributeName: testsEnabled
         type: toggleButton
         default: true
-        
+
+      - displayName: Distinct
+        attributeName: selectDistinct
+        type: toggleButton
+        default: false   
+      
       - displayName: Pre-SQL
         attributeName: preSQL
         type: textBox

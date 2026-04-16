@@ -49,5 +49,5 @@ metadata:
           options:
           - view
           isRequired: false
-name: View_1.0
+name: View
 type: NodeType
