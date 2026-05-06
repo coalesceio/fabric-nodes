@@ -32,12 +32,12 @@ does not permit copying or modification for any other purpose.
 {% elif node.materializationType == 'view' %}
     {{ stage('Drop Dimension View') }}
 
-    DROP VIEW IF EXISTS {{ ref_no_link(node.location.name, node.name) }}
+    DROP VIEW IF EXISTS {{ ref_no_link(node.location.name, node.name, include_db=False) }}
 
 
     {{ stage('Create Dimension View') }}
 
-    CREATE VIEW {{ ref_no_link(node.location.name, node.name) }}
+    CREATE VIEW {{ ref_no_link(node.location.name, node.name, include_db=False) }}
     (
         {% for col in columns %}
             [{{ col.name }}]

@@ -1,15 +1,15 @@
 fileVersion: 1
-id: "150"
+id: "633"
 isDisabled: true
 metadata:
   defaultStorageLocation: null
   error: null
-  nodeMetadataSpec: |+
-    capitalized: Persistent Stage
-    short: PSTG
-    plural: Persistent Stages
-    tagColor: '#29B2DB'
-        
+  nodeMetadataSpec: |
+    capitalized: Dimension 
+    short: DIM
+    tagColor: '#1E339A'
+    plural: Dimensions
+
     config:
     - groupName: Options
       items:
@@ -18,9 +18,13 @@ metadata:
         default: table
         options:
         - table
-      
+        - view
+
+      - type: overrideSQLToggle
+        enableIf: "{% if node.materializationType == 'view' %} true {% else %} false {% endif %}"
+        
       - type: multisourceToggle
-        enableIf: "{% if node.materializationType == 'table' %} true {% else %} false {% endif %}"
+        enableIf: "{% if node.override.create.enabled %} false {% else %} true {% endif %}"
 
       - displayName: Multi Source Strategy
         attributeName: insertStrategy
@@ -30,7 +34,13 @@ metadata:
         - "UNION"
         - "UNION ALL"
         isRequired: false
-        enableIf: "{% if node.isMultisource %} true {% else %} false {% endif %}"  
+        enableIf: "{% if node.isMultisource %} true {% else %} false {% endif %}"
+
+      - type: toggleButton
+        attributeName: insertZeroKey
+        displayName: Insert Zero Key Record
+        default: false
+        enableIf: "{% if node.materializationType == 'table' or node.materializationType == 'transient table'%} true {% else %} false {% endif %}" 
 
       - displayName: Update Strategy
         attributeName: updateStrategy
@@ -41,9 +51,9 @@ metadata:
         - "INSERT/UPDATE"
         isRequired: false
         enableIf: "{% if node.materializationType != 'view' %} true {% else %} false {% endif %}"
-      
+
       - type: businessKeyColumns
-        isRequired: false
+        isRequired: true
 
       - type: toggleButton
         attributeName: lastModifiedComparison
@@ -78,54 +88,29 @@ metadata:
         displayName: Type 2 Dimension
         default: false
         enableIf: "{% if node.materializationType != 'view' and config.lastModifiedComparison and config.updateStrategy == 'MERGE' %} true {% else %} false {% endif %}"
-      
+
+
       - type: changeTrackingColumns
         isRequired: false
+        enableIf: "{% if node.materializationType == 'view' %} false {% else %} true {% endif %}"
 
       - displayName: Truncate Before
         attributeName: truncateBefore
         type: toggleButton
         default: false
-       
+        enableIf: "{% if node.materializationType == 'view' %} false {% else %} true {% endif %}"
 
       - displayName: Enable Tests
         attributeName: testsEnabled
         type: toggleButton
-        default: false
         enableIf: "{% if node.materializationType == 'view' %} false {% else %} true {% endif %}"
+        default: false
         
-
       - displayName: Distinct
         attributeName: selectDistinct
         type: toggleButton
-        enableIf: "{% if config.groupByAll %} false {% else %} true {% endif %}"
-        default: false
-
-      - displayName: Group By All
-        attributeName: groupByAll
-        type: toggleButton
-        enableIf: "{% if config.selectDistinct %} false {% else %} true {% endif %}"
-        default: false
-        
-      - type: tabular
-        displayName: 'Sort column'
-        attributeName: orderbycolumn
-        columns:
-
-          -  type: columnDropdownSelector
-             displayName: Column Name
-             attributeName: sortColName
-
-          -  type: dropdownSelector
-             displayName: Sort Order
-             attributeName: sortOrder
-             default: desc
-             options:
-             - desc
-             - asc
-           
-        isRequired: true
-        enableIf: "{% if config.orderby %} true {% else %} false {% endif %}"    
+        enableIf: "{% if config.groupByAll or  node.override.create.enabled %} false {% else %} true {% endif %}"
+        default: false   
 
       - displayName: Pre-SQL
         attributeName: preSQL
@@ -134,7 +119,6 @@ metadata:
         isRequired: false
         enableIf: "{% if node.materializationType == 'view' %} false {% else %} true {% endif %}"
 
-
       - displayName: Post-SQL
         attributeName: postSQL
         type: textBox
@@ -142,8 +126,75 @@ metadata:
         isRequired: false
         enableIf: "{% if node.materializationType == 'view' %} false {% else %} true {% endif %}"
 
-    systemColumns:
+    - groupName: Zero Key Record Options
+      enableIf: "{% if config.insertZeroKey  and node.materializationType != 'view' %} true {% else %} false {% endif %}"
+      items:
+      - displayName: Default Surrogate Key Value
+        attributeName: insertZeroKeySurrogateKey
+        type: textBox
+        default: "0"
+        isRequired: false
+        enableIf: "{% if config.insertZeroKey == true and node.materializationType != 'view' %} true {% else %} false {% endif %}"
 
+      - displayName: Default String Value
+        attributeName: insertZeroKeyStr
+        type: textBox
+        default: "UNKNOWN"
+        isRequired: false
+        enableIf: "{% if config.insertZeroKey == true and node.materializationType != 'view' %} true {% else %} false {% endif %}"
+
+      - displayName: Default Date Value (Date Format DD-MM-YYYY)
+        attributeName: insertZeroKeyDate
+        type: textBox
+        default: "01-01-1900"
+        isRequired: false
+        enableIf: "{% if config.insertZeroKey == true and node.materializationType != 'view' %} true {% else %} false {% endif %}"
+
+      - displayName: Default Timestamp Value (Timestamp Format YYYY-MM-DD HH24:MI:SS.FF)
+        attributeName: insertZeroKeyTimestamp
+        type: textBox
+        default: "1900-01-01 00:00:00.000"
+        isRequired: false
+        enableIf: "{% if config.insertZeroKey == true and node.materializationType != 'view' %} true {% else %} false {% endif %}"
+
+      - displayName: Default Boolean Value
+        attributeName: insertZeroKeyBol
+        type: dropdownSelector
+        default: "TRUE"
+        isRequired: false
+        options:
+        - "TRUE"
+        - "FALSE"
+        enableIf: "{% if config.insertZeroKey == true and node.materializationType != 'view' %} true {% else %} false {% endif %}"
+
+      - type: toggleButton
+        attributeName: insertZeroKeyAdvanced
+        displayName: Advanced Zero Key Record Options
+        default: false
+        enableIf: "{% if ((node.materializationType == 'table' or node.materializationType == 'transient table') and config.insertZeroKey == true) %} true {% else %} false {% endif %}"
+
+      - type: tabular
+        displayName: 'Custom Zero Key Values'
+        attributeName: customZeroKeyValues
+        columns:
+
+        - type: columnDropdownSelector
+          displayName: Column
+          attributeName: columnNameDefault
+          isRequired: false
+          enableIf: "{% if config.insertZeroKey == true and config.insertZeroKeyAdvanced  == true and node.materializationType != 'view'%} true {% else %} false {% endif %}"
+      
+        -  type: textBox
+           displayName: Default Value
+           attributeName: columnValueDefault
+           isRequired: false
+           enableIf: "{% if config.insertZeroKey == true and config.insertZeroKeyAdvanced  == true  and node.materializationType != 'view' %} true {% else %} false {% endif %}"
+      
+        isRequired: false
+        enableIf: "{% if config.insertZeroKey  == true and config.insertZeroKeyAdvanced  == true  and node.materializationType != 'view' %} true {% else %} false {% endif %}"
+
+
+    systemColumns:
     - displayName: '{{NODE_NAME}}_KEY'
       transform: ''
       dataType: DECIMAL
@@ -169,7 +220,7 @@ metadata:
       attributeName: isSystemStartDate
 
     - displayName: SYSTEM_END_DATE
-      transform: CAST('2999-12-31 00:00:00' AS DATETIME2(6))
+      transform: CAST('2999-12-31 00:00:00' AS DATETIME2(3))
       dataType: DATETIME2(3)
       placement: end
       attributeName: isSystemEndDate
@@ -185,6 +236,5 @@ metadata:
       dataType: DATETIME2(3)
       placement: end
       attributeName: isSystemUpdateDate
-
-name: Persistent Stage
+name: Dimension
 type: NodeType

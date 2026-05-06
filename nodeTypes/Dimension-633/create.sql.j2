@@ -6,21 +6,18 @@ Coalesce permits you to copy and modify this script for the purposes of using wi
 does not permit copying or modification for any other purpose.  
 #}
 {# == Node Type Version        : 1  == #}
-{# == Node Type Name           : Work  == #}
-{# == Node Type Description    : This node creates work table,view and also override create sql for view == #}
-
-{# Release date:20250217 Version:1.0.0 #}
-
+{# == Node Type Name           : Dimension  == #}
+{# == Node Type Description    : This node loads data into dimension table and maintain history using config options distinct,multi-source  == #}
 
 {% if node.override.create.enabled %}
 	
 	{{ node.override.create.script }}
 
 {% elif node.materializationType == 'table' %}
-  {{ stage('Drop Work Table') }}
+  {{ stage('Drop Dimension Table') }}
   DROP TABLE IF EXISTS {{ ref_no_link(node.location.name, node.name) }}
 
-  {{ stage('Create Work Table') }}
+	{{ stage('Create Dimension Table') }}
 
 	CREATE TABLE {{ ref_no_link(node.location.name, node.name) }}
 	(
@@ -31,19 +28,18 @@ does not permit copying or modification for any other purpose.
 			{%- if not loop.last -%}, {% endif %}
 		{% endfor %}
 	)
-
-
+    
 {% elif node.materializationType == 'view' %}
-    {{ stage('Drop Stage View') }}
+    {{ stage('Drop Dimension View') }}
 
-    DROP VIEW IF EXISTS {{ ref_no_link(node.location.name, node.name, include_db=False) }}
-{%set source = sources[0]%}
+    DROP VIEW IF EXISTS {{ ref_no_link(node.location.name, node.name) }}
 
-    {{ stage('Create Stage View') }}
 
-    CREATE VIEW {{ ref_no_link(node.location.name, node.name, include_db=False) }}
+    {{ stage('Create Dimension View') }}
+
+    CREATE VIEW {{ ref_no_link(node.location.name, node.name) }}
     (
-        {% for col in source.columns %}
+        {% for col in columns %}
             [{{ col.name }}]
             {%- if not loop.last -%}, {% endif %}
         {% endfor %}
@@ -51,9 +47,9 @@ does not permit copying or modification for any other purpose.
     AS
     {% for source in sources %}
         SELECT
-		{% if config.selectDistinct -%}	 
-		DISTINCT	
-		{%- endif -%}
+         {% if config.selectDistinct %}
+        DISTINCT
+        {% endif %}
         {% for col in source.columns %}
             {{ get_source_transform(col) }} AS [{{ col.name }}]
             {%- if not loop.last -%}, {% endif %}
