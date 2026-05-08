@@ -4,14 +4,11 @@ name: FCT_CUSTOMER
 operation:
   config:
     insertStrategy: UNION ALL
-    lastModifiedComparison: false
     postSQL: ""
     preSQL: ""
     selectDistinct: false
     testsEnabled: false
-    treatNullAsCurrentTimestamp: false
     truncateBefore: false
-    type2Dimension: false
   database: ""
   deployEnabled: true
   description: ""
@@ -28,6 +25,7 @@ operation:
         config: {}
         dataType: DECIMAL(38,6)
         description: ""
+        isBusinessKey: true
         name: C_CUSTKEY
         nullable: true
         sourceColumnReferences:
@@ -133,16 +131,12 @@ operation:
               - columnCounter: 65b7bbe3-5c6f-412d-910d-d4ab0caa84f5
                 stepCounter: bbdd4152-3470-4066-86f1-841e513cbda5
             transform: ""
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
+      - appliedColumnTests: {}
         columnReference:
-          columnCounter: 16cc51e6-b610-4a42-bbf7-f790dca0b717
+          columnCounter: f330cd88-d1b2-4b39-a78b-8634da9b95fe
           stepCounter: 22f9b84d-f4ad-4277-9e07-25e224762c17
         config: {}
         dataType: DATETIME2(3)
-        defaultValue: ""
         description: ""
         isSystemCreateDate: true
         name: SYSTEM_CREATE_DATE
@@ -150,16 +144,12 @@ operation:
         sourceColumnReferences:
           - columnReferences: []
             transform: CAST(GETDATE() AS DATETIME2(3))
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
+      - appliedColumnTests: {}
         columnReference:
-          columnCounter: f495e2d7-5f54-4020-abce-526daad8c401
+          columnCounter: f37e1ecc-65b6-4e80-9a4a-9abad350079f
           stepCounter: 22f9b84d-f4ad-4277-9e07-25e224762c17
         config: {}
         dataType: DATETIME2(3)
-        defaultValue: ""
         description: ""
         isSystemUpdateDate: true
         name: SYSTEM_UPDATE_DATE
@@ -184,7 +174,7 @@ operation:
   name: FCT_CUSTOMER
   overrideSQL: false
   schema: ""
-  sqlType: "149"
+  sqlType: Fact
   type: sql
   version: 1
 type: Node

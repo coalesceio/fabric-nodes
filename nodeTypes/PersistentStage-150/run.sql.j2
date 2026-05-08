@@ -8,7 +8,7 @@ does not permit copying or modification for any other purpose.
 {# == Node Type Version        : 1  == #}
 {# == Node Type Name           : Persistent stage  == #}
 {# == Node Type Description    :This node loads data into dimension table and maintain history using config options distinct,groupby all,order by ,multi-source  == #}
-FW
+
 {%- if config.updateStrategy == 'INSERT/UPDATE' -%}
     {%- set varUpdateStrategy = 'INSERT/UPDATE' -%}
 {%- else -%}

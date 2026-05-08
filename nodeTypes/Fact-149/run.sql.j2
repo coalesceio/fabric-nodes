@@ -9,6 +9,12 @@ does not permit copying or modification for any other purpose.
 {# == Node Type Name           : Fact  == #}
 {# == Node Type Description    :This node loads data into fact table using config options distinct,multi-source  == #}
 
+{%- if config.updateStrategy == 'INSERT/UPDATE' -%}
+    {%- set varUpdateStrategy = 'INSERT/UPDATE' -%}
+{%- else -%}
+    {%- set varUpdateStrategy = 'MERGE' -%}
+{%- endif -%}
+
 {# == Variable check to identify type of dimension == #}
 
 --{% set is_type_2 = columns | selectattr("isChangeTracking") | list | length > 0 %}
@@ -66,7 +72,8 @@ does not permit copying or modification for any other purpose.
 	
 {% endif %}
 
- {% if has_business_key %}
+ {% if has_business_key  and varUpdateStrategy != 'MERGE'%}
+ {% elif has_business_key  and varUpdateStrategy == 'MERGE' %}
 
         MERGE INTO {{ ref_no_link(node.location.name, node.name) }} "TGT"
             USING ( 
