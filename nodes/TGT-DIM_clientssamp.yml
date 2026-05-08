@@ -32,7 +32,7 @@ operation:
   description: ""
   isMultisource: false
   locationName: TGT
-  materializationType: view
+  materializationType: table
   metadata:
     appliedNodeTests: []
     columns:

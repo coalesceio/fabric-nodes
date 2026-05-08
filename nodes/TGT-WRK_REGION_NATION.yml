@@ -123,8 +123,12 @@ operation:
           REGION: 25bfccc4-099e-430b-8887-724f68cb5e2d
         customSQL:
           customSQL: |-
+            {{ stage('Drop View') }}
+
+               DROP VIEW {{ ref_no_link('TGT', 'WRK_REGION_NATION',include_db=False)}}
+
             {{ stage('Override Create SQL') }}
-            	CREATE VIEW {{ ref('TGT', 'WRK_REGION_NATION')}} AS (
+            	CREATE VIEW {{ ref_no_link('TGT', 'WRK_REGION_NATION',include_db=False)}} AS (
             		SELECT 
              [R_REGIONKEY] AS [R_REGIONKEY],
              [R_NAME] AS [R_NAME],

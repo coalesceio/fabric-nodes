@@ -13,6 +13,7 @@ operation:
     selectDistinct: false
     testsEnabled: false
     truncateBefore: true
+    updateStrategy: MERGE
   database: ""
   deployEnabled: true
   description: ""
