@@ -5,6 +5,8 @@ operation:
   config:
     groupByAll: false
     insertStrategy: UNION ALL
+    lastModifiedColumn: ""
+    lastModifiedComparison: true
     orderbycolumn:
       items:
         - {}
@@ -13,6 +15,7 @@ operation:
     selectDistinct: false
     testsEnabled: false
     truncateBefore: false
+    updateStrategy: MERGE
   database: ""
   deployEnabled: true
   description: ""

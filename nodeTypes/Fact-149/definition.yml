@@ -35,6 +35,16 @@ metadata:
         isRequired: false
         enableIf: "{% if node.isMultisource %} true {% else %} false {% endif %}"
 
+      - displayName: Update Strategy
+        attributeName: updateStrategy
+        type: dropdownSelector
+        default: MERGE
+        options:
+        - "MERGE"
+        - "INSERT/UPDATE"
+        isRequired: false
+        enableIf: "{% if node.materializationType != 'view' %} true {% else %} false {% endif %}"
+      
       - type: businessKeyColumns
         isRequired: false
         enableIf: "{% if node.materializationType == 'view' %} false {% else %} true {% endif %}"
