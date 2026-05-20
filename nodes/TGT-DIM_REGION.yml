@@ -3,12 +3,23 @@ id: 95259cdb-0b7f-46b8-ac8f-d412b95b60f5
 name: DIM_REGION
 operation:
   config:
+    customZeroKeyValues:
+      items:
+        - {}
     insertStrategy: UNION ALL
+    insertZeroKey: false
+    insertZeroKeyAdvanced: false
+    insertZeroKeyBol: "TRUE"
+    insertZeroKeyDate: 01-01-1900
+    insertZeroKeyStr: UNKNOWN
+    insertZeroKeySurrogateKey: "0"
+    insertZeroKeyTimestamp: "1900-01-01 00:00:00.000"
     postSQL: ""
     preSQL: ""
     selectDistinct: false
     testsEnabled: false
     truncateBefore: false
+    updateStrategy: MERGE
   database: ""
   deployEnabled: true
   description: ""
@@ -18,16 +29,12 @@ operation:
   metadata:
     appliedNodeTests: []
     columns:
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
+      - appliedColumnTests: {}
         columnReference:
-          columnCounter: 7c2fa46c-0fdb-4660-8e3c-7599a0a27423
+          columnCounter: 07d11c37-0583-499b-9746-355a5df51b5b
           stepCounter: 95259cdb-0b7f-46b8-ac8f-d412b95b60f5
         config: {}
         dataType: DECIMAL
-        defaultValue: ""
         description: ""
         isSurrogateKey: true
         name: DIM_REGION_KEY
@@ -78,16 +85,12 @@ operation:
               - columnCounter: eb5b962a-301e-4736-9100-edd30b197a31
                 stepCounter: 25bfccc4-099e-430b-8887-724f68cb5e2d
             transform: ""
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
+      - appliedColumnTests: {}
         columnReference:
-          columnCounter: d6cec16a-4053-421c-9f0f-19a86bd930e1
+          columnCounter: 5c8e2ff3-a5e9-4577-a4b8-2e405e444401
           stepCounter: 95259cdb-0b7f-46b8-ac8f-d412b95b60f5
         config: {}
         dataType: DECIMAL
-        defaultValue: ""
         description: ""
         isSystemVersion: true
         name: SYSTEM_VERSION
@@ -95,16 +98,12 @@ operation:
         sourceColumnReferences:
           - columnReferences: []
             transform: ""
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
+      - appliedColumnTests: {}
         columnReference:
-          columnCounter: 833cf178-2781-49a7-a630-be009cba247f
+          columnCounter: d2a5f8ef-a2dd-4148-9c28-31e0b7002c83
           stepCounter: 95259cdb-0b7f-46b8-ac8f-d412b95b60f5
         config: {}
         dataType: VARCHAR(1)
-        defaultValue: ""
         description: ""
         isSystemCurrentFlag: true
         name: SYSTEM_CURRENT_FLAG
@@ -112,16 +111,12 @@ operation:
         sourceColumnReferences:
           - columnReferences: []
             transform: ""
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
+      - appliedColumnTests: {}
         columnReference:
-          columnCounter: dc846f7f-33d4-466e-a0fe-6b61440f6be9
+          columnCounter: 8082ca26-6b10-431f-99c6-5d7de0604ac5
           stepCounter: 95259cdb-0b7f-46b8-ac8f-d412b95b60f5
         config: {}
         dataType: DATETIME2(3)
-        defaultValue: ""
         description: ""
         isSystemStartDate: true
         name: SYSTEM_START_DATE
@@ -129,16 +124,12 @@ operation:
         sourceColumnReferences:
           - columnReferences: []
             transform: CAST(GETDATE() AS DATETIME2(3))
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
+      - appliedColumnTests: {}
         columnReference:
-          columnCounter: 69004258-b2e3-4689-9991-b90fb8a3fb98
+          columnCounter: e43fb451-e998-46a3-a350-2294e79e5cd0
           stepCounter: 95259cdb-0b7f-46b8-ac8f-d412b95b60f5
         config: {}
         dataType: DATETIME2(3)
-        defaultValue: ""
         description: ""
         isSystemEndDate: true
         name: SYSTEM_END_DATE
@@ -146,16 +137,12 @@ operation:
         sourceColumnReferences:
           - columnReferences: []
             transform: CAST('2999-12-31 00:00:00' AS DATETIME2(3))
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
+      - appliedColumnTests: {}
         columnReference:
-          columnCounter: 517fe497-d153-4562-a79b-a480e1eb1331
+          columnCounter: 50342564-3caf-452d-b9f9-8c6609961a6f
           stepCounter: 95259cdb-0b7f-46b8-ac8f-d412b95b60f5
         config: {}
         dataType: DATETIME2(3)
-        defaultValue: ""
         description: ""
         isSystemCreateDate: true
         name: SYSTEM_CREATE_DATE
@@ -163,16 +150,12 @@ operation:
         sourceColumnReferences:
           - columnReferences: []
             transform: CAST(GETDATE() AS DATETIME2(3))
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
+      - appliedColumnTests: {}
         columnReference:
-          columnCounter: 5bbaa5eb-f0ee-4205-bf25-6e878f673147
+          columnCounter: 5a85dd6b-f496-49c5-b890-5fa1f48ac6fb
           stepCounter: 95259cdb-0b7f-46b8-ac8f-d412b95b60f5
         config: {}
         dataType: DATETIME2(3)
-        defaultValue: ""
         description: ""
         isSystemUpdateDate: true
         name: SYSTEM_UPDATE_DATE
@@ -197,7 +180,7 @@ operation:
   name: DIM_REGION
   overrideSQL: false
   schema: ""
-  sqlType: Dimension
+  sqlType: "633"
   type: sql
   version: 1
 type: Node
