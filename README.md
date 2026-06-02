@@ -13,7 +13,7 @@ The Coalesce Base Node Types Package includes:
 
 ## Work
 
-The Coalesce work node is a versatile node that allows you to develop and deploy a Work table/view in Microsoft Fabric.
+The Coalesce Work Node is a versatile node that allows you to develop and deploy a Work table/view in Microsoft Fabric.
 
 A Work node serves as an intermediary object and is commonly employed to store raw data before undergoing the crucial phases of transformation and loading into the main tables of the data warehouse.
 
@@ -34,8 +34,8 @@ The Work node type has two configuration groups:
 |----------|-------------|
 | **Storage Location** | Storage Location where the WORK will be created |
 | **Node Type** | Name of template used to create node objects |
-| **Description** | A description of the node's purpose |
-| **Deploy Enabled** | If TRUE the node will be deployed / redeployed when changes are detected<br/> If FALSE the node will not be deployed or will be dropped during redeployment |
+| **Description** | A description of the Node's purpose |
+| **Deploy Enabled** | If TRUE the node will be deployed or redeployed when changes are detected<br/> If FALSE the node will not be deployed or will be dropped during redeployment |
 
 #### Work Options
 
@@ -172,8 +172,8 @@ The Persistent node type has two configuration groups:
 |----------|-------------|
 | **Storage Location** | Storage Location where the WORK will be created |
 | **Node Type** | Name of template used to create node objects |
-| **Description** | A description of the node's purpose |
-| **Deploy Enabled** | If TRUE the node will be deployed / redeployed when changes are detected<br/> If FALSE the node will not be deployed or will be dropped during redeployment |
+| **Description** | A description of the Node's purpose |
+| **Deploy Enabled** | If TRUE the node will be deployed or redeployed when changes are detected<br/> If FALSE the node will not be deployed or will be dropped during redeployment |
 
 #### Persistent Stage Options
 
@@ -266,8 +266,8 @@ The Dimension node type has two configuration groups:
 |----------|-------------|
 | **Storage Location** | Storage Location where the DIMENSION will be created |
 | **Node Type** | Name of template used to create node objects |
-| **Description** | A description of the node's purpose |
-| **Deploy Enabled** | If TRUE the node will be deployed / redeployed when changes are detected<br/> If FALSE the node will not be deployed or will be dropped during redeployment |
+| **Description** | A description of the Node's purpose |
+| **Deploy Enabled** | If TRUE the node will be deployed or redeployed when changes are detected<br/> If FALSE the node will not be deployed or will be dropped during redeployment |
 
 #### Dimension Options
 
@@ -314,7 +314,7 @@ When deployed for the first time into an environment the Dimension node of mater
 |-----------|----------------|
 | **Drop Dimension Table** | This will execute a DROP statement and Drops a table in the target environment |
 | **Create Dimension Table** | This will execute a CREATE statement and create a table in the target environment |
-| **Drop Dimension View** | This will execute a DROP statement and Drops a view in the target environmentt |
+| **Drop Dimension View** | This will execute a DROP statement and Drops a view in the target environment |
 | **Create Dimension View** | This will execute a CREATE statement and create a view in the target environment |
 
 #### Dimension Redeployment
@@ -343,7 +343,7 @@ The following stages are executed:
 
 Any of the following changes to views will result in deleting and recreating the Dimension view.
 
-* View defintion
+* View definition
 * Renaming view results
 
 ### Dimension Undeployment
@@ -385,8 +385,8 @@ The Fact node has two configuration groups:
 |----------|-------------|
 | **Storage Location** | Storage Location where the FACT will be created |
 | **Node Type** | Name of template used to create node objects |
-| **Description** | A description of the node's purpose |
-| **Deploy Enabled** | If TRUE the node will be deployed / redeployed when changes are detected<br/> If FALSE the node will not be deployed or will be dropped during redeployment |
+| **Description** | A description of the Node's purpose |
+| **Deploy Enabled** | If TRUE the node will be deployed or redeployed when changes are detected<br/> If FALSE the node will not be deployed or will be dropped during redeployment |
 
 #### Fact Options
 
@@ -432,7 +432,7 @@ When deployed for the first time into an environment the Fact node of materializ
 |-----------|----------------|
 | **Drop Fact Table** | This will execute a DROP statement and Drops a table in the target environment |
 | **Create Fact Table** | This will execute a CREATE statement and create a table in the target environment |
-| **Drop Fact View** | This will execute a DROP statement and Drops a view in the target environmentt |
+| **Drop Fact View** | This will execute a DROP statement and Drops a view in the target environment |
 | **Create Fact View** | This will execute a CREATE statement and create a view in the target environment |
 
 #### Fact Redeployment
@@ -502,8 +502,8 @@ The View node type has two configuration groups:
 |----------|-------------|
 | **Storage Location** | Storage Location where the WORK will be created |
 | **Node Type** | Name of template used to create node objects |
-| **Description** | A description of the node's purpose |
-| **Deploy Enabled** | If TRUE the node will be deployed / redeployed when changes are detected<br/> If FALSE the node will not be deployed or will be dropped during redeployment |
+| **Description** | A description of the Node's purpose |
+| **Deploy Enabled** | If TRUE the node will be deployed or redeployed when changes are detected<br/> If FALSE the node will not be deployed or will be dropped during redeployment |
 
 #### View Options
 
