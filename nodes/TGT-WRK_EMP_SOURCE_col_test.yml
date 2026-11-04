@@ -48,20 +48,6 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 077805dc-c62b-440c-b955-c2790bd2c8b4
-          stepCounter: b2fb84ce-f743-4eb7-99d6-85c7ccb0cf31
-        config: {}
-        dataType: VARCHAR(100)
-        description: ""
-        name: EMP_CITY
-        nullable: true
-        sourceColumnReferences:
-          - columnReferences:
-              - columnCounter: 888b1d0e-689b-4b74-abd5-b488e97a6c18
-                stepCounter: 83c944af-f04c-4171-b7a8-e022dd8624ea
-            transform: ""
-      - appliedColumnTests: {}
-        columnReference:
           columnCounter: d0836e0e-3f5d-45da-a72b-3d7dfc5ce05e
           stepCounter: b2fb84ce-f743-4eb7-99d6-85c7ccb0cf31
         config: {}
