@@ -45,8 +45,59 @@ metadata:
       - type: businessKeyColumns
         isRequired: false
 
+      - type: toggleButton
+        attributeName: lastModifiedComparison
+        displayName: Last Modified Comparison
+        default: false
+        enableIf: "{% if node.materializationType != 'view' and (columns 
+                      | selectattr('isBusinessKey')
+                      | list
+                      | length > 0) %} true {% else %} false {% endif %}"
+
+      - type: label
+        attributeName: note1
+        displayName: Last Modified columns can be either a timestamp or incremental id column
+        enableIf: "{% if config.lastModifiedComparison  %} true {% else %} false {% endif %}"
+      
+
+      - type: columnDropdownSelector
+        attributeName: lastModifiedColumn
+        displayName: Last Modified Column
+        enableIf: "{% if node.materializationType != 'view' and config.lastModifiedComparison %} true {% else %} false {% endif %}"
+
       - type: changeTrackingColumns
         isRequired: false
+
+      - displayName: Delete Strategy 
+        attributeName: deleteStrategy
+        type: dropdownSelector
+        default: "NO DELETE"
+        options:
+        - "NO DELETE"
+        - "SOFT DELETE"
+        - "HARD DELETE"
+        isRequired: false
+        enableIf: "{% if (columns 
+                      | selectattr('isBusinessKey')
+                      | list
+                      | length > 0) %} true {% else %} false {% endif %}"
+
+      - displayName: Column that Identifies DML Operations*(DELETE)
+        attributeName: dmlCol
+        type: columnDropdownSelector
+        enableIf: "{% if config.deleteStrategy != 'NO DELETE' and (columns 
+                      | selectattr('isBusinessKey')
+                      | list
+                      | length > 0) %} true {% else %} false {% endif %}"
+
+      - displayName: Delete Value *
+        attributeName: dmlDelete
+        type: textBox
+        default: D
+        enableIf: "{% if config.deleteStrategy != 'NO DELETE' and (columns 
+                      | selectattr('isBusinessKey')
+                      | list
+                      | length > 0) %} true {% else %} false {% endif %}"
 
       - displayName: Truncate Before
         attributeName: truncateBefore

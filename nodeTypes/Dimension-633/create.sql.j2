@@ -10,7 +10,7 @@ does not permit copying or modification for any other purpose.
 {# == Node Type Description    : This node loads data into dimension table and maintain history using config options distinct,multi-source  == #}
 
 {% if node.override.create.enabled %}
-	
+
 	{{ node.override.create.script }}
 
 {% elif node.materializationType == 'table' %}
@@ -22,7 +22,11 @@ does not permit copying or modification for any other purpose.
 	CREATE TABLE {{ ref_no_link(node.location.name, node.name) }}
 	(
 		{% for col in columns %}
-             [{{ col.name }}] {{ col.dataType }}
+			{%- set dataType = col.dataType -%}
+			{%- if dataType is not none and '(-1)' in dataType -%}
+				{%- set dataType = dataType.replace('(-1)', '(MAX)') -%}
+			{%- endif -%}
+             [{{ col.name }}] {{ dataType }}
 			{%- if not col.nullable %} NOT NULL
 			{% endif %}
 			{%- if not loop.last -%}, {% endif %}

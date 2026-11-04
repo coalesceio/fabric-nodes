@@ -44,6 +44,48 @@ does not permit copying or modification for any other purpose.
         {% endif %}
     {% endfor %}
 
+{% set _dt = config.lastModifiedColumn.dataType | upper %}
+{% if use_last_modified and (('TIMESTAMP' in _dt) or ('DATETIME' in _dt) or (_dt == 'DATE')) %}
+
+    {{ test_stage(
+        'Checking NULL values for ' ~ last_modified_col ~ ' column',
+        false
+    ) }}
+
+    {% set ns = namespace(first=true) %}
+
+    {% for source in sources %}
+
+        {% for col in source.columns if col.name == last_modified_col %}
+
+            {% set col_transform = get_source_transform(col) %}
+
+            {% if col_transform is not none and col_transform != 'NULL' %}
+
+                {% if not ns.first %}
+                    UNION ALL
+                {% endif %}
+
+                SELECT 1
+
+                {{ get_clause(source.join,'from') }}
+
+                WHERE {{ col_transform }} IS NULL
+
+                {{ get_clause(source.join) }}
+
+                {% set ns.first = false %}
+                /* If NULL values are detected, this stage will fail and execution will be terminated */
+
+            {% endif %}
+
+        {% endfor %}
+
+    {% endfor %}
+
+{% endif %}			
+
+
 {% if node.materializationType == 'table' %}
 
 {# == Queries to be excuted before data insertion  == #}
@@ -211,14 +253,10 @@ does not permit copying or modification for any other purpose.
 	                   + COALESCE (( SELECT MAX({%- for col in columns if col.isSurrogateKey -%}{%- if not loop.first %} , {%- endif %} [{{col.name}}] {%endfor%}) FROM {{ ref_no_link(node.location.name, node.name) }}),0)  
                       {% elif col.isSystemCurrentFlag %}
                     	'Y'
-					  {% elif col.name == last_modified_col and useCurrentTimeStamp %}
-					     COALESCE({{ get_source_transform(col) }},CURRENT_TIMESTAMP()) AS [{{ col.name }}],
-						 COALESCE({{ get_source_transform(col) }},CURRENT_TIMESTAMP()) as [COMPARISON_VALUE],
+					  {% elif col.name == last_modified_col %}
+					    {{ get_source_transform(col) }} AS [{{ col.name }}],
+						{{ get_source_transform(col) }} as [COMPARISON_VALUE],
 						 MAX ([DIM].[{{last_modified_col}}]) AS [MAX_TARGET_VALUE]		    
-                      {% elif col.name == last_modified_col and not useCurrentTimeStamp%}
-					     {{ get_source_transform(col) }} AS [{{ col.name }}],
-						 {{ get_source_transform(col) }} AS [COMPARISON_VALUE],
-					     MAX ([DIM].[{{last_modified_col}}]) AS [MAX_TARGET_VALUE]
 					  {% else %}
                         {{ get_source_transform(col) }}
                       {% endif %}

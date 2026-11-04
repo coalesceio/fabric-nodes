@@ -55,9 +55,34 @@ metadata:
       - type: businessKeyColumns
         isRequired: true
 
+      - type: toggleButton
+        attributeName: lastModifiedComparison
+        displayName: Last Modified Comparison
+        default: false
+        enableIf: "{% if node.materializationType != 'view'%} true {%else%} false {%endif%}"
+        
+
+      - type: label
+        attributeName: l1
+        displayName: Columns can either be a timestamp or incremental id column
+        enableIf: "{% if node.materializationType != 'view' and config.lastModifiedComparison %} true {% else %} false {% endif %}"
+        
+
+      - type: columnDropdownSelector
+        attributeName: lastModifiedColumn
+        displayName: Last Modified Column
+        enableIf: "{% if node.materializationType != 'view' and config.lastModifiedComparison %} true {% else %} false {% endif %}"
+
+
+      - type: toggleButton
+        attributeName: type2Dimension
+        displayName: Type 2 Dimension
+        default: false
+        enableIf: "{% if config.lastModifiedComparison  %} true {% else %} false {% endif %}"
+
       - type: changeTrackingColumns
         isRequired: false
-        enableIf: "{% if node.materializationType == 'view' %} false {% else %} true {% endif %}"
+        enableIf: "{% if config.lastModifiedComparison  or node.materializationType == 'view' %} false {% else %} true {% endif %}"
 
       - displayName: Truncate Before
         attributeName: truncateBefore
@@ -76,6 +101,11 @@ metadata:
         type: toggleButton
         enableIf: "{% if config.groupByAll or  node.override.create.enabled %} false {% else %} true {% endif %}"
         default: false   
+
+      - displayName: Group BY All
+        attributeName: groupByAll
+        type: toggleButton
+        enableIf: "{% if config.selectDistinct or (node.materializationType == 'view' and node.override.create.enabled) %} false {% else %} true {% endif %}"    
 
       - displayName: Pre-SQL
         attributeName: preSQL

@@ -65,18 +65,6 @@ metadata:
         displayName: Last Modified Column
         enableIf: "{% if node.materializationType != 'view' and config.lastModifiedComparison and config.updateStrategy == 'MERGE'%} true {% else %} false {% endif %}"
 
-      - type: label
-        attributeName: l2
-        displayName: The below toggle is applicable only for timestamp column
-        enableIf: "{% if node.materializationType != 'view' and config.lastModifiedComparison and config.updateStrategy == 'MERGE'%} true {% else %} false {% endif %}"
-
-
-      - type: toggleButton
-        attributeName: treatNullAsCurrentTimestamp
-        displayName: Treat NULL as Current Timestamp
-        default: false
-        enableIf: "{% if node.materializationType != 'view' and config.lastModifiedComparison and config.updateStrategy == 'MERGE' %} true {% else %} false {% endif %}"
-
       - type: toggleButton
         attributeName: type2Dimension
         displayName: Type 2 Dimension

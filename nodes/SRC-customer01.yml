@@ -1,6 +1,6 @@
 fileVersion: 1
-id: 25bfccc4-099e-430b-8887-724f68cb5e2d
-name: REGION
+id: 2b3f7b7c-ada7-45e9-9283-a34af5f77c3c
+name: customer01
 operation:
   database: ""
   deployEnabled: true
@@ -13,13 +13,13 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: 2ef8fd25-8d47-4651-b124-4702e7e4ec32
-          stepCounter: 25bfccc4-099e-430b-8887-724f68cb5e2d
+          columnCounter: d8ba67d9-0eff-4123-a233-42e2647c5764
+          stepCounter: 2b3f7b7c-ada7-45e9-9283-a34af5f77c3c
         config: {}
-        dataType: DECIMAL(38,6)
+        dataType: BIGINT
         defaultValue: ""
         description: ""
-        name: R_REGIONKEY
+        name: id
         nullable: true
         sourceColumnReferences:
           - columnReferences: []
@@ -30,13 +30,30 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: 5b27f5ff-8117-4c78-b55d-0d2a9239a48b
-          stepCounter: 25bfccc4-099e-430b-8887-724f68cb5e2d
+          columnCounter: 79a89a03-41dc-4194-839d-05864602f21b
+          stepCounter: 2b3f7b7c-ada7-45e9-9283-a34af5f77c3c
         config: {}
-        dataType: VARCHAR(8000)
+        dataType: VARCHAR(100)
         defaultValue: ""
         description: ""
-        name: R_NAME
+        name: name
+        nullable: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 7ad82a14-475f-47e5-a6bd-42f8fe4ad3e9
+          stepCounter: 2b3f7b7c-ada7-45e9-9283-a34af5f77c3c
+        config: {}
+        dataType: VARCHAR(100)
+        defaultValue: ""
+        description: ""
+        name: city
         nullable: true
         sourceColumnReferences:
           - columnReferences: []
@@ -47,19 +64,19 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: eb5b962a-301e-4736-9100-edd30b197a31
-          stepCounter: 25bfccc4-099e-430b-8887-724f68cb5e2d
+          columnCounter: 3b4b7957-460f-400f-b3e5-0221e99967a5
+          stepCounter: 2b3f7b7c-ada7-45e9-9283-a34af5f77c3c
         config: {}
-        dataType: VARCHAR(8000)
+        dataType: DATETIME2(6)
         defaultValue: ""
         description: ""
-        name: R_COMMENT
+        name: created_at
         nullable: true
         sourceColumnReferences:
           - columnReferences: []
             transform: ""
         transform: ""
-  name: REGION
+  name: customer01
   schema: ""
   sqlType: Source
   type: sourceInput
