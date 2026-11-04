@@ -1,0 +1,111 @@
+fileVersion: 1
+id: aff7bab8-fbfb-48b0-bb91-3123c337cb42
+name: WRK_EMP_SOURCE_table_rename
+operation:
+  config:
+    insertStrategy: INSERT
+    postSQL: ""
+    preSQL: ""
+    selectDistinct: false
+    testsEnabled: true
+    truncateBefore: true
+  database: ""
+  deployEnabled: true
+  description: ""
+  isMultisource: false
+  locationName: TGT
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 719f1d73-3502-4805-be22-ec03ce11cc07
+          stepCounter: aff7bab8-fbfb-48b0-bb91-3123c337cb42
+        config: {}
+        dataType: INT
+        description: ""
+        name: EMP_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: c4b8db2a-302e-4ae1-9233-affc5b73a9c5
+                stepCounter: 8911a6da-d805-4052-a411-a9c43283b6d0
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: d78cb6b3-f199-4b79-bb7d-86b8b08d8dc7
+          stepCounter: aff7bab8-fbfb-48b0-bb91-3123c337cb42
+        config: {}
+        dataType: VARCHAR(100)
+        description: ""
+        name: EMP_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 76f81f96-91eb-42f0-ab2a-dd253eb267eb
+                stepCounter: 8911a6da-d805-4052-a411-a9c43283b6d0
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: e9a38856-cabc-4ff8-989a-60048ba46118
+          stepCounter: aff7bab8-fbfb-48b0-bb91-3123c337cb42
+        config: {}
+        dataType: VARCHAR(100)
+        description: ""
+        name: EMP_CITY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 3110dcc7-9636-4230-a00b-1977b6c498bc
+                stepCounter: 8911a6da-d805-4052-a411-a9c43283b6d0
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 047ea5fb-a80a-439d-bcd7-d09b72ec43ac
+          stepCounter: aff7bab8-fbfb-48b0-bb91-3123c337cb42
+        config: {}
+        dataType: VARCHAR(1)
+        description: ""
+        name: DML_FLAG
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 3dc50382-9b4a-45a7-aaa7-806cd12d46b9
+                stepCounter: 8911a6da-d805-4052-a411-a9c43283b6d0
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 51268cbe-0bc3-4430-9774-9039d0146ab5
+          stepCounter: aff7bab8-fbfb-48b0-bb91-3123c337cb42
+        config: {}
+        dataType: DATETIME2(6)
+        description: ""
+        name: created_at
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: e225b324-91e3-4d83-8cac-2b054910e0ca
+                stepCounter: 8911a6da-d805-4052-a411-a9c43283b6d0
+            transform: ""
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases:
+          WRK_EMP_SOURCE: 8911a6da-d805-4052-a411-a9c43283b6d0
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: TGT
+            nodeName: WRK_EMP_SOURCE
+        join:
+          joinCondition: FROM {{ ref('TGT', 'WRK_EMP_SOURCE') }} [WRK_EMP_SOURCE]
+        name: WRK_EMP_SOURCE_table_rename
+        noLinkRefs: []
+  name: WRK_EMP_SOURCE_table_rename
+  overrideSQL: false
+  schema: ""
+  sqlType: "147"
+  type: sql
+  version: 1
+type: Node

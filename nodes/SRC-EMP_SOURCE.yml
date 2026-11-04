@@ -1,6 +1,6 @@
 fileVersion: 1
-id: 62a750cc-c26f-4230-8a29-dcb524e5d004
-name: Products_elec
+id: 46036477-f293-4d27-8b5a-db90a4dd82d6
+name: EMP_SOURCE
 operation:
   database: ""
   deployEnabled: true
@@ -13,13 +13,13 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: 5b31f9b8-9039-4c81-a8de-52d844b95157
-          stepCounter: 62a750cc-c26f-4230-8a29-dcb524e5d004
+          columnCounter: d30d4bbb-d4e4-4cde-9ae6-795b4d20d86a
+          stepCounter: 46036477-f293-4d27-8b5a-db90a4dd82d6
         config: {}
         dataType: INT
         defaultValue: ""
         description: ""
-        name: Product_ID
+        name: EMP_ID
         nullable: true
         sourceColumnReferences:
           - columnReferences: []
@@ -30,53 +30,70 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: 77f109d6-557d-45c8-babc-d7eef50d0863
-          stepCounter: 62a750cc-c26f-4230-8a29-dcb524e5d004
-        config: {}
-        dataType: VARCHAR(255)
-        defaultValue: ""
-        description: ""
-        name: Product_Name
-        nullable: false
-        sourceColumnReferences:
-          - columnReferences: []
-            transform: ""
-        transform: ""
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
-        columnReference:
-          columnCounter: 4e8dc83e-3a29-4b62-95d9-6692782a44bb
-          stepCounter: 62a750cc-c26f-4230-8a29-dcb524e5d004
-        config: {}
-        dataType: VARCHAR(255)
-        defaultValue: ""
-        description: ""
-        name: Brand
-        nullable: true
-        sourceColumnReferences:
-          - columnReferences: []
-            transform: ""
-        transform: ""
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
-        columnReference:
-          columnCounter: 12a623c2-b758-4090-83d4-8122237effed
-          stepCounter: 62a750cc-c26f-4230-8a29-dcb524e5d004
+          columnCounter: 256a4bbe-8d68-4fe7-acb7-d3b608cdee6c
+          stepCounter: 46036477-f293-4d27-8b5a-db90a4dd82d6
         config: {}
         dataType: VARCHAR(100)
         defaultValue: ""
         description: ""
-        name: Colour
+        name: EMP_NAME
         nullable: true
         sourceColumnReferences:
           - columnReferences: []
             transform: ""
         transform: ""
-  name: Products_elec
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 36bb3c2e-2cde-4cd5-822c-57f1acfa0a35
+          stepCounter: 46036477-f293-4d27-8b5a-db90a4dd82d6
+        config: {}
+        dataType: VARCHAR(100)
+        defaultValue: ""
+        description: ""
+        name: EMP_CITY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6e7e889b-9267-4307-90c5-27b84f41246b
+          stepCounter: 46036477-f293-4d27-8b5a-db90a4dd82d6
+        config: {}
+        dataType: VARCHAR(1)
+        defaultValue: ""
+        description: ""
+        name: DML_FLAG
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: be86985b-b781-410b-888c-856417bfcd4f
+          stepCounter: 46036477-f293-4d27-8b5a-db90a4dd82d6
+        config: {}
+        dataType: DATETIME2(6)
+        defaultValue: ""
+        description: ""
+        name: created_at
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+  name: EMP_SOURCE
   schema: ""
   sqlType: Source
   type: sourceInput
