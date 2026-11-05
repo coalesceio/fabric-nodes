@@ -1,6 +1,6 @@
 fileVersion: 1
 id: 27283356-3275-4e1f-842d-7e43d4a719ad
-name: WRK_EMP_SOURCE_rename_table
+name: WRK_EMP_SOURCE_rename_table_01
 operation:
   config:
     insertStrategy: INSERT
@@ -100,9 +100,9 @@ operation:
             nodeName: EMP_SOURCE
         join:
           joinCondition: FROM {{ ref('SRC', 'EMP_SOURCE') }} [EMP_SOURCE]
-        name: WRK_EMP_SOURCE_rename_table
+        name: WRK_EMP_SOURCE_rename_table_01
         noLinkRefs: []
-  name: WRK_EMP_SOURCE_rename_table
+  name: WRK_EMP_SOURCE_rename_table_01
   overrideSQL: false
   schema: ""
   sqlType: "147"

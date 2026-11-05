@@ -53,7 +53,7 @@ operation:
         config: {}
         dataType: VARCHAR(100)
         description: ""
-        name: EMP_CITY
+        name: EMP_CITY_001
         nullable: true
         sourceColumnReferences:
           - columnReferences:

@@ -14,7 +14,7 @@ operation:
   description: ""
   isMultisource: false
   locationName: TGT
-  materializationType: table
+  materializationType: view
   metadata:
     appliedNodeTests: []
     columns:
